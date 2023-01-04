@@ -1,7 +1,6 @@
 import { display } from "../theme/Theme";
 
 export default function CadastrarInvestimentosStyle(){
-    {console.log(display.Mobile["max-width"])}
     return <style jsx='true' >{`
     
     .titulo{

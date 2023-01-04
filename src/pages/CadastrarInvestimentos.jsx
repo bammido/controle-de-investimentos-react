@@ -45,7 +45,6 @@ export default function CadastrarInvestimentos(){
                     <form className="cadastrar-investimentos-form" onSubmit={handleSubmit}>
                         <div className="form-inputs" >
                             <div className="input-div">
-                                {console.log(values)}
                                 <label htmlFor="dataDaCompra">Data da compra</label>
                                 <DatePicker 
                                 id="dataDaCompra" 
