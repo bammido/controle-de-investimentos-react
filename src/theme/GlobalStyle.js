@@ -8,6 +8,8 @@ export default function Globalstyle(){
 
             margin: 0;
             padding:0;
+
+            transition: 300ms;
         }
         `}</style>
     )
