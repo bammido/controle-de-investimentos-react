@@ -6,6 +6,7 @@ import {
 import NotFound from "./pages/404";
 import CadastrarInvestimentos from "./pages/CadastrarInvestimentos";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 import VerInvestimentos from "./pages/VerInvestimentos";
 
 const router = createBrowserRouter(
@@ -13,7 +14,8 @@ const router = createBrowserRouter(
     <Route path="/" errorElement={<NotFound />} element={<Home />}>
       <Route path="cadastrar-investimentos" element={<CadastrarInvestimentos />} />
       <Route path="ver-investimentos" element={<VerInvestimentos />} />
-      <Route errorElement element={<NotFound />} />
+      {/* <Route errorElement element={<NotFound />} /> */}
+      <Route path="login" element={<Login />} />
     </Route>
   )
 );
