@@ -9,27 +9,37 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import VerInvestimentos from "./pages/VerInvestimentos";
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" errorElement={<NotFound />} element={<Home />}>
-      <Route path="cadastrar-investimentos" element={<CadastrarInvestimentos />} />
-      <Route path="ver-investimentos" element={<VerInvestimentos />} />
-      {/* <Route errorElement element={<NotFound />} /> */}
-      <Route path="login" element={<Login />} />
-    </Route>
-  )
-);
+// const router = createBrowserRouter(
+//   createRoutesFromElements(
+//     <Route path="/" errorElement={<NotFound />} element={<Home />}>
+//       <Route path="cadastrar-investimentos" element={<CadastrarInvestimentos />} />
+//       <Route path="ver-investimentos" element={<VerInvestimentos />} />
+//       {/* <Route errorElement element={<NotFound />} /> */}
+//       <Route path="login" element={<Login />} />
+//     </Route>
+//   )
+// );
 
-// const router = createBrowserRouter([{
-//     path: "/",
-//     element: <Home/>,
-//     errorElement: <NotFound/>,
-//     children: [
-//         {
-//             path: "cadastrar-investimentos",
-//             element: <CadastrarInvestimentos/>
-//         }
-//     ]
-// }])
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+    errorElement: <NotFound />,
+    children: [
+      {
+        path: "cadastrar-investimentos",
+        element: <CadastrarInvestimentos />
+      },
+      {
+        path: "ver-investimentos",
+        element: <VerInvestimentos />
+      },
+    ]
+  }, {
+    path: "/login",
+    element: <Login />,
+    errorElement: <NotFound />,
+  }
+])
 
 export default router
