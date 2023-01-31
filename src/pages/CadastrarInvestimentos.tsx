@@ -5,9 +5,9 @@ import DatePicker from "../Components/DatePicker";
 import InputNumber from "../Components/InputNumber";
 import InputText from "../Components/InputText";
 import { initialValues, InitialValuesType, validation } from "../helpers/validationSchemas/CadastrarInvestimentos";
-import CadastrarInvestimentosStyle from "../styles/CadastrarInvestimentosStyle";
 import { Toast } from 'primereact/toast';
 import { mensagemDeSucesso } from "../helpers/functions/Toast";
+import { CadastrarInvestimentosForm, ErrorMessageSpan, FormInputsWrapper, InputLabel, InputWrapper, SubmitDiv, Titulo } from "../styles/CadastrarInvestimentosStyle";
 
 export default function CadastrarInvestimentos() {
     const toast = useRef(null)
@@ -34,7 +34,7 @@ export default function CadastrarInvestimentos() {
     return <>
         <div>
             <Toast ref={toast} />
-            <h1 className="titulo">Cadastrar Investimentos</h1>
+            <Titulo className="titulo">Cadastrar Investimentos</Titulo>
             <Formik
                 onSubmit={cadastrar}
                 initialValues={initialValues}
@@ -42,10 +42,10 @@ export default function CadastrarInvestimentos() {
             >
                 {({ values, handleChange, handleSubmit, errors }) => (
                     <div>
-                        <form className="cadastrar-investimentos-form" onSubmit={handleSubmit}>
-                            <div className="form-inputs" >
-                                <div className="input-div">
-                                    <label htmlFor="dataDaCompra">Data da compra</label>
+                        <CadastrarInvestimentosForm className="cadastrar-investimentos-form" onSubmit={handleSubmit}>
+                            <FormInputsWrapper className="form-inputs" >
+                                <InputWrapper className="input-div">
+                                    <InputLabel htmlFor="dataDaCompra">Data da compra</InputLabel>
                                     <DatePicker
                                         id="dataDaCompra"
                                         value={values.dataDaCompra}
@@ -54,21 +54,21 @@ export default function CadastrarInvestimentos() {
                                         minDate={new Date()}
                                         touchUI
                                     />
-                                    <ErrorMessage component='span' className="error-message" name="dataDaCompra" />
-                                </div>
+                                    <ErrorMessage component={ErrorMessageSpan} className="error-message" name="dataDaCompra" />
+                                </InputWrapper>
 
-                                <div className="input-div">
-                                    <label htmlFor="papel">Papel</label>
+                                <InputWrapper className="input-div">
+                                    <InputLabel htmlFor="papel">Papel</InputLabel>
                                     <InputText
                                         id="papel"
                                         placeholder="ex: MXRF11"
                                         value={values.papel}
                                         onChange={handleChange}
                                     />
-                                    <ErrorMessage component='span' className="error-message" name="papel" />
-                                </div>
-                                <div className="input-div">
-                                    <label htmlFor="preco">Preço</label>
+                                    <ErrorMessage component={ErrorMessageSpan} className="error-message" name="papel" />
+                                </InputWrapper>
+                                <InputWrapper className="input-div">
+                                    <InputLabel htmlFor="preco">Preço</InputLabel>
                                     <InputNumber
                                         id="preco"
                                         value={values.preco}
@@ -79,20 +79,20 @@ export default function CadastrarInvestimentos() {
                                         minFractionDigits={2}
                                         placeholder="R$"
                                     />
-                                    <ErrorMessage component='span' className="error-message" name="preco" />
-                                </div>
-                                <div className="input-div">
-                                    <label htmlFor="corretora">Corretora</label>
+                                    <ErrorMessage component={ErrorMessageSpan} className="error-message" name="preco" />
+                                </InputWrapper>
+                                <InputWrapper className="input-div">
+                                    <InputLabel htmlFor="corretora">Corretora</InputLabel>
                                     <InputText
                                         id="corretora"
                                         placeholder="ex: modal"
                                         value={values.corretora}
                                         onChange={handleChange}
                                     />
-                                    <ErrorMessage component='span' className="error-message" name="corretora" />
-                                </div>
-                                <div className="input-div">
-                                    <label htmlFor="qtd" >Quantidade</label>
+                                    <ErrorMessage component={ErrorMessageSpan} className="error-message" name="corretora" />
+                                </InputWrapper>
+                                <InputWrapper className="input-div">
+                                    <InputLabel htmlFor="qtd" >Quantidade</InputLabel>
                                     <InputNumber
                                         id="qtd"
                                         value={values.qtd}
@@ -101,22 +101,21 @@ export default function CadastrarInvestimentos() {
                                         minFractionDigits={1}
                                         maxFractionDigits={10}
                                     />
-                                    <ErrorMessage component='span' className="error-message" name="qtd" />
-                                </div>
-                            </div>
-                            <div className="submit-button" >
+                                    <ErrorMessage component={ErrorMessageSpan} className="error-message" name="qtd" />
+                                </InputWrapper>
+                            </FormInputsWrapper>
+                            <SubmitDiv className="submit-button" >
                                 <Button
                                     type="submit"
                                     label="enviar"
                                     severity={defineSeverity(errors)}
                                     loading={isLoading}
                                 />
-                            </div>
-                        </form>
+                            </SubmitDiv>
+                        </CadastrarInvestimentosForm>
                     </div>
                 )}
             </Formik>
         </div>
-        <CadastrarInvestimentosStyle />
     </>
 }

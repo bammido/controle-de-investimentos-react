@@ -1,4 +1,3 @@
-import GlobalStyle from './theme/GlobalStyle'
 import { RouterProvider } from 'react-router-dom';
 import router from './Routes'
 
@@ -7,6 +6,7 @@ import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";                                //icons
 
 import { locale, addLocale } from 'primereact/api'
+import { GlobalStyle } from './theme/GlobalStyle';
 
 addLocale('pt-br', {
   firstDayOfWeek: 1,
@@ -24,7 +24,7 @@ locale('pt-br');
 function App() {
   return (
     <div className="App">
-      {/* <GlobalStyle/> */}
+      <GlobalStyle />
       <RouterProvider router={router} />
     </div>
   );

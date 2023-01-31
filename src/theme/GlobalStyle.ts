@@ -1,7 +1,12 @@
-import { fonts } from './Theme'
+import { createGlobalStyle } from "styled-components";
+import { fonts } from "./Theme";
 
-export default function Globalstyle() {
-    return <>
-        <style></style>
-        < />
+
+export const GlobalStyle = createGlobalStyle`
+* {
+    font-family: ${fonts.primary};
+    margin: 0;
+    padding: 0;
+    transition: 300ms;
 }
+`
