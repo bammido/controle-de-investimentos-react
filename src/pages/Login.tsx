@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 import Button from "../Components/Button";
 import InputText from "../Components/InputText";
 import { InputDiv, LoginForm, LoginPageWrapper, InputLabel, NavButtonDiv } from "../styles/LoginStyle";
@@ -7,23 +7,42 @@ import { Formik } from "formik";
 import NavButton from "../Components/NavButton";
 import Navigation from "../Navigation";
 import sleep from "../helpers/functions/sleep";
+import { initialValues, InitialValuesType, validation } from "../helpers/validationSchemas/Login";
+import PasswordInput from "../Components/PasswordInput";
+import { mensagemDeErro } from "../helpers/functions/Toast";
+import { Toast } from "../Components/Toast/Toast";
 
 export default function Login() {
+    const toast = useRef(null)
+
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const { goToHome, goToCadastrarUsuario } = Navigation()
 
-    async function Logar(values: any) {
-        setIsLoading(true)
-        await sleep(3000)
-        setIsLoading(false)
-        goToHome()
+    async function Logar(values: InitialValuesType) {
+        try {
+            setIsLoading(true)
+            await sleep(3000)
+
+            const { email, password } = values
+
+            if (email === 'teste@email.com' && password === '123456') goToHome()
+
+            throw new Error('Usuário ou senha incorretos')
+
+        } catch (error: any) {
+            mensagemDeErro(toast, error.message || 'Algo deu errado!')
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     return <LoginPageWrapper>
+        <Toast Ref={toast} />
         <Formik
-            initialValues={{}}
+            initialValues={initialValues}
             onSubmit={Logar}
+            validationSchema={validation}
         >
             {
                 ({ values, handleChange, handleSubmit, errors }) => (
@@ -33,13 +52,15 @@ export default function Login() {
                             <InputDiv>
                                 <InputLabel htmlFor="email" >Email</InputLabel>
                                 <InputText
+                                    value={values.email}
                                     id="email"
                                     onChange={handleChange}
                                 />
                             </InputDiv>
                             <InputDiv>
                                 <InputLabel htmlFor="password">Senha</InputLabel>
-                                <InputText
+                                <PasswordInput
+                                    value={values.password}
                                     id="password"
                                     onChange={handleChange}
                                 />

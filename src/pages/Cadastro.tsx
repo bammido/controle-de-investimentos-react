@@ -1,9 +1,9 @@
 import { ErrorMessage, Formik } from "formik";
-import { Toast } from "primereact/toast";
 import { useState, useRef } from "react";
 import Button from "../Components/Button";
 import InputText from "../Components/InputText";
 import PasswordInput from "../Components/PasswordInput";
+import { Toast } from "../Components/Toast/Toast";
 import sleep from "../helpers/functions/sleep";
 import { mensagemDeErro, mensagemDeSucesso } from "../helpers/functions/Toast";
 import { initialValues, InitialValuesType, validation } from "../helpers/validationSchemas/Cadastro";
@@ -27,7 +27,7 @@ export default function Cadastro() {
     }
 
     return <CadastroPageWrapper>
-        <Toast ref={toast} />
+        <Toast Ref={toast} />
         <Formik
             initialValues={initialValues}
             validationSchema={validation}

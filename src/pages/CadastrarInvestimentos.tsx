@@ -1,13 +1,13 @@
 import { Formik, ErrorMessage, FormikErrors } from "formik";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Button from "../Components/Button";
 import DatePicker from "../Components/DatePicker";
 import InputNumber from "../Components/InputNumber";
 import InputText from "../Components/InputText";
 import { initialValues, InitialValuesType, validation } from "../helpers/validationSchemas/CadastrarInvestimentos";
-import { Toast } from 'primereact/toast';
 import { mensagemDeSucesso } from "../helpers/functions/Toast";
 import { CadastrarInvestimentosForm, ErrorMessageSpan, FormInputsWrapper, InputLabel, InputWrapper, SubmitDiv, Titulo } from "../styles/CadastrarInvestimentosStyle";
+import { Toast } from "../Components/Toast/Toast";
 
 export default function CadastrarInvestimentos() {
     const toast = useRef(null)
@@ -33,7 +33,7 @@ export default function CadastrarInvestimentos() {
 
     return <>
         <div>
-            <Toast ref={toast} />
+            <Toast Ref={toast} />
             <Titulo className="titulo">Cadastrar Investimentos</Titulo>
             <Formik
                 onSubmit={cadastrar}
