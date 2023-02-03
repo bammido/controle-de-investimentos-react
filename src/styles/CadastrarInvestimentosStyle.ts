@@ -36,6 +36,7 @@ export const InputLabel = styled.label`
 
 export const ErrorMessageSpan = styled.span`
     color: red;
+    word-break: break-all;
 `
 
 export const SubmitDiv = styled.div`

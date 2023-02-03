@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import NotFound from "./pages/404";
 import CadastrarInvestimentos from "./pages/CadastrarInvestimentos";
+import Cadastro from "./pages/Cadastro";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import VerInvestimentos from "./pages/VerInvestimentos";
@@ -39,7 +40,12 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
     errorElement: <NotFound />,
-  }
+  }, {
+    path: "/cadastrarUsuario",
+    element: <Cadastro />,
+    errorElement: <NotFound />,
+  },
+
 ])
 
 export default router

@@ -15,9 +15,19 @@ export default function Navigation(){
         navigation('ver-investimentos')
     }
 
+    function goToLogin() {
+        navigation('/login')
+    }
+
+    function goToCadastrarUsuario() {
+        navigation('/cadastrarUsuario')
+    }
+
     return {
         goToHome,
         goToCadastrarInvestimentos,
-        goToVerInvestimentos
+        goToVerInvestimentos,
+        goToLogin,
+        goToCadastrarUsuario
     }
 }
