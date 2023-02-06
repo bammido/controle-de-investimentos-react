@@ -4,9 +4,9 @@ import Button from "../Components/Button";
 import DatePicker from "../Components/DatePicker";
 import InputNumber from "../Components/InputNumber";
 import InputText from "../Components/InputText";
-import { initialValues, InitialValuesType, validation } from "../helpers/validationSchemas/CadastrarInvestimentos";
+import { initialValues, InitialValuesType, validation } from "../helpers/validationSchemas/CadastrarCompras";
 import { mensagemDeSucesso } from "../helpers/functions/Toast";
-import { CadastrarInvestimentosForm, ErrorMessageSpan, FormInputsWrapper, InputLabel, InputWrapper, SubmitDiv, Titulo } from "../styles/CadastrarComprasStyle";
+import { CadastrarComprasForm, ErrorMessageSpan, FormInputsWrapper, InputLabel, InputWrapper, SubmitDiv, Titulo } from "../styles/CadastrarComprasStyle";
 import { Toast } from "../Components/Toast/Toast";
 
 export default function CadastrarCompras() {
@@ -33,7 +33,7 @@ export default function CadastrarCompras() {
 
     return <>
         <div>
-            <Toast Ref={toast} />
+            <Toast Reference={toast} />
             <Titulo className="titulo">Cadastrar Compras</Titulo>
             <Formik
                 onSubmit={cadastrar}
@@ -42,7 +42,7 @@ export default function CadastrarCompras() {
             >
                 {({ values, handleChange, handleSubmit, errors }) => (
                     <div>
-                        <CadastrarInvestimentosForm className="cadastrar-investimentos-form" onSubmit={handleSubmit}>
+                        <CadastrarComprasForm className="cadastrar-investimentos-form" onSubmit={handleSubmit}>
                             <FormInputsWrapper className="form-inputs" >
                                 <InputWrapper className="input-div">
                                     <InputLabel htmlFor="dataDaCompra">Data da compra</InputLabel>
@@ -112,7 +112,7 @@ export default function CadastrarCompras() {
                                     loading={isLoading}
                                 />
                             </SubmitDiv>
-                        </CadastrarInvestimentosForm>
+                        </CadastrarComprasForm>
                     </div>
                 )}
             </Formik>

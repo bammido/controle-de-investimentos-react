@@ -59,7 +59,7 @@ export default function Login() {
     }
 
     return <LoginPageWrapper>
-        <Toast Ref={toast} />
+        <Toast Reference={toast} />
         <Formik
             initialValues={initialValues}
             onSubmit={Logar}

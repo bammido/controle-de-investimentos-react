@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import NotFound from "./pages/404";
 import CadastrarCompras from "./pages/CadastrarCompras";
+import CadastrarInvestimentos from "./pages/CadastrarInvestimentos";
 import Cadastro from "./pages/Cadastro";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "cadastrar-compras",
         element: <CadastrarCompras />
+      },
+      {
+        path: "cadastrar-investimentos",
+        element: <CadastrarInvestimentos />
       },
       {
         path: "ver-investimentos",

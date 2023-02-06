@@ -44,7 +44,7 @@ export default function Cadastro() {
     }
 
     return <CadastroPageWrapper>
-        <Toast Ref={toast} />
+        <Toast Reference={toast} />
         <Formik
             initialValues={initialValues}
             validationSchema={validation}
