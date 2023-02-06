@@ -14,7 +14,7 @@ export default async function verifyToken(token: string) {
         let mensagem = error.message
 
         if (mensagem.includes("exp")) {
-            mensagem = "tempo de sessão expirado, necessário logar de novo"
+            mensagem = "tempo de sessão expirado, necessário fazer login novamente"
         }
 
         throw new Error(mensagem, { cause: cause })

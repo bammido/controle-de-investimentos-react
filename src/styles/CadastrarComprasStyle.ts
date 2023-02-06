@@ -8,7 +8,7 @@ export const Titulo = styled.h1`
 
 export const FormInputsWrapper = styled.div`
     display: flex;
-    flex-wrap: wrap
+    flex-wrap: wrap;
 `
 
 export const InputWrapper = styled.div`
@@ -18,6 +18,7 @@ export const InputWrapper = styled.div`
 
     @media (${display.Mobile["max-width"]}){
         align-items: center;
+        flex-grow: 1;
     }
 `
 

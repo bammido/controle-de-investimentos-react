@@ -7,8 +7,8 @@ export default function Navigation(){
         navigation('/')    
     }
 
-    function goToCadastrarInvestimentos(){
-        navigation('cadastrar-investimentos')
+    function goToCadastrarCompras() {
+        navigation('cadastrar-compras')
     }
    
     function goToVerInvestimentos(){
@@ -25,7 +25,7 @@ export default function Navigation(){
 
     return {
         goToHome,
-        goToCadastrarInvestimentos,
+        goToCadastrarCompras,
         goToVerInvestimentos,
         goToLogin,
         goToCadastrarUsuario

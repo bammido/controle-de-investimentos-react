@@ -6,10 +6,10 @@ import InputNumber from "../Components/InputNumber";
 import InputText from "../Components/InputText";
 import { initialValues, InitialValuesType, validation } from "../helpers/validationSchemas/CadastrarInvestimentos";
 import { mensagemDeSucesso } from "../helpers/functions/Toast";
-import { CadastrarInvestimentosForm, ErrorMessageSpan, FormInputsWrapper, InputLabel, InputWrapper, SubmitDiv, Titulo } from "../styles/CadastrarInvestimentosStyle";
+import { CadastrarInvestimentosForm, ErrorMessageSpan, FormInputsWrapper, InputLabel, InputWrapper, SubmitDiv, Titulo } from "../styles/CadastrarComprasStyle";
 import { Toast } from "../Components/Toast/Toast";
 
-export default function CadastrarInvestimentos() {
+export default function CadastrarCompras() {
     const toast = useRef(null)
 
     const [isLoading, setIsLoading] = useState(false)
@@ -34,7 +34,7 @@ export default function CadastrarInvestimentos() {
     return <>
         <div>
             <Toast Ref={toast} />
-            <Titulo className="titulo">Cadastrar Investimentos</Titulo>
+            <Titulo className="titulo">Cadastrar Compras</Titulo>
             <Formik
                 onSubmit={cadastrar}
                 initialValues={initialValues}

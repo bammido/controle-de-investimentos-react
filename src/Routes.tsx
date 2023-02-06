@@ -4,7 +4,7 @@ import {
   Route,
 } from "react-router-dom";
 import NotFound from "./pages/404";
-import CadastrarInvestimentos from "./pages/CadastrarInvestimentos";
+import CadastrarCompras from "./pages/CadastrarCompras";
 import Cadastro from "./pages/Cadastro";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -28,8 +28,8 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       {
-        path: "cadastrar-investimentos",
-        element: <CadastrarInvestimentos />
+        path: "cadastrar-compras",
+        element: <CadastrarCompras />
       },
       {
         path: "ver-investimentos",

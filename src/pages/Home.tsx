@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import BarraDeNavegacao from "../Components/NavBar";
 import { globalContext } from "../Contexts/GlobalContext";
 import useIsAuthenticated from "../helpers/hooks/useIsAuthenticated";
+import { BarraDeNavegacaoDiv, HomePageWrapper, OutLetDiv } from "../styles/Home";
 
 export default function Home() {
 
@@ -10,8 +11,12 @@ export default function Home() {
 
   const { states } = useContext(globalContext)
 
-  return <div>
-    <BarraDeNavegacao />
-    <Outlet />
-  </div>
+  return <HomePageWrapper>
+    <OutLetDiv>
+      <Outlet />
+    </OutLetDiv>
+    <BarraDeNavegacaoDiv>
+      <BarraDeNavegacao />
+    </BarraDeNavegacaoDiv>
+  </HomePageWrapper>
 }
