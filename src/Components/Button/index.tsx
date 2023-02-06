@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button as PrimeReactButton, ButtonProps } from 'primereact/button';
 
-export default function Button(props: ButtonProps & { severity: string }) {
+export default function Button(props: ButtonProps & { severity?: string }) {
 
     function defineSeverity() {
         const { severity } = props || {}

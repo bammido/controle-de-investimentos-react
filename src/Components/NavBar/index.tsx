@@ -1,13 +1,14 @@
 import { TabMenu, TabMenuTabChangeParams } from 'primereact/tabmenu';
 import { useState } from 'react';
 import Navigation from '../../Navigation';
+import { BarraDeNavegacaoWrapper } from '../../styles/BarraDeNavegacao';
 
 type Event = TabMenuTabChangeParams & { index: number, value: { label: string, action: () => {} } }
 
 export default function BarraDeNavegacao() {
     const [telaAtual, setTelaAtual] = useState(0)
 
-    const { goToCadastrarInvestimentos, goToHome, goToVerInvestimentos } = Navigation()
+    const { goToCadastrarCompras, goToHome, goToVerInvestimentos } = Navigation()
 
     function onChange(e: Event) {
         setTelaAtual(e.index)
@@ -15,14 +16,14 @@ export default function BarraDeNavegacao() {
     }
 
     const telas = [
-        { label: 'Cadastrar Investimento', icon: 'pi pi-plus', action: goToCadastrarInvestimentos },
+        { label: 'Cadastrar Investimento', icon: 'pi pi-plus', action: goToCadastrarCompras },
         { label: 'Ver investimentos', icon: 'pi pi-chart-line', action: goToVerInvestimentos },
-        { label: 'Cadastrar Compra', icon: 'pi pi-cart-plus', action: goToCadastrarInvestimentos },
+        { label: 'Cadastrar Compra', icon: 'pi pi-cart-plus', action: goToCadastrarCompras },
         { label: 'Ver Compras', icon: 'pi pi-shopping-cart', action: goToVerInvestimentos },
 
     ];
 
-    return <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+    return <BarraDeNavegacaoWrapper>
         <TabMenu model={telas} activeIndex={telaAtual} onTabChange={(e: Event) => onChange(e)} />
-    </div>
+    </BarraDeNavegacaoWrapper>
 }
