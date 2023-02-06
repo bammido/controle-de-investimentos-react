@@ -41,7 +41,7 @@ const router = createBrowserRouter([
     element: <Login />,
     errorElement: <NotFound />,
   }, {
-    path: "/cadastrarUsuario",
+    path: "/cadastrar-usuario",
     element: <Cadastro />,
     errorElement: <NotFound />,
   },

@@ -7,6 +7,7 @@ import "primeicons/primeicons.css";                                //icons
 
 import { locale, addLocale } from 'primereact/api'
 import { GlobalStyle } from './theme/GlobalStyle';
+import { GlobalContextProvider } from './Contexts/GlobalContext';
 
 addLocale('pt-br', {
   firstDayOfWeek: 1,
@@ -25,7 +26,9 @@ function App() {
   return (
     <div className="App">
       <GlobalStyle />
-      <RouterProvider router={router} />
+      <GlobalContextProvider>
+        <RouterProvider router={router} />
+      </GlobalContextProvider>
     </div>
   );
 }

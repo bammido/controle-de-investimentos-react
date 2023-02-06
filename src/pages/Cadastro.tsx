@@ -7,19 +7,36 @@ import { Toast } from "../Components/Toast/Toast";
 import sleep from "../helpers/functions/sleep";
 import { mensagemDeErro, mensagemDeSucesso } from "../helpers/functions/Toast";
 import { initialValues, InitialValuesType, validation } from "../helpers/validationSchemas/Cadastro";
-import { CadastroForm, CadastroPageWrapper, ErrorMessageSpan, InputDiv, InputLabel } from "../styles/CadastroStyle";
+import UsuariosService from "../services/UsuariosService/UsuariosService";
+import UsuariosServiceMakePayload from "../services/UsuariosService/UsuariosServiceMakePayload";
+import { CadastroForm, CadastroPageWrapper, ErrorMessageSpan, InputDiv, InputLabel, NavButtonDiv } from "../styles/CadastroStyle";
+
+import axios from 'axios'
+import Navigation from "../Navigation";
+import NavButton from "../Components/NavButton";
 
 export default function Cadastro() {
     const toast = useRef(null)
+
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
+    const { goToLogin } = Navigation()
 
     async function cadastrar(values: InitialValuesType) {
         try {
             setIsLoading(true)
-            await sleep(3000)
+
+            const { email, nome, password } = values
+
+            const cadastrarPayload = UsuariosServiceMakePayload.cadastrar(email, password, nome)
+
+            await UsuariosService.cadastrar(cadastrarPayload)
+
+            goToLogin()
+
             mensagemDeSucesso(toast, 'Sucesso!', 'usuário cadastrado com sucesso')
-        } catch (error) {
+        } catch (error: any) {
+            console.log(error.cause)
             mensagemDeErro(toast, 'Algo deu errado :(', 'tente novamente mais tarde!')
         } finally {
             setIsLoading(false)
@@ -98,6 +115,14 @@ export default function Cadastro() {
                             aria-label="cadastrar"
                             loading={isLoading}
                         />
+                        <NavButtonDiv>
+                            <NavButton
+                                type="button"
+                                label="Já possui cadastro? ir para login"
+                                className="p-button-link"
+                                onClick={goToLogin}
+                            />
+                        </NavButtonDiv>
                     </CadastroForm>
                 )
             }

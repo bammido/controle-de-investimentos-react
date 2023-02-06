@@ -1,16 +1,21 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useContext } from "react"
 import Button from "../Components/Button";
 import InputText from "../Components/InputText";
 import { InputDiv, LoginForm, LoginPageWrapper, InputLabel, NavButtonDiv } from "../styles/LoginStyle";
-import ViteLogo from '../../public/vite.svg'
+import ViteLogo from '../assets/vite.svg'
 import { Formik } from "formik";
 import NavButton from "../Components/NavButton";
 import Navigation from "../Navigation";
-import sleep from "../helpers/functions/sleep";
 import { initialValues, InitialValuesType, validation } from "../helpers/validationSchemas/Login";
 import PasswordInput from "../Components/PasswordInput";
 import { mensagemDeErro } from "../helpers/functions/Toast";
 import { Toast } from "../Components/Toast/Toast";
+import UsuariosService from "../services/UsuariosService/UsuariosService";
+import UsuariosServiceMakePayload from "../services/UsuariosService/UsuariosServiceMakePayload";
+import verifyToken from "../helpers/functions/verifyToken";
+import setTokenLocal from "../helpers/functions/setTokenLocal";
+import { globalContext } from "../Contexts/GlobalContext";
+import sleep from "../helpers/functions/sleep";
 
 export default function Login() {
     const toast = useRef(null)
@@ -19,16 +24,32 @@ export default function Login() {
 
     const { goToHome, goToCadastrarUsuario } = Navigation()
 
+    const { setters } = useContext(globalContext)
+
+    const { setUser } = setters
+
     async function Logar(values: InitialValuesType) {
         try {
             setIsLoading(true)
-            await sleep(3000)
 
             const { email, password } = values
 
-            if (email === 'teste@email.com' && password === '123456') goToHome()
+            const loginPayload = UsuariosServiceMakePayload.logar(email, password)
 
-            throw new Error('Usuário ou senha incorretos')
+            const response = await UsuariosService.logar(loginPayload)
+
+            const token = response.data?.token
+
+            await sleep(2000)
+
+            const { payload } = await verifyToken(token)
+
+            const user = payload?.data
+
+            setUser(user)
+            setTokenLocal(token)
+
+            goToHome()
 
         } catch (error: any) {
             mensagemDeErro(toast, error.message || 'Algo deu errado!')

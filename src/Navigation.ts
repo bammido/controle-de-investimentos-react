@@ -20,7 +20,7 @@ export default function Navigation(){
     }
 
     function goToCadastrarUsuario() {
-        navigation('/cadastrarUsuario')
+        navigation('/cadastrar-usuario')
     }
 
     return {
