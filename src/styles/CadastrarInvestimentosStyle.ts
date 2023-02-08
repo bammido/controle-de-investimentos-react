@@ -1,5 +1,8 @@
 import styled from "styled-components";
+import { display } from "../theme/Theme";
 import { CadastrarComprasForm, Titulo as TituloCadastrarCompras, FormInputsWrapper as FormInputsWrapperCadastrarCompras, InputWrapper as InputWrapperCadastrarCompras, InputLabel as InputLabelCadastrarCompras, SubmitDiv as SubmitDivCadastrarCompras, ErrorMessageSpan as ErrorMessageSpanCadastrarCompras } from "./CadastrarComprasStyle";
+
+const laptopMinDisplay = display.Laptops["min-width"]
 
 export const Titulo = styled(TituloCadastrarCompras)``
 
@@ -24,4 +27,19 @@ export const InputTaxasLabel = styled(InputLabel)`
 export const SubTitulo = styled.h2`
     text-align: center;
     margin: 5vh 0; 
+`
+
+export const InputstaxasWrapper = styled(FormInputsWrapper)`
+    align-items: center;
+    @media screen and (${laptopMinDisplay}){
+        height: 18vh;
+        overflow-y: scroll;
+        border: 1px solid;
+        margin-bottom: 15px;
+        z-index: 100;   
+    }
+`
+
+export const Span = styled.span`
+    font-size: 1.5em;
 `

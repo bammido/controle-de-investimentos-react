@@ -8,7 +8,7 @@ import MultiSelect from "../Components/MultiSelect";
 import { Toast } from "../Components/Toast/Toast";
 import { mensagemDeErro } from "../helpers/functions/Toast";
 import { initialValues, validation, InitialValuesType } from "../helpers/validationSchemas/CadastrarInvestimentos";
-import { CadastrarInvestimentosForm, ErrorMessageSpan, FormInputsWrapper, InputLabel, InputTaxasLabel, InputWrapper, SubmitDiv, SubTitulo, Titulo } from "../styles/CadastrarInvestimentosStyle";
+import { CadastrarInvestimentosForm, ErrorMessageSpan, FormInputsWrapper, InputLabel, InputstaxasWrapper, InputTaxasLabel, InputWrapper, Span, SubmitDiv, SubTitulo, Titulo } from "../styles/CadastrarInvestimentosStyle";
 
 export default function CadastrarInvestimentos() {
     const toast = useRef(null)
@@ -19,6 +19,7 @@ export default function CadastrarInvestimentos() {
         { label: 'Renda fixa', value: 'fixa' },
         { label: 'Renda variável', value: 'variavel' },
         { label: 'Tesouro direto', value: 'tesouro' },
+        { label: 'Fundos de investimentos', value: 'fundos' },
     ]
 
     const tiposDeInvestimentosRendaFixa = [
@@ -29,11 +30,19 @@ export default function CadastrarInvestimentos() {
         { label: 'LCA', value: 'LCA' },
     ]
 
+    const tiposDeInvestimentosRendaVariavel = [
+        { label: 'Ação', value: 'acao' },
+        { label: 'Fundo Imobiliario', value: 'Fundo imobiliario' },
+        { label: 'ETF', value: 'ETF' },
+    ]
+
     const taxasIncidentes = [
         { label: 'CDI', value: 'CDI' },
-        { label: 'Selic', value: 'Selic' },
+        { label: 'Selic', value: 'selic' },
         { label: 'IPCA', value: 'IPCA' },
-        { label: 'Real', value: 'Real' },
+        { label: 'Prefixado', value: 'prefixado' },
+        { label: 'Teste1', value: 'Teste1' },
+        { label: 'Teste2', value: 'Teste2' },
     ]
 
     async function cadastrar(values: InitialValuesType) {
@@ -54,6 +63,12 @@ export default function CadastrarInvestimentos() {
 
     type SetFieldValueType = (field: string, value: any, shouldValidate?: boolean) => void
 
+    function onChangeTipoDeRenda(e: DropdownChangeParams, setFieldValue: SetFieldValueType) {
+        setFieldValue('tipoDeInvestimento', '')
+        setFieldValue('tipoDeRenda', e.value)
+    }
+
+
     function onChangeValorTaxasIncidentes(e: InputNumberChangeParams, setFieldValue: SetFieldValueType, taxasIncidentes: number[], taxaIncidente: string) {
         const newTaxasIncidentes = taxasIncidentes.map((taxa: any) => taxa.taxa === taxaIncidente ? { taxa: taxaIncidente, valor: e.value } : taxa)
 
@@ -62,22 +77,20 @@ export default function CadastrarInvestimentos() {
 
     function OnChangeTaxas(e: DropdownChangeParams, setFieldValue: SetFieldValueType, taxasIncidentes: []) {
         const value = e.value
-
-        if (!taxasIncidentes.length) {
-            const novasTaxas = value.map((taxa: any) => { return { taxa, valor: null } })
-            return setFieldValue('taxasIncidentes', novasTaxas)
-        }
+        let novasTaxas: any[] = []
 
         if (taxasIncidentes.length > e.value.length) {
-            const novasTaxas = taxasIncidentes.filter((taxa: any) => value.includes(taxa.taxa))
-            return setFieldValue('taxasIncidentes', novasTaxas)
+            novasTaxas = taxasIncidentes.filter((taxa: any) => value.includes(taxa.taxa))
         }
 
         if (taxasIncidentes.length < e.value.length) {
-            const novaTaxa = value[value.length - 1]
-            const novasTaxas = [...taxasIncidentes, { taxa: novaTaxa, valor: null }]
-            return setFieldValue('taxasIncidentes', novasTaxas)
+            const taxasIncidentesAux = taxasIncidentes.map((taxa: any) => taxa.taxa)
+            novasTaxas = value.map((taxa: any) => taxasIncidentesAux.includes(taxa) ? taxasIncidentes.find((taxaIncidente: any) => taxaIncidente.taxa === taxa) : { taxa: taxa, valor: null })
         }
+
+        novasTaxas = novasTaxas.map((taxa: any) => taxa.taxa.toUpperCase() !== 'PREFIXADO' ? { taxa: taxa.taxa, valor: taxa.taxa } : taxa)
+
+        return setFieldValue('taxasIncidentes', novasTaxas)
 
     } 
 
@@ -124,7 +137,7 @@ export default function CadastrarInvestimentos() {
                                 id='tipoDeRenda'
                                 value={values.tipoDeRenda}
                                 options={tiposDeRenda}
-                                onChange={(e: DropdownChangeParams) => setFieldValue('tipoDeRenda', e.value)}
+                                onChange={(e: DropdownChangeParams) => onChangeTipoDeRenda(e, setFieldValue)}
                                 placeholder="Selecione um tipo de renda"
                             />
                             <ErrorMessage
@@ -132,20 +145,23 @@ export default function CadastrarInvestimentos() {
                                 className="error-message"
                                 name="tipoDeRenda" />
                         </InputWrapper>
-                        <InputWrapper>
+                        {
+                            values.tipoDeRenda && (values.tipoDeRenda.toLowerCase() !== 'tesouro' && values.tipoDeRenda.toLowerCase() !== 'fundos') && < InputWrapper >
                             <InputLabel htmlFor="tipoDeInvestimento">Tipo de investimento</InputLabel>
                             <Dropdown
                                 id='tipoDeRenda'
                                 value={values.tipoDeInvestimento}
-                                options={tiposDeInvestimentosRendaFixa}
-                                onChange={(e: DropdownChangeParams) => setFieldValue('tipoDeInvestimento', e.value)}
+                                    options={values.tipoDeRenda.toLowerCase() === 'fixa' ? tiposDeInvestimentosRendaFixa : tiposDeInvestimentosRendaVariavel}
+                                    onChange={(e: DropdownChangeParams) => setFieldValue('tipoDeInvestimento', e.value)}
                                 placeholder="Selecione um tipo de investimento"
                             />
                             <ErrorMessage
                                 component={ErrorMessageSpan}
                                 className="error-message"
-                                name="tipoDeInvestimento" />
+                                    name="tipoDeInvestimento"
+                                />
                         </InputWrapper>
+                        }
                         <InputWrapper>
                             <InputLabel htmlFor="taxasIncidentes">Taxa(s) que incide(m)</InputLabel>
                             <MultiSelect
@@ -160,19 +176,37 @@ export default function CadastrarInvestimentos() {
                     </FormInputsWrapper>
                     {values?.taxasIncidentes?.length ? <>
                         <SubTitulo>Defina a porcentagem das(s) taxa(s)</SubTitulo>
-                        <FormInputsWrapper>
-                            {values.taxasIncidentes?.map((taxaIncidente: any, i: number) => <InputWrapper key={new Date().getSeconds() + i}>
-                                <InputTaxasLabel htmlFor={`${taxaIncidente.taxa}${i}`}>{taxaIncidente.taxa}</InputTaxasLabel>
+                        <ErrorMessage
+                            component={ErrorMessageSpan}
+                            className="error-message"
+                            name="taxasIncidentes"
+                        />
+                        <InputstaxasWrapper>
+                            {values.taxasIncidentes?.map((taxaIncidente: any, i: number) => <>
+                                <InputWrapper key={new Date().getSeconds() + i}>
+                                    {taxaIncidente.taxa.toUpperCase() !== 'PREFIXADO' && <>
+                                        <InputTaxasLabel htmlFor={taxaIncidente.taxa}>{taxaIncidente.taxa.toUpperCase()}</InputTaxasLabel>
+                                        <InputText
+                                            disabled={true}
+                                            id={taxaIncidente.taxa}
+                                            value={taxaIncidente.valor}
+                                        />
+                                    </>}
+                                    {taxaIncidente.taxa.toUpperCase() === 'PREFIXADO' && <>
+                                        <InputTaxasLabel htmlFor={taxaIncidente.taxa}>{taxaIncidente.taxa.toUpperCase()}</InputTaxasLabel>
                                 <InputNumber
-                                    id={`${taxaIncidente.taxa}${i}`}
+                                            id={taxaIncidente.taxa}
                                     mode='decimal'
                                     value={taxaIncidente.valor}
                                     onValueChange={(e: InputNumberChangeParams) => onChangeValorTaxasIncidentes(e, setFieldValue, values.taxasIncidentes as [], taxaIncidente.taxa)}
                                     suffix=" %"
                                 />
-                            </InputWrapper>)
+                                    </>}
+                                </InputWrapper>
+                                {(values.taxasIncidentes.length - 1 !== i) && <Span>+</Span>}
+                            </>)
                             }
-                        </FormInputsWrapper>
+                        </InputstaxasWrapper>
                     </> : <></>}
                     <SubmitDiv className="submit-button" >
                         <Button
