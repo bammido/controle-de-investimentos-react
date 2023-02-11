@@ -213,7 +213,7 @@ export default function CadastrarInvestimentos() {
                             name="taxasIncidentes"
                         />
                         <InputstaxasWrapper>
-                            {values.taxasIncidentes?.map((taxaIncidente: any, i: number) => <div style={{ display: 'flex', alignItems: 'center' }} key={new Date().getSeconds() + i}>
+                            {values.taxasIncidentes?.map((taxaIncidente: any, i: number) => <div key={new Date().getSeconds() + i}>
                                 <InputWrapper >
                                     {taxaIncidente.taxa.toUpperCase() !== 'PREFIXADO' && <>
                                         <InputTaxasLabel htmlFor={taxaIncidente.taxa}>{taxaIncidente.taxa.toUpperCase()}</InputTaxasLabel>
