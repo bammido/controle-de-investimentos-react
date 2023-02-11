@@ -59,14 +59,14 @@ export default function Login() {
     }
 
     return <LoginPageWrapper>
-        <Toast Ref={toast} />
+        <Toast reference={toast} />
         <Formik
             initialValues={initialValues}
             onSubmit={Logar}
             validationSchema={validation}
         >
             {
-                ({ values, handleChange, handleSubmit, errors }) => (
+                ({ values, handleChange, handleSubmit }) => (
                     <div>
                         <LoginForm onSubmit={handleSubmit}>
                             <img src={ViteLogo} style={{ width: '100%', height: '100px', marginBottom: '3vh' }} />

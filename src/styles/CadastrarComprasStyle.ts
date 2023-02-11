@@ -22,7 +22,7 @@ export const InputWrapper = styled.div`
     }
 `
 
-export const CadastrarInvestimentosForm = styled.form`
+export const CadastrarComprasForm = styled.form`
     padding: 5vh 5vw;
 
     @media (${display.Mobile["max-width"]}){
