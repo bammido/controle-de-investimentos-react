@@ -33,7 +33,7 @@ export default function CadastrarCompras() {
 
     return <>
         <div>
-            <Toast Reference={toast} />
+            <Toast reference={toast} />
             <Titulo className="titulo">Cadastrar Compras</Titulo>
             <Formik
                 onSubmit={cadastrar}

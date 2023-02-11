@@ -1,4 +1,4 @@
-import { ErrorMessage, Formik } from "formik";
+import { ErrorMessage, Formik, FormikHelpers } from "formik";
 import { useRef, useState } from "react";
 import Button from "../Components/Button";
 import Dropdown, { DropdownChangeParams } from "../Components/Dropdown";
@@ -6,9 +6,12 @@ import InputNumber, { InputNumberChangeParams } from "../Components/InputNumber"
 import InputText from "../Components/InputText";
 import MultiSelect from "../Components/MultiSelect";
 import { Toast } from "../Components/Toast/Toast";
-import { mensagemDeErro } from "../helpers/functions/Toast";
+import { somenteUmEspacoEntrePalavras, toUpperCase, transformValue } from "../helpers/functions/transformers/valueTransforms";
+import { mensagemDeErro, mensagemDeSucesso } from "../helpers/functions/Toast";
 import { initialValues, validation, InitialValuesType } from "../helpers/validationSchemas/CadastrarInvestimentos";
 import { CadastrarInvestimentosForm, ErrorMessageSpan, FormInputsWrapper, InputLabel, InputstaxasWrapper, InputTaxasLabel, InputWrapper, Span, SubmitDiv, SubTitulo, Titulo } from "../styles/CadastrarInvestimentosStyle";
+import PapelServiceMakePayload from "../services/PapelService/PapelServiceMakePayload";
+import PapelService from "../services/PapelService/PapelService";
 
 export default function CadastrarInvestimentos() {
     const toast = useRef(null)
@@ -45,19 +48,36 @@ export default function CadastrarInvestimentos() {
         { label: 'Teste2', value: 'Teste2' },
     ]
 
-    async function cadastrar(values: InitialValuesType) {
+    async function cadastrar(values: InitialValuesType, formikHelpers: FormikHelpers<InitialValuesType>) {
         try {
+            const { resetForm } = formikHelpers
+            setIsLoading(true)
             const {
+                papel,
                 nome,
                 tipoDeInvestimento,
                 tipoDeRenda,
                 'taxasIncidentes': taxas } = values
 
-            const taxasIncidentes = taxas.length ? taxas.map((taxa: any) => `${taxa.taxa}:${taxa.valor}`).join(';') : null
+            const taxasIncidentes = taxas && taxas.length ? taxas.map((taxa: any) => `${taxa.taxa}:${taxa.valor}`).join(';') : null
 
-            console.log(taxasIncidentes)
+            const papelPayload = PapelServiceMakePayload.cadastrar(papel, nome, tipoDeRenda, tipoDeInvestimento, taxasIncidentes)
+            const response = await PapelService.cadastrar(papelPayload)
+
+            mensagemDeSucesso(toast, 'Sucesso!', 'papel cadastrado!', { life: 3000, closable: true })
+            resetForm()
         } catch (error: any) {
-            mensagemDeErro(toast, 'Erro')
+            const errorStatus = error.cause?.status
+            const errorStatusText = error.cause?.statusText
+            const errorMessage = error.cause?.data?.message
+
+            if (errorStatus === 409 || errorStatusText?.toLowerCase() === 'conflict') {
+                return mensagemDeErro(toast, 'Algo deu errado :(', 'Papel já cadastrado!')
+            }
+
+            return mensagemDeErro(toast, 'Algo deu errado :(', 'tente novamente mais tarde!')
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -94,8 +114,19 @@ export default function CadastrarInvestimentos() {
 
     } 
 
+
+    function onChangePapel(e: React.ChangeEvent<any>, setFieldValue: SetFieldValueType) {
+        const { value } = e.target
+
+        const transformers = [toUpperCase, somenteUmEspacoEntrePalavras]
+        const newValue = transformValue({ transformers, value })
+
+        setFieldValue('papel', newValue)
+    }
+
+
     return <div>
-        <Toast Reference={toast} />
+        <Toast reference={toast} />
         <Titulo className="titulo">Cadastrar Investimentos</Titulo>
         <Formik
             onSubmit={cadastrar}
@@ -111,7 +142,7 @@ export default function CadastrarInvestimentos() {
                                 id="papel"
                                 placeholder="ex: NSLU11"
                                 value={values.papel}
-                                onChange={handleChange}
+                                onChange={e => onChangePapel(e, setFieldValue)}
                             />
                             <ErrorMessage
                                 component={ErrorMessageSpan}
@@ -182,8 +213,8 @@ export default function CadastrarInvestimentos() {
                             name="taxasIncidentes"
                         />
                         <InputstaxasWrapper>
-                            {values.taxasIncidentes?.map((taxaIncidente: any, i: number) => <>
-                                <InputWrapper key={new Date().getSeconds() + i}>
+                            {values.taxasIncidentes?.map((taxaIncidente: any, i: number) => <div style={{ display: 'flex', alignItems: 'center' }} key={new Date().getSeconds() + i}>
+                                <InputWrapper >
                                     {taxaIncidente.taxa.toUpperCase() !== 'PREFIXADO' && <>
                                         <InputTaxasLabel htmlFor={taxaIncidente.taxa}>{taxaIncidente.taxa.toUpperCase()}</InputTaxasLabel>
                                         <InputText
@@ -194,17 +225,17 @@ export default function CadastrarInvestimentos() {
                                     </>}
                                     {taxaIncidente.taxa.toUpperCase() === 'PREFIXADO' && <>
                                         <InputTaxasLabel htmlFor={taxaIncidente.taxa}>{taxaIncidente.taxa.toUpperCase()}</InputTaxasLabel>
-                                <InputNumber
+                                        <InputNumber
                                             id={taxaIncidente.taxa}
-                                    mode='decimal'
-                                    value={taxaIncidente.valor}
-                                    onValueChange={(e: InputNumberChangeParams) => onChangeValorTaxasIncidentes(e, setFieldValue, values.taxasIncidentes as [], taxaIncidente.taxa)}
-                                    suffix=" %"
-                                />
+                                            mode='decimal'
+                                            value={taxaIncidente.valor}
+                                            onValueChange={(e: InputNumberChangeParams) => onChangeValorTaxasIncidentes(e, setFieldValue, values.taxasIncidentes as [], taxaIncidente.taxa)}
+                                            suffix=" %"
+                                        />
                                     </>}
                                 </InputWrapper>
-                                {(values.taxasIncidentes.length - 1 !== i) && <Span>+</Span>}
-                            </>)
+                                {(values.taxasIncidentes && values.taxasIncidentes.length - 1 !== i) && <Span>+</Span>}
+                            </div>)
                             }
                         </InputstaxasWrapper>
                     </> : <></>}

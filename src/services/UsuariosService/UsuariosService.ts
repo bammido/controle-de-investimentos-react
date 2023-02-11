@@ -19,7 +19,6 @@ class UsuariosService {
 
             return res
         } catch (error: AxiosError | Error | any) {
-            console.log(error.response)
             throw new Error('Erro na requisição de cadastro', { cause: error.response })
         }
     }
@@ -30,7 +29,6 @@ class UsuariosService {
 
             return res
         } catch (error: AxiosError | Error | any) {
-            console.log(error.response)
             throw new Error('Erro na requisição de cadastro', { cause: error.response })
         }
     }

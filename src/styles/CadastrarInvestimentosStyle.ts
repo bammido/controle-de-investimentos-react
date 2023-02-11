@@ -30,7 +30,10 @@ export const SubTitulo = styled.h2`
 `
 
 export const InputstaxasWrapper = styled(FormInputsWrapper)`
-    align-items: center;
+    &>div{
+        display: flex; 
+        align-items: center;
+    }
     @media screen and (${laptopMinDisplay}){
         height: 18vh;
         overflow-y: scroll;

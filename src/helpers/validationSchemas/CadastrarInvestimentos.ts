@@ -6,7 +6,7 @@ export type InitialValuesType = {
     nome: string,
     tipoDeRenda: string,
     tipoDeInvestimento?: string,
-    taxasIncidentes: []
+    taxasIncidentes?: []
 }
 
 export const initialValues: InitialValuesType = {

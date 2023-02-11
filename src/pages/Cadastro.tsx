@@ -36,7 +36,6 @@ export default function Cadastro() {
 
             mensagemDeSucesso(toast, 'Sucesso!', 'usuário cadastrado com sucesso')
         } catch (error: any) {
-            console.log(error.cause)
             mensagemDeErro(toast, 'Algo deu errado :(', 'tente novamente mais tarde!')
         } finally {
             setIsLoading(false)
@@ -44,7 +43,7 @@ export default function Cadastro() {
     }
 
     return <CadastroPageWrapper>
-        <Toast Reference={toast} />
+        <Toast reference={toast} />
         <Formik
             initialValues={initialValues}
             validationSchema={validation}
