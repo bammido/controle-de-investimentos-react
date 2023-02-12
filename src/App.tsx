@@ -7,7 +7,11 @@ import "primeicons/primeicons.css";                                //icons
 
 import { locale, addLocale } from 'primereact/api'
 import { GlobalStyle } from './theme/GlobalStyle';
-import { GlobalContextProvider } from './Contexts/GlobalContext';
+import { ThemeProvider } from 'styled-components';
+import { temaClaro, temaEscuro } from './theme/Theme';
+
+import { useContext } from 'react'
+import { globalContext } from './Contexts/GlobalContext';
 
 addLocale('pt-br', {
   firstDayOfWeek: 1,
@@ -23,12 +27,15 @@ addLocale('pt-br', {
 locale('pt-br');
 
 function App() {
+
+  const { states } = useContext(globalContext)
+  const { temaEstaEscuro } = states
   return (
     <div className="App">
-      <GlobalStyle />
-      <GlobalContextProvider>
+      <ThemeProvider theme={temaEstaEscuro ? temaEscuro : temaClaro}>
+        <GlobalStyle />
         <RouterProvider router={router} />
-      </GlobalContextProvider>
+      </ThemeProvider>
     </div>
   );
 }

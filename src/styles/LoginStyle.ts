@@ -8,6 +8,8 @@ export const LoginPageWrapper = styled.div`
     justify-content: center;
     align-items: center;
 
+    background-color: ${props => props.theme.pallete.primary.main};
+
 `
 
 export const LoginForm = styled.form`
@@ -23,6 +25,8 @@ export const InputLabel = styled.label`
 
     font-size: large;
     font-weight: 700;
+
+    color: ${props => props.theme.pallete.primary.contrastText};
 `
 
 export const InputDiv = styled.div`

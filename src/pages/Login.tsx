@@ -14,7 +14,7 @@ import UsuariosService from "../services/UsuariosService/UsuariosService";
 import UsuariosServiceMakePayload from "../services/UsuariosService/UsuariosServiceMakePayload";
 import verifyToken from "../helpers/functions/verifyToken";
 import setTokenLocal from "../helpers/functions/setTokenLocal";
-import { globalContext } from "../Contexts/GlobalContext";
+import { globalContext, SettersType } from "../Contexts/GlobalContext";
 import sleep from "../helpers/functions/sleep";
 
 export default function Login() {
@@ -26,7 +26,7 @@ export default function Login() {
 
     const { setters } = useContext(globalContext)
 
-    const { setUser } = setters
+    const { setUser } = setters as SettersType
 
     async function Logar(values: InitialValuesType) {
         try {
@@ -44,7 +44,7 @@ export default function Login() {
 
             const { payload } = await verifyToken(token)
 
-            const user = payload?.data
+            const user = payload?.data || {}
 
             setUser(user)
             setTokenLocal(token)

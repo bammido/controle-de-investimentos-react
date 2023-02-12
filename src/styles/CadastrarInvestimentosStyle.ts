@@ -27,6 +27,8 @@ export const InputTaxasLabel = styled(InputLabel)`
 export const SubTitulo = styled.h2`
     text-align: center;
     margin: 5vh 0; 
+
+    color: ${props => props.theme.pallete.primary.contrastText};
 `
 
 export const InputstaxasWrapper = styled(FormInputsWrapper)`
