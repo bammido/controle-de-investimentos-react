@@ -27,6 +27,8 @@ export const SideBarButtonsWrapper = styled.div`
     width: 100%;
     background-color: ${props => props.theme.pallete.primary.main} ;
 
+    margin: 0.3rem 0;
+
     & button{
         width: 100%;
     }

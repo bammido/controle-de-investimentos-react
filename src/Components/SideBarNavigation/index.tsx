@@ -33,21 +33,21 @@ export default function SideBarNavigation() {
         >
             <SideBarWrapper>
                 <SideBarButtonsWrapper>
-                <Button
-                    onClick={logOut}
-                    label='logOut'
-                    aria-label='logOut'
-                    iconPos='right'
-                    icon='pi pi-sign-out'
-                />
-                </SideBarButtonsWrapper>
-                <SideBarButtonsWrapper>
                     <SideBarThemeButtom
                         onClick={() => mudaTema(!temaEstaEscuro)}
                         label={`mudar para tema ${temaEstaEscuro ? 'claro' : 'escuro'}`}
                         aria-label='logOut'
                         iconPos='right'
                         icon={`pi ${temaEstaEscuro ? 'pi-sun' : 'pi-moon'}`}
+                    />
+                </SideBarButtonsWrapper>
+                <SideBarButtonsWrapper>
+                    <Button
+                        onClick={logOut}
+                        label='logOut'
+                        aria-label='logOut'
+                        iconPos='right'
+                        icon='pi pi-sign-out'
                     />
                 </SideBarButtonsWrapper>
             </SideBarWrapper>
