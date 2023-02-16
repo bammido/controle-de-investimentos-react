@@ -14,8 +14,9 @@ import UsuariosService from "../services/UsuariosService/UsuariosService";
 import UsuariosServiceMakePayload from "../services/UsuariosService/UsuariosServiceMakePayload";
 import verifyToken from "../helpers/functions/verifyToken";
 import setTokenLocal from "../helpers/functions/setTokenLocal";
-import { globalContext } from "../Contexts/GlobalContext";
+import { globalContext, GlobalSettersType } from "../Contexts/GlobalContext";
 import sleep from "../helpers/functions/sleep";
+import MudaTemaButtonComponent from "../Components/MudaTemaButton";
 
 export default function Login() {
     const toast = useRef(null)
@@ -26,7 +27,8 @@ export default function Login() {
 
     const { setters } = useContext(globalContext)
 
-    const { setUser } = setters
+    const { setUser } = setters as GlobalSettersType
+
 
     async function Logar(values: InitialValuesType) {
         try {
@@ -44,7 +46,7 @@ export default function Login() {
 
             const { payload } = await verifyToken(token)
 
-            const user = payload?.data
+            const user = payload?.data || {}
 
             setUser(user)
             setTokenLocal(token)
@@ -60,6 +62,7 @@ export default function Login() {
 
     return <LoginPageWrapper>
         <Toast reference={toast} />
+        <MudaTemaButtonComponent />
         <Formik
             initialValues={initialValues}
             onSubmit={Logar}

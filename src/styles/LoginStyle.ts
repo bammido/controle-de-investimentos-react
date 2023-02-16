@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import Button from "../Components/Button";
-import { colors } from '../theme/Theme'
 
 export const LoginPageWrapper = styled.div`
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    background-color: ${props => props.theme.pallete.primary.main};
 
 `
 
@@ -23,6 +24,8 @@ export const InputLabel = styled.label`
 
     font-size: large;
     font-weight: 700;
+
+    color: ${props => props.theme.pallete.primary.contrastText};
 `
 
 export const InputDiv = styled.div`
@@ -35,3 +38,4 @@ export const InputDiv = styled.div`
 export const NavButtonDiv = styled.div`
     margin-top: 3vh;
 `
+

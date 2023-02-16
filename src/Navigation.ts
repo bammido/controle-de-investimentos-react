@@ -4,7 +4,7 @@ export default function Navigation(){
     const navigation = useNavigate()
 
     function goToHome(){
-        navigation('/')    
+        navigation('/app')    
     }
 
     function goToCadastrarCompras() {

@@ -4,6 +4,8 @@ import { display } from "../theme/Theme";
 export const Titulo = styled.h1`
     text-align: center;
     margin: 5vh 0; 
+
+    color: ${props => props.theme.pallete.primary.contrastText};
 `
 
 export const FormInputsWrapper = styled.div`
@@ -33,6 +35,8 @@ export const CadastrarComprasForm = styled.form`
 
 export const InputLabel = styled.label`
     margin-bottom: 1vh;
+
+    color: ${props => props.theme.pallete.primary.contrastText};
 `
 
 export const ErrorMessageSpan = styled.span`

@@ -5,6 +5,8 @@ display: flex;
 flex-direction: column;
 width: 100%;
 min-height: 100vh;
+
+background-color: ${props => props.theme.pallete.primary.main};
 `
 
 export const OutLetDiv = styled.div`
@@ -14,5 +16,5 @@ max-height: 90vh;
 `
 
 export const BarraDeNavegacaoDiv = styled.div`
-border-top: 1px solid;
+border-top: 3px solid ${props => props.theme.pallete.colors.blue};
 `
