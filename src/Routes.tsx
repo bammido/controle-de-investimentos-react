@@ -24,7 +24,7 @@ import VerInvestimentos from "./pages/VerInvestimentos";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/app",
     element: <Home />,
     errorElement: <NotFound />,
     children: [

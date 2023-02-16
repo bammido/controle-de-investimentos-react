@@ -14,6 +14,7 @@ import { CadastroForm, CadastroPageWrapper, ErrorMessageSpan, InputDiv, InputLab
 import axios from 'axios'
 import Navigation from "../Navigation";
 import NavButton from "../Components/NavButton";
+import MudaTemaButtonComponent from "../Components/MudaTemaButton";
 
 export default function Cadastro() {
     const toast = useRef(null)
@@ -44,6 +45,7 @@ export default function Cadastro() {
 
     return <CadastroPageWrapper>
         <Toast reference={toast} />
+        <MudaTemaButtonComponent />
         <Formik
             initialValues={initialValues}
             validationSchema={validation}

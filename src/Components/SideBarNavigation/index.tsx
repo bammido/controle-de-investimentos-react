@@ -3,7 +3,7 @@ import Button from '../Button';
 import Sidebar from "../SideBar";
 import { SideBarButtonsWrapper, SideBarNavigationShowButton, SideBarNavigationWrapper, SideBarThemeButtom, SideBarWrapper } from './style';
 import Navigation from "../../Navigation"
-import { globalContext, SettersType } from '../../Contexts/GlobalContext';
+import { globalContext, GlobalMethodsType, GlobalSettersType, GlobalStatesType } from '../../Contexts/GlobalContext';
 import { temaClaro, temaEscuro } from '../../theme/Theme';
 
 export default function SideBarNavigation() {
@@ -20,9 +20,9 @@ export default function SideBarNavigation() {
         goToLogin()
     }
 
-    const { states, setters } = useContext(globalContext)
-    const { temaEstaEscuro } = states
-    const { setTemaEstaEscuro } = setters as SettersType
+    const { states, setters, methods } = useContext(globalContext)
+    const { temaEstaEscuro } = states as GlobalStatesType
+    const { mudaTema } = methods as GlobalMethodsType
 
     return <SideBarNavigationWrapper>
         <Sidebar
@@ -43,7 +43,7 @@ export default function SideBarNavigation() {
                 </SideBarButtonsWrapper>
                 <SideBarButtonsWrapper>
                     <SideBarThemeButtom
-                        onClick={() => setTemaEstaEscuro(prev => prev ? false : true)}
+                        onClick={() => mudaTema(!temaEstaEscuro)}
                         label={`mudar para tema ${temaEstaEscuro ? 'claro' : 'escuro'}`}
                         aria-label='logOut'
                         iconPos='right'
