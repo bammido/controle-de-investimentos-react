@@ -15,11 +15,11 @@ export default function Home() {
 
   const { goToCadastrarInvestimentos } = Navigation()
 
-  useEffect(() => {
-    setTimeout(() => {
-      goToCadastrarInvestimentos()
-    }, 2000)
-  }, [])
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     goToCadastrarInvestimentos()
+  //   }, 2000)
+  // }, [])
 
   return <HomePageWrapper>
     <SideBarNavigation />

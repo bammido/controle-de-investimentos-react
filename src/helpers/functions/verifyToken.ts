@@ -4,8 +4,11 @@ const privateKey = import.meta.env.VITE_JWT_PRIVATE_KEY
 
 const secret = new TextEncoder().encode(privateKey)
 
-export default async function verifyToken(token: string) {
+export default async function verifyToken(token?: string | null) {
     try {
+        if (!token) {
+            throw new Error('não foi passado o token')
+        }
         const jwt = await jose.jwtVerify(token, secret, { clockTolerance: "23h" })
 
         return jwt

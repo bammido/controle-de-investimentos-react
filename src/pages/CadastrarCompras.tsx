@@ -1,46 +1,80 @@
-import { Formik, ErrorMessage, FormikErrors } from "formik";
-import { useRef, useState } from "react";
+import { Formik, ErrorMessage, FormikErrors, FormikHelpers } from "formik";
+import { useEffect, useRef, useState } from "react";
 import Button from "../Components/Button";
 import DatePicker from "../Components/DatePicker";
 import InputNumber from "../Components/InputNumber";
 import InputText from "../Components/InputText";
 import { initialValues, InitialValuesType, validation } from "../helpers/validationSchemas/CadastrarCompras";
-import { mensagemDeSucesso } from "../helpers/functions/Toast";
+import { mensagemDeErro, mensagemDeSucesso } from "../helpers/functions/Toast";
 import { CadastrarComprasForm, ErrorMessageSpan, FormInputsWrapper, InputLabel, InputWrapper, SubmitDiv, Titulo } from "../styles/CadastrarComprasStyle";
 import { Toast } from "../Components/Toast/Toast";
+import PapelService from "../services/PapelService/PapelService";
+import Dropdown, { DropdownChangeParams } from "../Components/Dropdown";
+import verifyToken from "../helpers/functions/verifyToken";
+import getTokenLocal from "../helpers/functions/getTokenLocal";
+import MovimentacoesServiceMakePayload from "../services/MovimentacoesService/MovimentacoesServiceMakePayload";
 
 export default function CadastrarCompras() {
     const toast = useRef(null)
 
-    const [isLoading, setIsLoading] = useState(false)
-    const [sucesso, setSucesso] = useState(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [sucesso, setSucesso] = useState<boolean>(false)
+    const [papeis, setPapeis] = useState<any>([])
 
-    function defineSeverity(errors: FormikErrors<InitialValuesType>) {
-        const { dataDaCompra, corretora, preco, papel, qtd } = errors
+    const tiposMovimentacao = ['compra', 'venda']
 
-        if (dataDaCompra || corretora || preco || papel || qtd) return 'erro'
-        else if (sucesso) return 'sucesso'
-        else return ''
+    async function pegaPapeis() {
+        try {
+            const res = await PapelService.pegarPapeis()
+
+            const codigos = res.data?.map((papel: any) => papel.papel)
+
+            setPapeis(codigos)
+            throw new Error('')
+        } catch (error: any) {
+            mensagemDeErro(toast, 'Ops...', 'erro ao buscar papeis, tente novamente mais tarde!')
+        }
     }
 
-    async function cadastrar(values: InitialValuesType) {
-        setIsLoading(true)
-        await new Promise(resolve => setTimeout(resolve, 3000))
-        setIsLoading(false)
-        setSucesso(true)
-        mensagemDeSucesso(toast, 'Sucesso!', 'Investimento cadastrado!', { life: 3000, closable: true })
+    useEffect(() => {
+        pegaPapeis()
+    }, [])
+
+    async function cadastrar(values: InitialValuesType, formikHelpers: FormikHelpers<InitialValuesType>) {
+        try {
+            const { resetForm } = formikHelpers
+            setIsLoading(true)
+            await new Promise(resolve => setTimeout(resolve, 3000))
+            setSucesso(true)
+
+            const token = getTokenLocal()
+
+            const user = (await verifyToken(token))?.payload?.data
+
+            const { dataDaCompra, preco, qtd, corretora, papel, tipoMovimentacao } = values
+            const userId = user?.id
+            const movimentacaoPayload = MovimentacoesServiceMakePayload.cadastrar(dataDaCompra, preco, qtd, corretora, papel, tipoMovimentacao, userId)
+            console.log(movimentacaoPayload)
+            mensagemDeSucesso(toast, 'Sucesso!', 'Investimento cadastrado!', { life: 3000, closable: true })
+            resetForm()
+        } catch (error: any) {
+            mensagemDeErro(toast, 'Ops...', 'Algo deu errado, tente novamente mais tarde!')
+            setSucesso(false)
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     return <>
         <div>
             <Toast reference={toast} />
-            <Titulo className="titulo">Cadastrar Compras</Titulo>
+            <Titulo className="titulo">Cadastrar Compra</Titulo>
             <Formik
                 onSubmit={cadastrar}
                 initialValues={initialValues}
                 validationSchema={validation}
             >
-                {({ values, handleChange, handleSubmit, errors }) => (
+                {({ values, handleChange, handleSubmit, errors, setFieldValue }) => (
                     <div>
                         <CadastrarComprasForm className="cadastrar-investimentos-form" onSubmit={handleSubmit}>
                             <FormInputsWrapper className="form-inputs" >
@@ -59,12 +93,20 @@ export default function CadastrarCompras() {
 
                                 <InputWrapper className="input-div">
                                     <InputLabel htmlFor="papel">Papel</InputLabel>
-                                    <InputText
+                                    {/* <InputText
                                         id="papel"
                                         placeholder="ex: MXRF11"
                                         value={values.papel}
                                         onChange={handleChange}
-                                    />
+                                    /> */}
+
+                                    <Dropdown
+                                        id='tipoDeRenda'
+                                        value={values.papel}
+                                        options={papeis}
+                                        onChange={(e: DropdownChangeParams) => setFieldValue('papel', e.value)}
+                                        placeholder="Selecione um papel"
+                                    />  
                                     <ErrorMessage component={ErrorMessageSpan} className="error-message" name="papel" />
                                 </InputWrapper>
                                 <InputWrapper className="input-div">
@@ -103,12 +145,24 @@ export default function CadastrarCompras() {
                                     />
                                     <ErrorMessage component={ErrorMessageSpan} className="error-message" name="qtd" />
                                 </InputWrapper>
+                                <InputWrapper className="input-div">
+                                    <InputLabel htmlFor="qtd" >Tipo de movimentação</InputLabel>
+                                    <Dropdown
+                                        id="tipo de movimentação"
+                                        options={tiposMovimentacao}
+                                        value={values.tipoMovimentacao}
+                                        onChange={(e: DropdownChangeParams) => setFieldValue('tipoMovimentacao', e.value)}
+                                        placeholder="selecione tipo de movimentação"
+                                    />
+                                    <ErrorMessage component={ErrorMessageSpan} className="error-message" name="tipoMovimentacao" />
+                                </InputWrapper>
                             </FormInputsWrapper>
                             <SubmitDiv className="submit-button" >
                                 <Button
                                     type="submit"
                                     label="enviar"
-                                    severity={defineSeverity(errors)}
+                                    sucesso={sucesso ? `${true}` : undefined}
+                                    errors={errors}
                                     loading={isLoading}
                                 />
                             </SubmitDiv>
