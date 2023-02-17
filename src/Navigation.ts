@@ -7,10 +7,14 @@ export default function Navigation(){
         navigation('/app')    
     }
 
-    function goToCadastrarCompras() {
-        navigation('cadastrar-compras')
+    function goToCadastrarMovimentacoes() {
+        navigation('cadastrar-movimentacoes')
     }
-   
+
+    function goToVerMovimentacoes() {
+        navigation('ver-movimentacoes')
+    }
+
     function goToVerInvestimentos(){
         navigation('ver-investimentos')
     }
@@ -29,10 +33,12 @@ export default function Navigation(){
 
     return {
         goToHome,
-        goToCadastrarCompras,
+        goToCadastrarMovimentacoes,
+        goToVerMovimentacoes,
         goToVerInvestimentos,
         goToLogin,
         goToCadastrarUsuario,
-        goToCadastrarInvestimentos
+        goToCadastrarInvestimentos,
+
     }
 }

@@ -5,7 +5,6 @@ import Column from "../Components/Column";
 import DataTable from "../Components/DataTable";
 import InputText from '../Components/InputText';
 import { Toast } from '../Components/Toast/Toast';
-import sleep from '../helpers/functions/sleep';
 import { mensagemDeErro, mensagemDeSucesso } from '../helpers/functions/Toast';
 import PapelService from '../services/PapelService/PapelService';
 import { DataTableHeader, Titulo, VerInvestimentosWrapper } from "../styles/VerInvestimentosStyle";
@@ -60,6 +59,27 @@ export default function VerInvestimentos(){
         )
     }
 
+    type InvestimentosType = {
+        papel: string,
+        nome: string,
+        tipoDeRenda: string,
+        tipoDeInvestimento?: string,
+        taxasIncidentes?: string
+    }
+
+    function columnTaxas(rowData: InvestimentosType) {
+        if (!rowData?.taxasIncidentes) return <></>
+        console.log(rowData)
+        const valoresTaxas = rowData?.taxasIncidentes?.split(';')
+        const taxas = valoresTaxas?.map<string>((taxa: string, i) => `${taxa?.split(':')[1]}${Number(taxa?.split(':')[1]) ? '%' : ''} ${i === valoresTaxas.length - 1 ? '' : '+'} `)
+
+        return <span>{taxas ? taxas.join('') : ''}</span>
+    }
+
+    function columnRenda(rowData: InvestimentosType) {
+        return <span>{rowData.tipoDeRenda?.toLocaleUpperCase()}</span>
+    }
+
     useEffect(() => {
         pegarPapeis()
     }, [])
@@ -85,9 +105,9 @@ export default function VerInvestimentos(){
         >
             <Column field="papel" header="Papel" sortable />
             <Column field="nome" header="Nome" sortable />
-            <Column field="tipoDeRenda" header="Tipo de Renda" />
+            <Column field="tipoDeRenda" header="Tipo de Renda" body={columnRenda} />
             <Column field="tipoDeInvestimento" header="Tipo de Investimento" />
-            <Column field="taxasIncidentes" header="Taxas Incidentes" />
+            <Column field="taxasIncidentes" header="Taxas Incidentes" body={columnTaxas} />
         </DataTable>
     </VerInvestimentosWrapper>
 }

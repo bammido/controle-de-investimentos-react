@@ -10,6 +10,7 @@ import Cadastro from "./pages/Cadastro";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import VerInvestimentos from "./pages/VerInvestimentos";
+import VerMovimentacoes from "./pages/VerMovimentacoes";
 
 // const router = createBrowserRouter(
 //   createRoutesFromElements(
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       {
-        path: "cadastrar-compras",
+        path: "cadastrar-movimentacoes",
         element: <CadastrarCompras />
       },
       {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "ver-investimentos",
         element: <VerInvestimentos />
+      },
+      {
+        path: "ver-movimentacoes",
+        element: <VerMovimentacoes />
       },
     ]
   }, {
