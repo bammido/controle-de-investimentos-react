@@ -5,15 +5,17 @@ export type InitialValuesType = {
     preco: number,
     qtd: number,
     corretora: string,
-    papel: string
+    papel: string,
+    tipoMovimentacao: string
 }
 
 export const initialValues: InitialValuesType = {
     dataDaCompra: new Date(),
-    preco: 10,
-    qtd: 10,
-    corretora: 'teste',
-    papel: 'teste'
+    preco: 0,
+    qtd: 0,
+    corretora: '',
+    papel: '',
+    tipoMovimentacao: ''
 }
 
 export const validation = yup.object().shape({
@@ -26,4 +28,5 @@ export const validation = yup.object().shape({
     corretora: yup.string().required('Campo obrigatório'),
     dataDaCompra: yup.date().required('Campo obrigatório'),
     papel: yup.string().required('Campo obrigatório'),
+    tipoMovimentacao: yup.string().required('Campo obrigatório')
 });

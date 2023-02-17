@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button as PrimeReactButton, ButtonProps } from 'primereact/button';
+import { FormikErrors } from 'formik';
 
-export default function Button(props: ButtonProps & { severity?: string }) {
+export default function Button(props: ButtonProps & { severity?: string, sucesso?: boolean | string, errors?: FormikErrors<any> }) {
 
-    function defineSeverity() {
-        const { severity } = props || {}
+    const { sucesso, errors } = props || {}
+    const [buttonStyle, setButtonStyle] = useState<any>({})
+
+    function defineSeverity(errors?: FormikErrors<any>) {
+        const errorsKeys = errors && Object.keys(errors)
+
+        let severity = ''
+
+        if (errorsKeys && errorsKeys.length) severity = 'erro'
+        else if (sucesso) severity = 'sucesso'
+        else severity = ''
+
 
         let buttonStyle = { background: '' }
 
@@ -32,10 +43,15 @@ export default function Button(props: ButtonProps & { severity?: string }) {
                 break;
         }
 
-        return buttonStyle
+        setButtonStyle(buttonStyle)
     }
 
+    useEffect(() => {
+        defineSeverity(errors)
+    }, [sucesso, errors])
+
+
     return <>
-        <PrimeReactButton {...props} style={defineSeverity()} />
+        <PrimeReactButton {...props} style={buttonStyle} />
     </>
 }

@@ -2,16 +2,19 @@ import { AxiosError } from "axios"
 import { apiInvestimentos } from "../apiInvestimentos/apiInvestimentos"
 
 type Cadastrar = {
+    dataDaCompra: Date,
+    preco: number,
+    qtd: number,
+    corretora: string,
     papel: string,
-    nome: string,
-    tipoDeRenda: string,
-    tipoDeInvestimento?: string,
-    taxasIncidentes?: string | null
+    tipoMovimentacao: string,
+    userId: string
 }
-class PapelService {
+
+class MovimentacoesService {
     async cadastrar(data: Cadastrar) {
         try {
-            const res = await apiInvestimentos.post('/papel', data)
+            const res = await apiInvestimentos.post('/movimentacao', data)
 
             return res
         } catch (error: AxiosError | Error | any) {
@@ -19,9 +22,9 @@ class PapelService {
         }
     }
 
-    async pegarPapeis() {
+    async pegarMovimentacoes() {
         try {
-            const res = await apiInvestimentos.get('/papel')
+            const res = await apiInvestimentos.get('/movimentacao')
 
             return res
         } catch (error: AxiosError | Error | any) {
@@ -30,4 +33,4 @@ class PapelService {
     }
 }
 
-export default new PapelService()
+export default new MovimentacoesService()
