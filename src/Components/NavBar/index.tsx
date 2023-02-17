@@ -18,8 +18,8 @@ export default function BarraDeNavegacao() {
     const telas = [
         { label: 'Cadastrar Investimento', icon: 'pi pi-plus', action: goToCadastrarInvestimentos },
         { label: 'Ver investimentos', icon: 'pi pi-chart-line', action: goToVerInvestimentos },
-        { label: 'Cadastrar Compra', icon: 'pi pi-cart-plus', action: goToCadastrarCompras },
-        { label: 'Ver Compras', icon: 'pi pi-shopping-cart', action: goToVerInvestimentos },
+        { label: 'Cadastrar Movimentação', icon: 'pi pi-cart-plus', action: goToCadastrarCompras },
+        { label: 'Ver Movimentações', icon: 'pi pi-shopping-cart', action: goToVerInvestimentos },
 
     ];
 

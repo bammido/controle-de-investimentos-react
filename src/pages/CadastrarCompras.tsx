@@ -1,4 +1,4 @@
-import { Formik, ErrorMessage, FormikErrors, FormikHelpers } from "formik";
+import { Formik, ErrorMessage, FormikHelpers } from "formik";
 import { useEffect, useRef, useState } from "react";
 import Button from "../Components/Button";
 import DatePicker from "../Components/DatePicker";
@@ -72,7 +72,7 @@ export default function CadastrarCompras() {
     return <>
         <div>
             <Toast reference={toast} />
-            <Titulo className="titulo">Cadastrar Compra</Titulo>
+            <Titulo className="titulo">Cadastrar Movimentação</Titulo>
             <Formik
                 onSubmit={cadastrar}
                 initialValues={initialValues}
@@ -89,7 +89,7 @@ export default function CadastrarCompras() {
                                         value={values.dataDaCompra}
                                         onChange={handleChange}
                                         showButtonBar
-                                        minDate={new Date()}
+                                        maxDate={new Date()}
                                         touchUI
                                     />
                                     <ErrorMessage component={ErrorMessageSpan} className="error-message" name="dataDaCompra" />
@@ -97,12 +97,6 @@ export default function CadastrarCompras() {
 
                                 <InputWrapper className="input-div">
                                     <InputLabel htmlFor="papel">Papel</InputLabel>
-                                    {/* <InputText
-                                        id="papel"
-                                        placeholder="ex: MXRF11"
-                                        value={values.papel}
-                                        onChange={handleChange}
-                                    /> */}
 
                                     <Dropdown
                                         id='tipoDeRenda'
