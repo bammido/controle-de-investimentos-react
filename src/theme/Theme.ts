@@ -8,7 +8,9 @@ export const colors = {
         '6': '#9c8200',
     },
     blackSmooth: '#303134',
-    blue: '#6366F1'
+    blue: '#6366F1',
+    black: '#202124',
+    white: '#E8F0FE',
 
 }
 
@@ -20,13 +22,16 @@ export const fonts = {
 export const temaEscuro = {
     pallete: {
         colors: {
-            black: '#202124',
-            white: '#E8F0FE',
+
             ...colors
         },
         primary: {
             main: '#202124',
             contrastText: '#fff'
+        },
+        secondary: {
+            main: colors.blackSmooth,
+            contrastText: colors.white
         }
     }
 }
@@ -34,13 +39,16 @@ export const temaEscuro = {
 export const temaClaro = {
     pallete: {
         colors: {
-            black: '#202124',
-            white: '#E8F0FE',
             ...colors
         },
         primary: {
             main: '#fff',
             contrastText: '#202124'
+        }
+        ,
+        secondary: {
+            main: 'rgba(0,0,0,0.1)',
+            contrastText: colors.blackSmooth
         }
     }
 }
