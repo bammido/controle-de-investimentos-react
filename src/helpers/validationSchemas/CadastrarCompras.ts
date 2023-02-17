@@ -11,10 +11,10 @@ export type InitialValuesType = {
 
 export const initialValues: InitialValuesType = {
     dataDaCompra: new Date(),
-    preco: 10,
-    qtd: 10,
-    corretora: 'teste',
-    papel: 'teste',
+    preco: 0,
+    qtd: 0,
+    corretora: '',
+    papel: '',
     tipoMovimentacao: ''
 }
 

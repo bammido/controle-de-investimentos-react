@@ -13,6 +13,7 @@ import Dropdown, { DropdownChangeParams } from "../Components/Dropdown";
 import verifyToken from "../helpers/functions/verifyToken";
 import getTokenLocal from "../helpers/functions/getTokenLocal";
 import MovimentacoesServiceMakePayload from "../services/MovimentacoesService/MovimentacoesServiceMakePayload";
+import MovimentacoesService from "../services/MovimentacoesService/MovimentacoesService";
 
 export default function CadastrarCompras() {
     const toast = useRef(null)
@@ -53,8 +54,11 @@ export default function CadastrarCompras() {
 
             const { dataDaCompra, preco, qtd, corretora, papel, tipoMovimentacao } = values
             const userId = user?.id
+
             const movimentacaoPayload = MovimentacoesServiceMakePayload.cadastrar(dataDaCompra, preco, qtd, corretora, papel, tipoMovimentacao, userId)
-            console.log(movimentacaoPayload)
+
+            const res = await MovimentacoesService.cadastrar(movimentacaoPayload)
+
             mensagemDeSucesso(toast, 'Sucesso!', 'Investimento cadastrado!', { life: 3000, closable: true })
             resetForm()
         } catch (error: any) {
