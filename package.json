@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "env-cmd -f ./.env.development vite",
-    "start": "env-cmd -f ./.env vite",
+    "start-prod": "env-cmd -f ./.env vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "start-heroku": "vite preview"
+    "start": "vite preview"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
