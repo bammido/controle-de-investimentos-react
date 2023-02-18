@@ -1,3 +1,9 @@
+import decryptAES from "./decryptAES"
+
 export default function getTokenLocal() {
-    return localStorage.getItem('usuario_token')
+    const cryptoToken = localStorage.getItem('usuario_token')
+
+    const decryptedToken = decryptAES(cryptoToken as string)
+
+    return decryptedToken
 }
