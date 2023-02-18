@@ -11,7 +11,7 @@ import { ThemeProvider } from 'styled-components';
 import { temaClaro, temaEscuro } from './theme/Theme';
 
 import { useContext } from 'react'
-import { globalContext } from './Contexts/GlobalContext';
+import { globalContext, GlobalStatesType } from './Contexts/GlobalContext';
 
 addLocale('pt-br', {
   firstDayOfWeek: 1,
@@ -29,7 +29,7 @@ locale('pt-br');
 function App() {
 
   const { states } = useContext(globalContext)
-  const { temaEstaEscuro } = states
+  const { temaEstaEscuro } = states as GlobalStatesType
   return (
     <div className="App">
       <ThemeProvider theme={temaEstaEscuro ? temaEscuro : temaClaro}>

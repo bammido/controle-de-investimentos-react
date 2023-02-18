@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Button as PrimeReactButton, ButtonProps } from 'primereact/button';
 import { FormikErrors } from 'formik';
 
-export default function Button(props: ButtonProps & { severity?: string, sucesso?: boolean | string, errors?: FormikErrors<any> }) {
+export default function Button(props: ButtonProps & { nostyle?: boolean | string, severity?: string, sucesso?: boolean | string, errors?: FormikErrors<any> }) {
 
-    const { sucesso, errors } = props || {}
+    const { sucesso, errors, nostyle } = props || {}
     const [buttonStyle, setButtonStyle] = useState<any>({})
 
     function defineSeverity(errors?: FormikErrors<any>) {
+        if (nostyle) return
+
         const errorsKeys = errors && Object.keys(errors)
 
         let severity = ''
