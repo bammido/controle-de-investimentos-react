@@ -1,3 +1,7 @@
+import cryptoAES from './cryptoAES';
+
 export default function setTokenLocal(token: string) {
-    return localStorage.setItem('usuario_token', token)
+    const cryptoToken = cryptoAES(token)
+
+    return localStorage.setItem('usuario_token', cryptoToken as string)
 }

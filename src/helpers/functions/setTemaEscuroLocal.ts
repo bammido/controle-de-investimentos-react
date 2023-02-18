@@ -1,3 +1,7 @@
+import cryptoAES from "./cryptoAES"
+
 export default function setTemaEscuroLocal(value: string): void {
-    return localStorage.setItem('tema_escuro', value)
+    const cryptoValue = cryptoAES(value)
+
+    return localStorage.setItem('tema_escuro', cryptoValue as string)
 }

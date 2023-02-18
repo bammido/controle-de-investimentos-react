@@ -25,7 +25,7 @@ import VerMovimentacoes from "./pages/VerMovimentacoes";
 
 const router = createBrowserRouter([
   {
-    path: "/app",
+    path: "/",
     element: <Home />,
     errorElement: <NotFound />,
     children: [
