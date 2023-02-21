@@ -9,15 +9,20 @@ import { Toast } from "../../Components/Toast/Toast";
 import { somenteUmEspacoEntrePalavras, toUpperCase, transformValue } from "../../helpers/functions/transformers/valueTransforms";
 import { mensagemDeErro, mensagemDeSucesso } from "../../helpers/functions/Toast";
 import { initialValues, validation, InitialValuesType } from "../../helpers/validationSchemas/CadastrarInvestimentos";
-import { CadastrarInvestimentosForm, ErrorMessageSpan, FormInputsWrapper, InputLabel, InputstaxasWrapper, InputTaxasLabel, InputWrapper, Span, SubmitDiv, SubTitulo, Titulo } from "../../styles/CadastrarInvestimentosStyle";
+import { CadastrarInvestimentosForm, ErrorMessageSpan, FormInputsWrapper, InputLabel, InputPrefixado, InputPrefixadoCloseIcon, InputstaxasWrapper, InputTaxasLabel, InputWrapper, Span, SubmitDiv, SubTitulo, Titulo } from "../../styles/CadastrarInvestimentosStyle";
 import PapelServiceMakePayload from "../../services/PapelService/PapelServiceMakePayload";
 import PapelService from "../../services/PapelService/PapelService";
 import { tiposDeRenda, tiposDeInvestimentosRendaFixa, tiposDeInvestimentosRendaVariavel, taxasIncidentes } from "./options";
+import Chip from "../../Components/Chip";
+import Inplace from "../../Components/Inplace";
+import InplaceDisplay from "../../Components/Inplace/InplaceDisplay";
+import InplaceContent from "../../Components/Inplace/InplaceContent";
 
 export default function CadastrarInvestimentos() {
     const toast = useRef(null)
 
     const [isLoading, setIsLoading] = useState(false)
+    const [inplaceActive, setInplaceActive] = useState(false)
 
 
 
@@ -85,6 +90,12 @@ export default function CadastrarInvestimentos() {
 
         return setFieldValue('taxasIncidentes', novasTaxas)
 
+    }
+
+    function onRemoveTaxa(taxaParaRemover: any, setFieldValue: SetFieldValueType, taxasIncidentes: []) {
+        const novasTaxas = taxasIncidentes.filter((taxa: any) => taxa.taxa !== taxaParaRemover.taxa)
+
+        return setFieldValue('taxasIncidentes', novasTaxas)
     }
 
 
@@ -179,7 +190,7 @@ export default function CadastrarInvestimentos() {
                         </InputWrapper>
                     </FormInputsWrapper>
                     {values?.taxasIncidentes?.length ? <>
-                        <SubTitulo>Defina a porcentagem das(s) taxa(s)</SubTitulo>
+                        <SubTitulo>Verifique a porcentagem da(s) taxa(s)</SubTitulo>
                         <ErrorMessage
                             component={ErrorMessageSpan}
                             className="error-message"
@@ -189,22 +200,24 @@ export default function CadastrarInvestimentos() {
                             {values.taxasIncidentes?.map((taxaIncidente: any, i: number) => <div key={new Date().getSeconds() + i}>
                                 <InputWrapper >
                                     {taxaIncidente.taxa.toUpperCase() !== 'PREFIXADO' && <>
-                                        <InputTaxasLabel htmlFor={taxaIncidente.taxa}>{taxaIncidente.taxa.toUpperCase()}</InputTaxasLabel>
-                                        <InputText
-                                            disabled={true}
-                                            id={taxaIncidente.taxa}
-                                            value={taxaIncidente.valor}
+                                        <Chip
+                                            label={taxaIncidente.taxa.toUpperCase()}
+                                            removable
+                                            onRemove={() => onRemoveTaxa(taxaIncidente, setFieldValue, values.taxasIncidentes as [])}
                                         />
                                     </>}
                                     {taxaIncidente.taxa.toUpperCase() === 'PREFIXADO' && <>
-                                        <InputTaxasLabel htmlFor={taxaIncidente.taxa}>{taxaIncidente.taxa.toUpperCase()}</InputTaxasLabel>
-                                        <InputNumber
-                                            id={taxaIncidente.taxa}
-                                            mode='decimal'
-                                            value={taxaIncidente.valor}
-                                            onValueChange={(e: InputNumberChangeParams) => onChangeValorTaxasIncidentes(e, setFieldValue, values.taxasIncidentes as [], taxaIncidente.taxa)}
-                                            suffix=" %"
-                                        />
+                                        <span className="p-input-icon-right">
+                                            <InputPrefixadoCloseIcon className={"pi pi-times-circle"} onClick={() => onRemoveTaxa(taxaIncidente, setFieldValue, values.taxasIncidentes as [])} />
+                                            <InputPrefixado
+                                                id={taxaIncidente.taxa}
+                                                mode='decimal'
+                                                value={taxaIncidente.valor}
+                                                placeholder='digite o valor'
+                                                onValueChange={(e: InputNumberChangeParams) => onChangeValorTaxasIncidentes(e, setFieldValue, values.taxasIncidentes as [], taxaIncidente.taxa)}
+                                                suffix={' %'}
+                                            />
+                                        </span>
                                     </>}
                                 </InputWrapper>
                                 {(values.taxasIncidentes && values.taxasIncidentes.length - 1 !== i) && <Span>+</Span>}

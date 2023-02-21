@@ -3,7 +3,7 @@ import { ErrorMessage, Formik } from "formik";
 import Button from "../../Components/Button";
 import Dialog, { DialogProps } from "../../Components/Dialog";
 import InputText from "../../Components/InputText";
-import { CadastrarInvestimentosForm, ErrorMessageSpan, FormInputsWrapper, InputLabel, InputstaxasWrapper, InputTaxasLabel, InputWrapper, Span, SubmitDiv, SubTitulo } from "../../styles/CadastrarInvestimentosStyle";
+import { CadastrarInvestimentosForm, ErrorMessageSpan, FormInputsWrapper, InputLabel, InputPrefixado, InputPrefixadoCloseIcon, InputstaxasWrapper, InputTaxasLabel, InputWrapper, Span, SubmitDiv, SubTitulo } from "../../styles/CadastrarInvestimentosStyle";
 import MultiSelect from "../../Components/MultiSelect";
 import Dropdown, { DropdownChangeParams } from "../../Components/Dropdown";
 import { edicaoValidation } from "../../helpers/validationSchemas/CadastrarInvestimentos";
@@ -15,6 +15,7 @@ import PapelServiceMakePayload from "../../services/PapelService/PapelServiceMak
 import PapelService from "../../services/PapelService/PapelService";
 import { mensagemDeErro, mensagemDeSucesso } from "../../helpers/functions/Toast";
 import { Toast as ToastPrimeReact } from "primereact/toast";
+import Chip from "../../Components/Chip";
 
 type InvestimentosType = {
         id: string,
@@ -109,6 +110,13 @@ export default function DialogEdicaoInvestimentos(props: Props) {
 
                 setFieldValue('papel', newValue)
         }
+
+        function onRemoveTaxa(taxaParaRemover: any, setFieldValue: SetFieldValueType, taxasIncidentes: []) {
+                const novasTaxas = taxasIncidentes.filter((taxa: any) => taxa.taxa !== taxaParaRemover.taxa)
+
+                return setFieldValue('taxasIncidentes', novasTaxas)
+        }
+
 
         useEffect(() => {
                 const { rowdata } = props
@@ -214,7 +222,7 @@ export default function DialogEdicaoInvestimentos(props: Props) {
                                                 </InputWrapper>
                                         </FormInputsWrapper>
                                         {values?.taxasIncidentes?.length ? <>
-                                                <SubTitulo>Defina a porcentagem das(s) taxa(s)</SubTitulo>
+                                                <SubTitulo>Verifique a porcentagem das(s) taxa(s)</SubTitulo>
                                                 <ErrorMessage
                                                         component={ErrorMessageSpan}
                                                         className="error-message"
@@ -224,22 +232,24 @@ export default function DialogEdicaoInvestimentos(props: Props) {
                                                         {values.taxasIncidentes?.map((taxaIncidente: any, i: number) => <div key={new Date().getSeconds() + i}>
                                                                 <InputWrapper >
                                                                         {taxaIncidente.taxa.toUpperCase() !== 'PREFIXADO' && <>
-                                                                                <InputTaxasLabel htmlFor={taxaIncidente.taxa}>{taxaIncidente.taxa.toUpperCase()}</InputTaxasLabel>
-                                                                                <InputText
-                                                                                        disabled={true}
-                                                                                        id={taxaIncidente.taxa}
-                                                                                        value={taxaIncidente.valor}
+                                                                                <Chip
+                                                                                        label={taxaIncidente.taxa.toUpperCase()}
+                                                                                        removable
+                                                                                        onRemove={() => onRemoveTaxa(taxaIncidente, setFieldValue, values.taxasIncidentes as [])}
                                                                                 />
                                                                         </>}
                                                                         {taxaIncidente.taxa.toUpperCase() === 'PREFIXADO' && <>
-                                                                                <InputTaxasLabel htmlFor={taxaIncidente.taxa}>{taxaIncidente.taxa.toUpperCase()}</InputTaxasLabel>
-                                                                                <InputNumber
-                                                                                        id={taxaIncidente.taxa}
-                                                                                        mode='decimal'
-                                                                                        value={taxaIncidente.valor}
-                                                                                        onValueChange={(e: InputNumberChangeParams) => onChangeValorTaxasIncidentes(e, setFieldValue, values.taxasIncidentes as [], taxaIncidente.taxa)}
-                                                                                        suffix=" %"
-                                                                                />
+                                                                                <span className="p-input-icon-right">
+                                                                                        <InputPrefixadoCloseIcon className={"pi pi-times-circle"} onClick={() => onRemoveTaxa(taxaIncidente, setFieldValue, values.taxasIncidentes as [])} />
+                                                                                        <InputPrefixado
+                                                                                                id={taxaIncidente.taxa}
+                                                                                                mode='decimal'
+                                                                                                value={taxaIncidente.valor}
+                                                                                                placeholder='digite o valor'
+                                                                                                onValueChange={(e: InputNumberChangeParams) => onChangeValorTaxasIncidentes(e, setFieldValue, values.taxasIncidentes as [], taxaIncidente.taxa)}
+                                                                                                suffix={' %'}
+                                                                                        />
+                                                                                </span>
                                                                         </>}
                                                                 </InputWrapper>
                                                                 {(values.taxasIncidentes && values.taxasIncidentes.length - 1 !== i) && <Span>+</Span>}
