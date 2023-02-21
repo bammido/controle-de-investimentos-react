@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Button from "../Components/Button";
 import { Titulo as TituloCadastrarInvestimentos } from "./CadastrarInvestimentosStyle";
 
 export const Titulo = styled(TituloCadastrarInvestimentos)``
@@ -71,4 +72,8 @@ export const VerInvestimentosWrapper = styled.div`
             color:${props => props.theme.pallete.secondary.contrastText} !important;
         }
     }
+`
+
+export const EditButton = styled(Button)`
+    border-radius: 50%;
 `

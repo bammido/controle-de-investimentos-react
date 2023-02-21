@@ -10,7 +10,7 @@ export type InitialValuesType = {
 }
 
 export const initialValues: InitialValuesType = {
-    papel: 'teste',
+    papel: '',
     nome: '',
     tipoDeInvestimento: '',
     tipoDeRenda: '',
@@ -34,3 +34,11 @@ function verificaTaxas(taxas: TypeOfShape<ObjectShape>[] | undefined): boolean {
 
     return true
 }
+
+export const edicaoValidation = yup.object().shape({
+    tipoDeRenda: yup.string(),
+    tipoDeInvestimento: yup.string(),
+    papel: yup.string(),
+    nome: yup.string(),
+    taxasIncidentes: yup.array().of(yup.object()).test('verificaTaxas', 'os valores das taxas devem ser preenchidos', verificaTaxas)
+});

@@ -1,15 +1,16 @@
 import { FilterMatchMode } from 'primereact/api';
 import { useEffect, useState, useRef } from 'react'
-import Button from '../Components/Button';
-import Column from "../Components/Column";
-import DataTable from "../Components/DataTable";
-import InputText from '../Components/InputText';
-import { Toast } from '../Components/Toast/Toast';
-import { mensagemDeErro, mensagemDeSucesso } from '../helpers/functions/Toast';
-import PapelService from '../services/PapelService/PapelService';
-import { DataTableHeader, Titulo, VerInvestimentosWrapper } from "../styles/VerInvestimentosStyle";
+import Button from '../../Components/Button';
+import Column from "../../Components/Column";
+import DataTable from "../../Components/DataTable";
+import InputText from '../../Components/InputText';
+import { Toast } from '../../Components/Toast/Toast';
+import { mensagemDeErro, mensagemDeSucesso } from '../../helpers/functions/Toast';
+import PapelService from '../../services/PapelService/PapelService';
+import { DataTableHeader, EditButton, Titulo, VerInvestimentosWrapper } from "../../styles/VerInvestimentosStyle";
+import DialogEdicaoInvestimentos from './DialogEdicaoInvestimentos';
 
-export default function VerInvestimentos(){
+export default function VerInvestimentos() {
     const toast = useRef(null)
 
     const [investimentos, setInvestimentos] = useState<[]>([])
@@ -18,6 +19,18 @@ export default function VerInvestimentos(){
         'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
     })
     const [isLoading, setIsLoading] = useState<boolean>(false)
+
+    const [modoEdicao, setModoEdicao] = useState<boolean>(false)
+    const [papelEditando, setpapelEditando] = useState<InvestimentosType | {}>({})
+
+    function abrirModoEdicao(papel: InvestimentosType) {
+        setModoEdicao(true)
+        setpapelEditando(papel)
+    }
+    function fecharModoEdicao() {
+        setModoEdicao(false)
+        setpapelEditando('')
+    }
 
     async function pegarPapeis() {
         try {
@@ -60,6 +73,7 @@ export default function VerInvestimentos(){
     }
 
     type InvestimentosType = {
+        id: string,
         papel: string,
         nome: string,
         tipoDeRenda: string,
@@ -69,7 +83,6 @@ export default function VerInvestimentos(){
 
     function columnTaxas(rowData: InvestimentosType) {
         if (!rowData?.taxasIncidentes) return <></>
-        console.log(rowData)
         const valoresTaxas = rowData?.taxasIncidentes?.split(';')
         const taxas = valoresTaxas?.map<string>((taxa: string, i) => `${taxa?.split(':')[1]}${Number(taxa?.split(':')[1]) ? '%' : ''} ${i === valoresTaxas.length - 1 ? '' : '+'} `)
 
@@ -80,11 +93,24 @@ export default function VerInvestimentos(){
         return <span>{rowData.tipoDeRenda?.toLocaleUpperCase()}</span>
     }
 
+    function ColumnAcoes(rowData: InvestimentosType) {
+        return <EditButton icon='pi pi-pencil' onClick={() => abrirModoEdicao(rowData)} />
+    }
+
     useEffect(() => {
         pegarPapeis()
     }, [])
 
     return <VerInvestimentosWrapper>
+
+        <DialogEdicaoInvestimentos
+            rowdata={papelEditando as InvestimentosType}
+            baseZIndex={100}
+            header={`Deseja editar o papel ${(papelEditando as InvestimentosType).papel}`}
+            visible={modoEdicao}
+            onHide={fecharModoEdicao}
+            toast={toast}
+        />
 
         <Toast reference={toast} />
 
@@ -108,6 +134,7 @@ export default function VerInvestimentos(){
             <Column field="tipoDeRenda" header="Tipo de Renda" body={columnRenda} />
             <Column field="tipoDeInvestimento" header="Tipo de Investimento" />
             <Column field="taxasIncidentes" header="Taxas Incidentes" body={columnTaxas} />
+            <Column header="Ações" body={ColumnAcoes} />
         </DataTable>
     </VerInvestimentosWrapper>
 }

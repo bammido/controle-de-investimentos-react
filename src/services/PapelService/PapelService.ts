@@ -28,6 +28,16 @@ class PapelService {
             throw new Error('Erro na requisição de cadastro', { cause: error.response })
         }
     }
+
+    async editar(id: string, payload: Cadastrar) {
+        try {
+            const res = await apiInvestimentos.put(`/papel/${id}`, payload)
+
+            return res
+        } catch (error: AxiosError | Error | any) {
+            throw new Error('Erro na requisição de cadastro', { cause: error.response })
+        }
+    }
 }
 
 export default new PapelService()

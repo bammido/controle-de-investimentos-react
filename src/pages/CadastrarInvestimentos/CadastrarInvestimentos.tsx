@@ -1,52 +1,25 @@
 import { ErrorMessage, Formik, FormikHelpers } from "formik";
 import { useRef, useState } from "react";
-import Button from "../Components/Button";
-import Dropdown, { DropdownChangeParams } from "../Components/Dropdown";
-import InputNumber, { InputNumberChangeParams } from "../Components/InputNumber";
-import InputText from "../Components/InputText";
-import MultiSelect from "../Components/MultiSelect";
-import { Toast } from "../Components/Toast/Toast";
-import { somenteUmEspacoEntrePalavras, toUpperCase, transformValue } from "../helpers/functions/transformers/valueTransforms";
-import { mensagemDeErro, mensagemDeSucesso } from "../helpers/functions/Toast";
-import { initialValues, validation, InitialValuesType } from "../helpers/validationSchemas/CadastrarInvestimentos";
-import { CadastrarInvestimentosForm, ErrorMessageSpan, FormInputsWrapper, InputLabel, InputstaxasWrapper, InputTaxasLabel, InputWrapper, Span, SubmitDiv, SubTitulo, Titulo } from "../styles/CadastrarInvestimentosStyle";
-import PapelServiceMakePayload from "../services/PapelService/PapelServiceMakePayload";
-import PapelService from "../services/PapelService/PapelService";
+import Button from "../../Components/Button";
+import Dropdown, { DropdownChangeParams } from "../../Components/Dropdown";
+import InputNumber, { InputNumberChangeParams } from "../../Components/InputNumber";
+import InputText from "../../Components/InputText";
+import MultiSelect from "../../Components/MultiSelect";
+import { Toast } from "../../Components/Toast/Toast";
+import { somenteUmEspacoEntrePalavras, toUpperCase, transformValue } from "../../helpers/functions/transformers/valueTransforms";
+import { mensagemDeErro, mensagemDeSucesso } from "../../helpers/functions/Toast";
+import { initialValues, validation, InitialValuesType } from "../../helpers/validationSchemas/CadastrarInvestimentos";
+import { CadastrarInvestimentosForm, ErrorMessageSpan, FormInputsWrapper, InputLabel, InputstaxasWrapper, InputTaxasLabel, InputWrapper, Span, SubmitDiv, SubTitulo, Titulo } from "../../styles/CadastrarInvestimentosStyle";
+import PapelServiceMakePayload from "../../services/PapelService/PapelServiceMakePayload";
+import PapelService from "../../services/PapelService/PapelService";
+import { tiposDeRenda, tiposDeInvestimentosRendaFixa, tiposDeInvestimentosRendaVariavel, taxasIncidentes } from "./options";
 
 export default function CadastrarInvestimentos() {
     const toast = useRef(null)
 
     const [isLoading, setIsLoading] = useState(false)
 
-    const tiposDeRenda = [
-        { label: 'Renda fixa', value: 'fixa' },
-        { label: 'Renda variável', value: 'variavel' },
-        { label: 'Tesouro direto', value: 'tesouro' },
-        { label: 'Fundos de investimentos', value: 'fundos' },
-    ]
 
-    const tiposDeInvestimentosRendaFixa = [
-        { label: 'CDB', value: 'CDB' },
-        { label: 'CRI', value: 'CRI' },
-        { label: 'CRA', value: 'CRA' },
-        { label: 'LCI', value: 'LCI' },
-        { label: 'LCA', value: 'LCA' },
-    ]
-
-    const tiposDeInvestimentosRendaVariavel = [
-        { label: 'Ação', value: 'acao' },
-        { label: 'Fundo Imobiliario', value: 'Fundo imobiliario' },
-        { label: 'ETF', value: 'ETF' },
-    ]
-
-    const taxasIncidentes = [
-        { label: 'CDI', value: 'CDI' },
-        { label: 'Selic', value: 'selic' },
-        { label: 'IPCA', value: 'IPCA' },
-        { label: 'Prefixado', value: 'prefixado' },
-        { label: 'Teste1', value: 'Teste1' },
-        { label: 'Teste2', value: 'Teste2' },
-    ]
 
     async function cadastrar(values: InitialValuesType, formikHelpers: FormikHelpers<InitialValuesType>) {
         try {
@@ -112,7 +85,7 @@ export default function CadastrarInvestimentos() {
 
         return setFieldValue('taxasIncidentes', novasTaxas)
 
-    } 
+    }
 
 
     function onChangePapel(e: React.ChangeEvent<any>, setFieldValue: SetFieldValueType) {
@@ -178,20 +151,20 @@ export default function CadastrarInvestimentos() {
                         </InputWrapper>
                         {
                             values.tipoDeRenda && (values.tipoDeRenda.toLowerCase() !== 'tesouro' && values.tipoDeRenda.toLowerCase() !== 'fundos') && < InputWrapper >
-                            <InputLabel htmlFor="tipoDeInvestimento">Tipo de investimento</InputLabel>
-                            <Dropdown
-                                id='tipoDeRenda'
-                                value={values.tipoDeInvestimento}
+                                <InputLabel htmlFor="tipoDeInvestimento">Tipo de investimento</InputLabel>
+                                <Dropdown
+                                    id='tipoDeRenda'
+                                    value={values.tipoDeInvestimento}
                                     options={values.tipoDeRenda.toLowerCase() === 'fixa' ? tiposDeInvestimentosRendaFixa : tiposDeInvestimentosRendaVariavel}
                                     onChange={(e: DropdownChangeParams) => setFieldValue('tipoDeInvestimento', e.value)}
-                                placeholder="Selecione um tipo de investimento"
-                            />
-                            <ErrorMessage
-                                component={ErrorMessageSpan}
-                                className="error-message"
+                                    placeholder="Selecione um tipo de investimento"
+                                />
+                                <ErrorMessage
+                                    component={ErrorMessageSpan}
+                                    className="error-message"
                                     name="tipoDeInvestimento"
                                 />
-                        </InputWrapper>
+                            </InputWrapper>
                         }
                         <InputWrapper>
                             <InputLabel htmlFor="taxasIncidentes">Taxa(s) que incide(m)</InputLabel>
