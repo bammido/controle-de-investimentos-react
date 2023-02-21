@@ -22,7 +22,6 @@ export default function CadastrarInvestimentos() {
     const toast = useRef(null)
 
     const [isLoading, setIsLoading] = useState(false)
-    const [inplaceActive, setInplaceActive] = useState(false)
 
 
 
