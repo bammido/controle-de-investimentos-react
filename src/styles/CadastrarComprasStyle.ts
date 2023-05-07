@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { display } from "../theme/Theme";
+import Fieldset from "../Components/FieldSet";
 
 export const Titulo = styled.h1`
     text-align: center;
@@ -34,7 +35,8 @@ export const CadastrarComprasForm = styled.form`
 `
 
 export const InputLabel = styled.label`
-    margin-bottom: 1vh;
+    margin-bottom: 2vh;
+    font-weight: 700;
 
     color: ${props => props.theme.pallete.primary.contrastText};
 `
@@ -50,5 +52,20 @@ export const SubmitDiv = styled.div`
 
     @media (${display.Mobile["max-width"]}){
         justify-content: center;
+    }
+`
+
+export const FieldSetStyled = styled.div`
+    border: 1px solid ${props => props.theme.pallete.primary.contrastText};
+    padding: 5vh 5vw;
+
+    display: flex;
+    flex-direction: column;
+
+    &>div{
+        display: flex;
+        flex-direction: column;
+
+        margin-bottom: 5vh;
     }
 `

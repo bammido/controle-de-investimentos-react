@@ -1,11 +1,12 @@
 class PapelServiceMakePayload {
 
-    cadastrar(papel: string, nome: string, tipoDeRenda: string, tipoDeInvestimento: string | undefined, taxasIncidentes: string | undefined | null) {
-        return { papel, nome, tipoDeRenda, tipoDeInvestimento, taxasIncidentes }
+    cadastrar(papel: string, nome: string, tipoDeRenda: string, tipoDeInvestimento: string | undefined) {
+
+        return { papel, nome, tipoDeRenda, tipoDeInvestimento: tipoDeInvestimento ? tipoDeInvestimento : null }
     }
 
-    editar(papel: string, nome: string, tipoDeRenda: string, tipoDeInvestimento: string | undefined, taxasIncidentes: string | undefined | null) {
-        return { papel, nome, tipoDeRenda, tipoDeInvestimento, taxasIncidentes }
+    editar(papel: string, nome: string, tipoDeRenda: string, tipoDeInvestimento: string | undefined) {
+        return { papel, nome, tipoDeRenda, tipoDeInvestimento }
     }
 
 }
