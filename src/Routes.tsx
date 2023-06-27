@@ -4,7 +4,7 @@ import {
   Route,
 } from "react-router-dom";
 import NotFound from "./pages/404";
-import CadastrarCompras from "./pages/CadastrarCompras";
+import CadastrarCompras from "./pages/cadastrarMovimentacoes/CadastrarCompras";
 import CadastrarInvestimentos from "./pages/CadastrarPapel/CadastrarPapel";
 import Cadastro from "./pages/Cadastro";
 import Home from "./pages/Home";

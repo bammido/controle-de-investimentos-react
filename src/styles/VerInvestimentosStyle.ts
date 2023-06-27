@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Button from "../Components/Button";
-import { Titulo as TituloCadastrarInvestimentos } from "./CadastrarInvestimentosStyle";
+import { Titulo as TituloCadastrarInvestimentos } from "./CadastrarPapelStyle";
 
 export const Titulo = styled(TituloCadastrarInvestimentos)``
 
