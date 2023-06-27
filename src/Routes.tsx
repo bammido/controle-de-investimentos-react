@@ -5,11 +5,11 @@ import {
 } from "react-router-dom";
 import NotFound from "./pages/404";
 import CadastrarCompras from "./pages/CadastrarCompras";
-import CadastrarInvestimentos from "./pages/CadastrarInvestimentos/CadastrarInvestimentos";
+import CadastrarInvestimentos from "./pages/CadastrarPapel/CadastrarPapel";
 import Cadastro from "./pages/Cadastro";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import VerInvestimentos from "./pages/VerInvestimentos/VerInvestimentos";
+import VerInvestimentos from "./pages/VerPapeis/VerInvestimentos";
 import VerMovimentacoes from "./pages/VerMovimentacoes";
 
 // const router = createBrowserRouter(
@@ -34,11 +34,11 @@ const router = createBrowserRouter([
         element: <CadastrarCompras />
       },
       {
-        path: "cadastrar-investimentos",
+        path: "cadastrar-papel",
         element: <CadastrarInvestimentos />
       },
       {
-        path: "ver-investimentos",
+        path: "ver-papeis",
         element: <VerInvestimentos />
       },
       {

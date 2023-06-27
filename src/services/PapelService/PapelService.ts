@@ -5,8 +5,7 @@ type Cadastrar = {
     papel: string,
     nome: string,
     tipoDeRenda: string,
-    tipoDeInvestimento?: string,
-    taxasIncidentes?: string | null
+    tipoDeInvestimento?: string | null
 }
 class PapelService {
     async cadastrar(data: Cadastrar) {

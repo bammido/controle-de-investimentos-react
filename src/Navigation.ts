@@ -15,12 +15,12 @@ export default function Navigation(){
         navigation('ver-movimentacoes')
     }
 
-    function goToVerInvestimentos(){
-        navigation('ver-investimentos')
+    function goToVerPapeis() {
+        navigation('ver-papeis')
     }
 
-    function goToCadastrarInvestimentos() {
-        navigation('cadastrar-investimentos')
+    function goToCadastrarPapel() {
+        navigation('cadastrar-papel')
     }
 
     function goToLogin() {
@@ -35,10 +35,10 @@ export default function Navigation(){
         goToHome,
         goToCadastrarMovimentacoes,
         goToVerMovimentacoes,
-        goToVerInvestimentos,
+        goToVerPapeis,
         goToLogin,
         goToCadastrarUsuario,
-        goToCadastrarInvestimentos,
+        goToCadastrarPapel,
 
     }
 }

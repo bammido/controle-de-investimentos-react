@@ -8,7 +8,7 @@ type Event = TabMenuTabChangeParams & { index: number, value: { label: string, a
 export default function BarraDeNavegacao() {
     const [telaAtual, setTelaAtual] = useState(0)
 
-    const { goToCadastrarMovimentacoes, goToCadastrarInvestimentos, goToVerInvestimentos, goToVerMovimentacoes } = Navigation()
+    const { goToCadastrarMovimentacoes, goToVerPapeis, goToCadastrarPapel, goToVerMovimentacoes } = Navigation()
 
     function onChange(e: Event) {
         setTelaAtual(e.index)
@@ -16,8 +16,8 @@ export default function BarraDeNavegacao() {
     }
 
     const telas = [
-        { label: 'Cadastrar Investimento', icon: 'pi pi-plus', action: goToCadastrarInvestimentos },
-        { label: 'Ver investimentos', icon: 'pi pi-chart-line', action: goToVerInvestimentos },
+        { label: 'Cadastrar Papel', icon: 'pi pi-plus', action: goToCadastrarPapel },
+        { label: 'Ver papeis', icon: 'pi pi-chart-line', action: goToVerPapeis },
         { label: 'Cadastrar Movimentação', icon: 'pi pi-cart-plus', action: goToCadastrarMovimentacoes },
         { label: 'Ver Movimentações', icon: 'pi pi-shopping-cart', action: goToVerMovimentacoes },
 
