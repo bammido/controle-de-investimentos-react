@@ -1,19 +1,18 @@
 import { ErrorMessage, useFormikContext } from "formik";
 import InputText from "../../Components/InputText";
-import { CadastrarInvestimentosForm, ErrorMessageSpan, FormInputsWrapper, InputLabel, InputWrapper, InputstaxasWrapper, SubTitulo, SubmitDiv } from "../../styles/CadastrarInvestimentosStyle";
+import { ErrorMessageSpan, InputLabel, SubmitDiv } from "../../styles/CadastrarInvestimentosStyle";
 import Dropdown, { DropdownChangeParams } from "../../Components/Dropdown";
 import Button from "../../Components/Button";
 import { InitialValuesType } from "../../helpers/validationSchemas/CadastrarInvestimentos";
 import { PapelForm } from "./style";
 import { useEffect, useState } from "react";
 import TipoDeRendaService from "../../services/TipoDeRendaService/TipoDeRendaService";
-import sleep from "../../helpers/functions/sleep";
 import { FieldSetStyled } from "../../styles/CadastrarComprasStyle";
 import TipoDeInvestimentoService from "../../services/TipoDeInvestimentoService/TipoDeInvestimentoService";
 
-type cadastrarPapelFormPropsType = { loading: boolean, setLoading: React.Dispatch<boolean>, sucesso: boolean }
+type cadastrarPapelFormPropsType = { loading: boolean, setLoading: React.Dispatch<boolean>, sucesso: boolean, showErrorMessage: () => void }
 
-export default function CadastrarPapelForm({ loading, setLoading, sucesso }: cadastrarPapelFormPropsType) {
+export default function CadastrarPapelForm({ loading, setLoading, sucesso, showErrorMessage }: cadastrarPapelFormPropsType) {
     const [tiposDeRenda, setTiposDeRenda] = useState<string[]>([])
     const [tiposDeInvestimentosRendaFixa, setTiposDeInvestimentosRendaFixa] = useState<string[]>([])
     const [tiposDeInvestimentosRendaVariavel, setTiposDeInvestimentosRendaVariavel] = useState<string[]>([])
@@ -23,26 +22,17 @@ export default function CadastrarPapelForm({ loading, setLoading, sucesso }: cad
             try {
                 setLoading(true)
 
-                await sleep(3000)
-
-                // const data = (await TipoDeRendaService.pegarRendas()).data
-
-
-                // const investimentosData = (await TipoDeInvestimentoService.pegarInvestimentos()).data
-
                 const [resRendas, resInvestimentos] = await Promise.all([TipoDeRendaService.pegarRendas(), TipoDeInvestimentoService.pegarInvestimentos()])
 
                 const rendas = resRendas?.data.length > 0 && resRendas?.data.map((renda: any) => renda.tipo)
 
                 const investimentosData = resInvestimentos.data
 
-                console.log(investimentosData)
-
                 Array.isArray(investimentosData.rendaFixa) && setTiposDeInvestimentosRendaFixa(investimentosData.rendaFixa)
                 Array.isArray(investimentosData.rendaVariavel) && setTiposDeInvestimentosRendaVariavel(investimentosData.rendaVariavel)
                 Array.isArray(rendas) && setTiposDeRenda(rendas)
             } catch (error: any) {
-                console.log(error)
+                showErrorMessage()
             } finally {
                 setLoading(false)
             }

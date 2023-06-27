@@ -64,6 +64,7 @@ export default function CadastrarPapel() {
                     loading={isLoading}
                     setLoading={setIsLoading}
                     sucesso={sucesso}
+                    showErrorMessage={() => mensagemDeErro(toast, 'Algo deu errado :(', 'tente novamente mais tarde!')}
                 />
             )}
         </Formik>
