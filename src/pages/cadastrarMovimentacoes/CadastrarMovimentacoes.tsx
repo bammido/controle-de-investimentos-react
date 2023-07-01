@@ -10,7 +10,7 @@ import MovimentacoesServiceMakePayload from "../../services/MovimentacoesService
 import MovimentacoesService from "../../services/MovimentacoesService/MovimentacoesService";
 import CadastrarMovimentacoesForm from "./CadastrarMovimentacoesForm";
 
-export default function CadastrarCompras() {
+export default function CadastrarMovimentacoes() {
     const toast = useRef(null)
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -58,7 +58,7 @@ export default function CadastrarCompras() {
                         loading={isLoading}
                         setLoading={setIsLoading}
                         sucesso={sucesso}
-                        showErrorMessage={() => mensagemDeErro(toast, 'Ops...', 'erro ao buscar papeis, tente novamente mais tarde!')}
+                        showErrorMessage={() => mensagemDeErro(toast, 'Ops...', 'erro na comunicação com o servidor, tente novamente mais tarde!')}
                     />
                 )}
             </Formik>
