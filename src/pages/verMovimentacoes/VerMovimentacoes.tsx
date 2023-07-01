@@ -1,14 +1,14 @@
-import { Toast } from "../Components/Toast/Toast";
+import { Toast } from "../../Components/Toast/Toast";
 import { useRef, useState, useEffect } from 'react'
-import { DataTableHeader, Titulo, VerComprasWrapper } from "../styles/VerMovimentacoesStyle";
-import DataTable from "../Components/DataTable";
-import Column from "../Components/Column";
-import sleep from "../helpers/functions/sleep";
-import MovimentacoesService from "../services/MovimentacoesService/MovimentacoesService";
-import formatDate from "../helpers/functions/formatDate";
-import Button from "../Components/Button";
-import InputText from "../Components/InputText";
+import { DataTableHeader, DataTableInfos, EditButton, Titulo, VerComprasWrapper } from "../../styles/VerMovimentacoesStyle";
+import DataTable from "../../Components/DataTable";
+import Column from "../../Components/Column";
+import MovimentacoesService from "../../services/MovimentacoesService/MovimentacoesService";
+import formatDate from "../../helpers/functions/formatDate";
+import Button from "../../Components/Button";
+import InputText from "../../Components/InputText";
 import { FilterMatchMode } from "primereact/api";
+import DialogEdicaoMovimentacoes from "./DialogEdicaoMovimentacoesForm";
 
 export default function VerMovimentacoes() {
     const [movimentacoes, setMovimentacoes] = useState<[]>([])
@@ -18,10 +18,12 @@ export default function VerMovimentacoes() {
         'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
     })
 
+    const [modoEdicao, setModoEdicao] = useState<boolean>(false)
+    const [movimentacaoEditando, setMovimentacaoEditando] = useState<Movimentacoes | {}>({})
+
     async function pegarMovimentacoes() {
         try {
             setIsLoading(true)
-            await sleep(3000)
             const res = (await MovimentacoesService.pegarMovimentacoes()).data
             setMovimentacoes(res)
         } catch (error) {
@@ -49,7 +51,7 @@ export default function VerMovimentacoes() {
     type Movimentacoes = {
         "id": string,
         "papel": string,
-        "dataDaCompra": string,
+        "data": string,
         "corretora": string,
         "preco": number,
         "qtd": number,
@@ -57,15 +59,28 @@ export default function VerMovimentacoes() {
         "userId": string
     }
 
+    function abrirModoEdicao(movimentacao: Movimentacoes) {
+        setModoEdicao(true)
+        setMovimentacaoEditando(movimentacao)
+    }
+    function fecharModoEdicao() {
+        setModoEdicao(false)
+        setMovimentacaoEditando('')
+    }
+
     function ColumnData(rowData: Movimentacoes) {
-        const dataFormatada = formatDate(rowData.dataDaCompra)
-        return <span>{`${dataFormatada}`}</span>
+        const dataFormatada = formatDate(rowData.data)
+        return <DataTableInfos tipo={rowData.tipoMovimentacao} >{`${dataFormatada}`}</DataTableInfos>
     }
 
     function ColumnPreco(rowData: Movimentacoes) {
         const precoFormatado = Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' })
             .format(rowData.preco);
         return <span>{precoFormatado}</span>
+    }
+
+    function ColumnAcoes(rowData: Movimentacoes) {
+        return <EditButton icon='pi pi-pencil' onClick={() => abrirModoEdicao(rowData)} />
     }
 
     const dataTableHeader = () => {
@@ -86,6 +101,15 @@ export default function VerMovimentacoes() {
 
     const toast = useRef(null)
     return <VerComprasWrapper>
+
+        <DialogEdicaoMovimentacoes
+            rowdata={movimentacaoEditando as Movimentacoes}
+            baseZIndex={100}
+            header={`Deseja editar o papel ${(movimentacaoEditando as Movimentacoes).papel}`}
+            visible={modoEdicao}
+            onHide={fecharModoEdicao}
+            toast={toast}
+        />
 
         <Toast reference={toast} />
 
@@ -108,8 +132,9 @@ export default function VerMovimentacoes() {
             <Column field="qtd" header="Quantidade" />
             <Column field="preco" header="Preço" body={ColumnPreco} />
             <Column field="tipoMovimentacao" header="Tipo" />
-            <Column field="dataDaCompra" header="Data" body={ColumnData} sortable />
+            <Column field="data" header="Data" body={ColumnData} sortable />
             <Column field="corretora" header="Corretora" />
+            <Column header="Ações" body={ColumnAcoes} />
         </DataTable>
     </VerComprasWrapper>
 }

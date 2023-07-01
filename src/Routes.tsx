@@ -10,7 +10,7 @@ import Cadastro from "./pages/Cadastro";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import VerInvestimentos from "./pages/VerPapeis/VerInvestimentos";
-import VerMovimentacoes from "./pages/VerMovimentacoes";
+import VerMovimentacoes from "./pages/verMovimentacoes/VerMovimentacoes";
 
 // const router = createBrowserRouter(
 //   createRoutesFromElements(

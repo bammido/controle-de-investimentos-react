@@ -2,14 +2,12 @@ import { ErrorMessage, useFormikContext } from "formik";
 import Button from "../../Components/Button";
 import DatePicker from "../../Components/DatePicker";
 import InputNumber from "../../Components/InputNumber";
-import InputText from "../../Components/InputText";
 import { CadastrarComprasForm, ErrorMessageSpan, FieldSetStyled, FormInputsWrapper, InputLabel, InputWrapper, SubmitDiv } from "../../styles/CadastrarMovimentacoesStyle";
 import Dropdown, { DropdownChangeParams } from "../../Components/Dropdown";
 import { InitialValuesType } from "../../helpers/validationSchemas/CadastrarCompras";
 import { useEffect, useState } from "react";
 import PapelService from "../../services/PapelService/PapelService";
 import CorretoraService from "../../services/CorretoraService/CorretoraService";
-import sleep from "../../helpers/functions/sleep";
 
 type cadastrarMovimentacaoFormPropsType = { loading: boolean, setLoading: React.Dispatch<boolean>, sucesso: boolean, showErrorMessage: () => void }
 
@@ -62,8 +60,8 @@ export default function CadastrarMovimentacoesForm({ loading, setLoading, sucess
                 <div>
                     <InputLabel htmlFor="dataDaCompra">Data da compra</InputLabel>
                     <DatePicker
-                        id="dataDaCompra"
-                        value={values.dataDaCompra}
+                        id="data"
+                        value={values.data}
                         onChange={handleChange}
                         showButtonBar
                         maxDate={new Date()}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Formik } from "formik";
 import Dialog, { DialogProps } from "../../Components/Dialog";
-import { edicaoValidation } from "../../helpers/validationSchemas/CadastrarInvestimentos";
+import { edicaoValidation } from "../../helpers/validationSchemas/CadastrarCompras";
 import sleep from "../../helpers/functions/sleep";
 import PapelServiceMakePayload from "../../services/PapelService/PapelServiceMakePayload";
 import PapelService from "../../services/PapelService/PapelService";
