@@ -1,5 +1,5 @@
 import { Toast } from "../../Components/Toast/Toast";
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, useContext } from 'react'
 import { DataTableHeader, DataTableInfos, EditButton, Titulo, VerComprasWrapper } from "../../styles/VerMovimentacoesStyle";
 import DataTable from "../../Components/DataTable";
 import Column from "../../Components/Column";
@@ -9,9 +9,12 @@ import Button from "../../Components/Button";
 import InputText from "../../Components/InputText";
 import { FilterMatchMode } from "primereact/api";
 import DialogEdicaoMovimentacoes from "./DialogEdicaoMovimentacoesForm";
+import { GlobalStatesType, globalContext } from "../../Contexts/GlobalContext";
+import getTokenLocal from "../../helpers/functions/getTokenLocal";
+import verifyToken from "../../helpers/functions/verifyToken";
 
 export default function VerMovimentacoes() {
-    const [movimentacoes, setMovimentacoes] = useState<[]>([])
+    const [movimentacoes, setMovimentacoes] = useState<Movimentacoes[] | []>([])
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [filtroGlobal, setFiltroGlobal] = useState<string>('')
     const [filters, setFilters] = useState<{ global: any }>({
@@ -21,10 +24,22 @@ export default function VerMovimentacoes() {
     const [modoEdicao, setModoEdicao] = useState<boolean>(false)
     const [movimentacaoEditando, setMovimentacaoEditando] = useState<Movimentacoes | {}>({})
 
+    const { states } = useContext(globalContext)
+
+    const { user } = (states as GlobalStatesType)
+
     async function pegarMovimentacoes() {
         try {
             setIsLoading(true)
-            const res = (await MovimentacoesService.pegarMovimentacoes()).data
+
+            const token = getTokenLocal()
+
+            const { payload } = await verifyToken(token)
+
+            const user = payload?.data || {}
+
+            const res = (await MovimentacoesService.pegarMovimentacoesDoUsuario(user.id)).data
+
             setMovimentacoes(res)
         } catch (error) {
 
@@ -51,7 +66,7 @@ export default function VerMovimentacoes() {
     type Movimentacoes = {
         "id": string,
         "papel": string,
-        "data": string,
+        "data": string | Date,
         "corretora": string,
         "preco": number,
         "qtd": number,
@@ -105,7 +120,7 @@ export default function VerMovimentacoes() {
         <DialogEdicaoMovimentacoes
             rowdata={movimentacaoEditando as Movimentacoes}
             baseZIndex={100}
-            header={`Deseja editar o papel ${(movimentacaoEditando as Movimentacoes).papel}`}
+            header={`Deseja editar essa movimentação`}
             visible={modoEdicao}
             onHide={fecharModoEdicao}
             toast={toast}

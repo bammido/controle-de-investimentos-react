@@ -13,7 +13,7 @@ export default function Home() {
 
   const { states } = useContext(globalContext)
 
-  const { goToCadastrarInvestimentos } = Navigation()
+  // const { goToCadastrarInvestimentos } = Navigation()
 
   // useEffect(() => {
   //   setTimeout(() => {
