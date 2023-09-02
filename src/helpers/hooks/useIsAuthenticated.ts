@@ -22,8 +22,6 @@ export default function useIsAuthenticated() {
 
             const user = payload?.data || {}
 
-            console.log(user)
-
             setUser(user)
         } catch (error) {
             return goToLogin()

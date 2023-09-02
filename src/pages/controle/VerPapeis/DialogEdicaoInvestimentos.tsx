@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Formik } from "formik";
-import Dialog, { DialogProps } from "../../Components/Dialog";
-import { edicaoValidation } from "../../helpers/validationSchemas/CadastrarCompras";
-import sleep from "../../helpers/functions/sleep";
-import PapelServiceMakePayload from "../../services/PapelService/PapelServiceMakePayload";
-import PapelService from "../../services/PapelService/PapelService";
-import { mensagemDeErro, mensagemDeSucesso } from "../../helpers/functions/Toast";
+import Dialog, { DialogProps } from "../../../Components/Dialog";
+import { edicaoValidation } from "../../../helpers/validationSchemas/CadastrarCompras";
+import sleep from "../../../helpers/functions/sleep";
+import PapelServiceMakePayload from "../../../services/PapelService/PapelServiceMakePayload";
+import PapelService from "../../../services/PapelService/PapelService";
+import { mensagemDeErro, mensagemDeSucesso } from "../../../helpers/functions/Toast";
 import { Toast as ToastPrimeReact } from "primereact/toast";
 import CadastrarPapelForm from "../CadastrarPapel/CadastrarPapelForm";
 
@@ -26,7 +26,7 @@ type Toast = {
         toast: React.RefObject<ToastPrimeReact>
 }
 
-type Props = DialogProps & RowData & Toast
+type Props = DialogProps & RowData & Toast & { fecharModoEdicao: () => void, pegarPapeis: () => Promise<void> }
 
 export default function DialogEdicaoInvestimentos(props: Props) {
         const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -49,6 +49,10 @@ export default function DialogEdicaoInvestimentos(props: Props) {
                         const res = await PapelService.editar(props.rowdata.id, editarPapelPayload)
 
                         mensagemDeSucesso(props.toast, 'sucesso', `${papel} editado com sucesso!`)
+
+                        await props.pegarPapeis()
+
+                        props.fecharModoEdicao()
                 } catch (error) {
                         mensagemDeErro(props.toast, 'Ops...', 'falha ao editar papel!')
                 } finally {
@@ -59,7 +63,6 @@ export default function DialogEdicaoInvestimentos(props: Props) {
         useEffect(() => {
                 const { rowdata } = props
 
-
                 if (!rowdata?.taxasIncidentes) return setTaxasIncidentesEdicao([])
                 const valoresTaxas = rowdata?.taxasIncidentes?.split(';')
                 const taxas = valoresTaxas?.map((taxa: string, i) => {
@@ -69,7 +72,6 @@ export default function DialogEdicaoInvestimentos(props: Props) {
                 })
 
                 setTaxasIncidentesEdicao(taxas)
-                console.log(taxas)
 
         }, [props.rowdata])
 

@@ -1,13 +1,13 @@
 import { ErrorMessage, useFormikContext } from "formik";
-import Button from "../../Components/Button";
-import DatePicker from "../../Components/DatePicker";
-import InputNumber from "../../Components/InputNumber";
-import { CadastrarComprasForm, ErrorMessageSpan, FieldSetStyled, FormInputsWrapper, InputLabel, InputWrapper, SubmitDiv } from "../../styles/CadastrarMovimentacoesStyle";
-import Dropdown, { DropdownChangeParams } from "../../Components/Dropdown";
-import { InitialValuesType } from "../../helpers/validationSchemas/CadastrarCompras";
+import Button from "../../../Components/Button";
+import DatePicker from "../../../Components/DatePicker";
+import InputNumber from "../../../Components/InputNumber";
+import { CadastrarComprasForm, ErrorMessageSpan, FieldSetStyled, FormInputsWrapper, InputLabel, InputWrapper, SubmitDiv } from "../../../styles/CadastrarMovimentacoesStyle";
+import Dropdown, { DropdownChangeParams } from "../../../Components/Dropdown";
+import { InitialValuesType } from "../../../helpers/validationSchemas/CadastrarCompras";
 import { useEffect, useState } from "react";
-import PapelService from "../../services/PapelService/PapelService";
-import CorretoraService from "../../services/CorretoraService/CorretoraService";
+import PapelService from "../../../services/PapelService/PapelService";
+import CorretoraService from "../../../services/CorretoraService/CorretoraService";
 
 type cadastrarMovimentacaoFormPropsType = { loading: boolean, setLoading: React.Dispatch<boolean>, sucesso: boolean, showErrorMessage: () => void }
 

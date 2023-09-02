@@ -10,6 +10,10 @@ export const GlobalStyle = createGlobalStyle`
         transition: 300ms;
     }
 
+    body::-webkit-scrollbar {
+        display: none;
+    }
+
     & .p-dialog .p-dialog-header{
         background: ${props => props.theme.pallete.primary.main} !important;
         color: ${props => props.theme.pallete.primary.contrastText};

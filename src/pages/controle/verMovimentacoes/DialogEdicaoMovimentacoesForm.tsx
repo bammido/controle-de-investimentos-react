@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { Formik } from "formik";
-import Dialog, { DialogProps } from "../../Components/Dialog";
-import { edicaoValidation } from "../../helpers/validationSchemas/CadastrarInvestimentos";
-import sleep from "../../helpers/functions/sleep";
-import PapelServiceMakePayload from "../../services/PapelService/PapelServiceMakePayload";
-import PapelService from "../../services/PapelService/PapelService";
-import { mensagemDeErro, mensagemDeSucesso } from "../../helpers/functions/Toast";
+import Dialog, { DialogProps } from "../../../Components/Dialog";
+import { edicaoValidation } from "../../../helpers/validationSchemas/CadastrarInvestimentos";
+import sleep from "../../../helpers/functions/sleep";
+import PapelServiceMakePayload from "../../../services/PapelService/PapelServiceMakePayload";
+import PapelService from "../../../services/PapelService/PapelService";
+import { mensagemDeErro, mensagemDeSucesso } from "../../../helpers/functions/Toast";
 import { Toast as ToastPrimeReact } from "primereact/toast";
 import CadastrarMovimentacoesForm from "../cadastrarMovimentacoes/CadastrarMovimentacoesForm";
-import MovimentacoesServiceMakePayload from "../../services/MovimentacoesService/MovimentacoesServiceMakePayload";
-import MovimentacoesService from "../../services/MovimentacoesService/MovimentacoesService";
+import MovimentacoesServiceMakePayload from "../../../services/MovimentacoesService/MovimentacoesServiceMakePayload";
+import MovimentacoesService from "../../../services/MovimentacoesService/MovimentacoesService";
 
 type Movimentacoes = {
     "id": string,
@@ -30,7 +30,7 @@ type Toast = {
     toast: React.RefObject<ToastPrimeReact>
 }
 
-type Props = DialogProps & RowData & Toast
+type Props = DialogProps & RowData & Toast & { pegarMovimentacoes: () => Promise<void>, fecharModoEdicao: () => void }
 
 export default function DialogEdicaoMovimentacoes(props: Props) {
     const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -57,6 +57,10 @@ export default function DialogEdicaoMovimentacoes(props: Props) {
             const res = await MovimentacoesService.editar(id, editarMovimentacoesPayload)
 
             mensagemDeSucesso(props.toast, 'sucesso', `Movimentação editada com sucesso!`)
+
+            await props.pegarMovimentacoes()
+
+            props.fecharModoEdicao()
         } catch (error) {
             mensagemDeErro(props.toast, 'Ops...', 'falha ao editar papel!')
         } finally {

@@ -11,6 +11,13 @@ export const colors = {
     blue: '#6366F1',
     black: '#202124',
     white: '#E8F0FE',
+    darkPurple: '#210124',
+    celadon: '#B3DEC1',
+    claret: '#750D37',
+    federalBlue: '#2E1760',
+    lightGreen: 'lightgreen',
+    red: 'red',
+    green: 'green'
 
 }
 
@@ -22,17 +29,18 @@ export const fonts = {
 export const temaEscuro = {
     pallete: {
         colors: {
-
             ...colors
         },
         primary: {
-            main: '#202124',
+            main: colors.blackSmooth,
             contrastText: '#fff'
         },
         secondary: {
-            main: colors.blackSmooth,
+            main: '#202124',
             contrastText: colors.white
-        }
+        },
+        green: colors.lightGreen,
+        red: colors.red
     }
 }
 
@@ -47,9 +55,11 @@ export const temaClaro = {
         }
         ,
         secondary: {
-            main: 'rgba(0,0,0,0.1)',
+            main: '#D0CFCF',
             contrastText: colors.blackSmooth
-        }
+        },
+        green: colors.green,
+        red: colors.red
     }
 }
 

@@ -1,13 +1,13 @@
 import { Formik, FormikHelpers } from "formik";
 import { useRef, useState } from "react";
-import { Titulo } from "../../styles/CadastrarMovimentacoesStyle";
-import { InitialValuesType, initialValues, validation } from "../../helpers/validationSchemas/CadastrarCompras";
-import { mensagemDeErro, mensagemDeSucesso } from "../../helpers/functions/Toast";
-import { Toast } from "../../Components/Toast/Toast";
-import verifyToken from "../../helpers/functions/verifyToken";
-import getTokenLocal from "../../helpers/functions/getTokenLocal";
-import MovimentacoesServiceMakePayload from "../../services/MovimentacoesService/MovimentacoesServiceMakePayload";
-import MovimentacoesService from "../../services/MovimentacoesService/MovimentacoesService";
+import { Titulo } from "../../../styles/CadastrarMovimentacoesStyle";
+import { InitialValuesType, initialValues, validation } from "../../../helpers/validationSchemas/CadastrarCompras";
+import { mensagemDeErro, mensagemDeSucesso } from "../../../helpers/functions/Toast";
+import { Toast } from "../../../Components/Toast/Toast";
+import verifyToken from "../../../helpers/functions/verifyToken";
+import getTokenLocal from "../../../helpers/functions/getTokenLocal";
+import MovimentacoesServiceMakePayload from "../../../services/MovimentacoesService/MovimentacoesServiceMakePayload";
+import MovimentacoesService from "../../../services/MovimentacoesService/MovimentacoesService";
 import CadastrarMovimentacoesForm from "./CadastrarMovimentacoesForm";
 
 export default function CadastrarMovimentacoes() {
@@ -27,17 +27,19 @@ export default function CadastrarMovimentacoes() {
 
             const user = (await verifyToken(token))?.payload?.data
 
-            const { dataDaCompra, preco, qtd, corretora, papel, tipoMovimentacao } = values
+            const { data, preco, qtd, corretora, papel, tipoMovimentacao } = values
             const userId = user?.id
 
-            const movimentacaoPayload = MovimentacoesServiceMakePayload.cadastrar(dataDaCompra, preco, qtd, corretora, papel, tipoMovimentacao, userId)
+            const movimentacaoPayload = MovimentacoesServiceMakePayload.cadastrar(data, preco, qtd, corretora, papel, tipoMovimentacao, userId)
 
             const res = await MovimentacoesService.cadastrar(movimentacaoPayload)
 
             mensagemDeSucesso(toast, 'Sucesso!', 'Investimento cadastrado!', { life: 3000, closable: true })
             resetForm()
         } catch (error: any) {
-            mensagemDeErro(toast, 'Ops...', 'Algo deu errado, tente novamente mais tarde!')
+            const { cause } = error
+            const errorMessage = cause?.data?.message
+            mensagemDeErro(toast, 'Ops...', errorMessage || 'Algo deu errado, tente novamente mais tarde!')
             setSucesso(false)
         } finally {
             setIsLoading(false)

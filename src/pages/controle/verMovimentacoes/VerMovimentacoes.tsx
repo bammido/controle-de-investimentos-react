@@ -1,17 +1,17 @@
-import { Toast } from "../../Components/Toast/Toast";
+import { Toast } from "../../../Components/Toast/Toast";
 import { useRef, useState, useEffect, useContext } from 'react'
-import { DataTableHeader, DataTableInfos, EditButton, Titulo, VerComprasWrapper } from "../../styles/VerMovimentacoesStyle";
-import DataTable from "../../Components/DataTable";
-import Column from "../../Components/Column";
-import MovimentacoesService from "../../services/MovimentacoesService/MovimentacoesService";
-import formatDate from "../../helpers/functions/formatDate";
-import Button from "../../Components/Button";
-import InputText from "../../Components/InputText";
+import { DataTableHeader, DataTableInfos, EditButton, Titulo, VerComprasWrapper } from "../../../styles/VerMovimentacoesStyle";
+import DataTable from "../../../Components/DataTable";
+import Column from "../../../Components/Column";
+import MovimentacoesService from "../../../services/MovimentacoesService/MovimentacoesService";
+import formatDate from "../../../helpers/functions/formatDate";
+import Button from "../../../Components/Button";
+import InputText from "../../../Components/InputText";
 import { FilterMatchMode } from "primereact/api";
 import DialogEdicaoMovimentacoes from "./DialogEdicaoMovimentacoesForm";
-import { GlobalStatesType, globalContext } from "../../Contexts/GlobalContext";
-import getTokenLocal from "../../helpers/functions/getTokenLocal";
-import verifyToken from "../../helpers/functions/verifyToken";
+import { GlobalStatesType, globalContext } from "../../../Contexts/GlobalContext";
+import getTokenLocal from "../../../helpers/functions/getTokenLocal";
+import verifyToken from "../../../helpers/functions/verifyToken";
 
 export default function VerMovimentacoes() {
     const [movimentacoes, setMovimentacoes] = useState<Movimentacoes[] | []>([])
@@ -118,6 +118,8 @@ export default function VerMovimentacoes() {
     return <VerComprasWrapper>
 
         <DialogEdicaoMovimentacoes
+            pegarMovimentacoes={pegarMovimentacoes}
+            fecharModoEdicao={fecharModoEdicao}
             rowdata={movimentacaoEditando as Movimentacoes}
             baseZIndex={100}
             header={`Deseja editar essa movimentação`}

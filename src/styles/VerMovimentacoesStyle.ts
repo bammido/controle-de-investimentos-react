@@ -5,6 +5,7 @@ import {
     VerInvestimentosWrapper,
     EditButton as EditButtonVeInvestimentos
 } from './VerInvestimentosStyle'
+import { colors } from "../theme/Theme";
 
 export const Titulo = styled(TituloVerInvestimentos)``
 
@@ -19,7 +20,5 @@ type DataTableInfosProps = {
 }
 
 export const DataTableInfos = styled.span<DataTableInfosProps>`
-color: ${(props) => props.tipo === 'compra' ? 'lightgreen' : 'red'}
-
-
+    color: ${(props) => props.tipo === 'compra' ? props.theme.pallete.green : props.theme.pallete.red}
 `
