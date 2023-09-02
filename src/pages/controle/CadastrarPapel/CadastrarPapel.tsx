@@ -1,17 +1,17 @@
 import { ErrorMessage, Formik, FormikHelpers } from "formik";
 import { useRef, useState } from "react";
-import Button from "../../Components/Button";
-import Dropdown, { DropdownChangeParams } from "../../Components/Dropdown";
-import InputNumber, { InputNumberChangeParams } from "../../Components/InputNumber";
-import InputText from "../../Components/InputText";
-import MultiSelect from "../../Components/MultiSelect";
-import { Toast } from "../../Components/Toast/Toast";
-import { somenteUmEspacoEntrePalavras, toUpperCase, transformValue } from "../../helpers/functions/transformers/valueTransforms";
-import { mensagemDeErro, mensagemDeSucesso } from "../../helpers/functions/Toast";
-import { initialValues, validation, InitialValuesType } from "../../helpers/validationSchemas/CadastrarInvestimentos";
-import { Titulo } from "../../styles/CadastrarInvestimentosStyle";
-import PapelServiceMakePayload from "../../services/PapelService/PapelServiceMakePayload";
-import PapelService from "../../services/PapelService/PapelService";
+import Button from "../../../Components/Button";
+import Dropdown, { DropdownChangeParams } from "../../../Components/Dropdown";
+import InputNumber, { InputNumberChangeParams } from "../../../Components/InputNumber";
+import InputText from "../../../Components/InputText";
+import MultiSelect from "../../../Components/MultiSelect";
+import { Toast } from "../../../Components/Toast/Toast";
+import { somenteUmEspacoEntrePalavras, toUpperCase, transformValue } from "../../../helpers/functions/transformers/valueTransforms";
+import { mensagemDeErro, mensagemDeSucesso } from "../../../helpers/functions/Toast";
+import { initialValues, validation, InitialValuesType } from "../../../helpers/validationSchemas/CadastrarInvestimentos";
+import { Titulo } from "../../../styles/CadastrarPapelStyle";
+import PapelServiceMakePayload from "../../../services/PapelService/PapelServiceMakePayload";
+import PapelService from "../../../services/PapelService/PapelService";
 import CadastrarPapelForm from "./CadastrarPapelForm";
 
 export default function CadastrarPapel() {

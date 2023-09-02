@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import InputNumber from "../Components/InputNumber";
 import { display } from "../theme/Theme";
-import { CadastrarComprasForm, Titulo as TituloCadastrarCompras, FormInputsWrapper as FormInputsWrapperCadastrarCompras, InputWrapper as InputWrapperCadastrarCompras, InputLabel as InputLabelCadastrarCompras, SubmitDiv as SubmitDivCadastrarCompras, ErrorMessageSpan as ErrorMessageSpanCadastrarCompras } from "./CadastrarComprasStyle";
+import { CadastrarComprasForm, Titulo as TituloCadastrarCompras, FormInputsWrapper as FormInputsWrapperCadastrarCompras, InputWrapper as InputWrapperCadastrarCompras, InputLabel as InputLabelCadastrarCompras, SubmitDiv as SubmitDivCadastrarCompras, ErrorMessageSpan as ErrorMessageSpanCadastrarCompras } from "./CadastrarMovimentacoesStyle";
 
 const laptopMinDisplay = display.Laptops["min-width"]
 

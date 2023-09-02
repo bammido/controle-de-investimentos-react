@@ -1,13 +1,13 @@
 import { FilterMatchMode } from 'primereact/api';
 import { useEffect, useState, useRef } from 'react'
-import Button from '../../Components/Button';
-import Column from "../../Components/Column";
-import DataTable from "../../Components/DataTable";
-import InputText from '../../Components/InputText';
-import { Toast } from '../../Components/Toast/Toast';
-import { mensagemDeErro, mensagemDeSucesso } from '../../helpers/functions/Toast';
-import PapelService from '../../services/PapelService/PapelService';
-import { DataTableHeader, EditButton, Titulo, VerInvestimentosWrapper } from "../../styles/VerInvestimentosStyle";
+import Button from '../../../Components/Button';
+import Column from "../../../Components/Column";
+import DataTable from "../../../Components/DataTable";
+import InputText from '../../../Components/InputText';
+import { Toast } from '../../../Components/Toast/Toast';
+import { mensagemDeErro, mensagemDeSucesso } from '../../../helpers/functions/Toast';
+import PapelService from '../../../services/PapelService/PapelService';
+import { DataTableHeader, EditButton, Titulo, VerInvestimentosWrapper } from "../../../styles/VerInvestimentosStyle";
 import DialogEdicaoInvestimentos from './DialogEdicaoInvestimentos';
 
 export default function VerInvestimentos() {
@@ -37,7 +37,6 @@ export default function VerInvestimentos() {
             setIsLoading(true)
             const papeis = (await PapelService.pegarPapeis()).data
             setInvestimentos(papeis)
-            mensagemDeSucesso(toast, 'investimentos carregados com sucesso!')
         } catch (error: any) {
             mensagemDeErro(toast, 'Ops...', 'Não foi possível carregar os investimentos!')
         } finally {
@@ -104,9 +103,11 @@ export default function VerInvestimentos() {
     return <VerInvestimentosWrapper>
 
         <DialogEdicaoInvestimentos
+            pegarPapeis={pegarPapeis}
+            fecharModoEdicao={fecharModoEdicao}
             rowdata={papelEditando as InvestimentosType}
             baseZIndex={100}
-            header={`Deseja editar o papel ${(papelEditando as InvestimentosType).papel}`}
+            header={'Modo edição'}
             visible={modoEdicao}
             onHide={fecharModoEdicao}
             toast={toast}

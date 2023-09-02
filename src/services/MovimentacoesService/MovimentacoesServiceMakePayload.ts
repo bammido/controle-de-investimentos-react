@@ -1,13 +1,22 @@
 class MovimentacoesServiceMakePayload {
 
-    cadastrar(dataDaCompra: Date,
+    cadastrar(data: Date,
         preco: number,
         qtd: number,
         corretora: string,
         papel: string,
         tipoMovimentacao: string,
         userId: string) {
-        return { papel, dataDaCompra, preco, qtd, corretora, tipoMovimentacao, userId }
+        return { papel, data, preco, qtd, corretora, tipoMovimentacao, userId }
+    }
+
+    editar(data: Date,
+        preco: number,
+        qtd: number,
+        corretora: string,
+        papel: string,
+        tipoMovimentacao: string) {
+        return { papel, data, preco, qtd, corretora, tipoMovimentacao }
     }
 
 }
