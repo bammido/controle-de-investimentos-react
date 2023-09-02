@@ -4,24 +4,14 @@ import {
   Route,
 } from "react-router-dom";
 import NotFound from "./pages/404";
-import CadastrarCompras from "./pages/cadastrarMovimentacoes/CadastrarCompras";
-import CadastrarInvestimentos from "./pages/CadastrarPapel/CadastrarPapel";
+import CadastrarMovimentacoes from "./pages/controle/cadastrarMovimentacoes/CadastrarMovimentacoes";
+import CadastrarInvestimentos from "./pages/controle/CadastrarPapel/CadastrarPapel";
 import Cadastro from "./pages/Cadastro";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import VerInvestimentos from "./pages/VerPapeis/VerInvestimentos";
-import VerMovimentacoes from "./pages/VerMovimentacoes";
-
-// const router = createBrowserRouter(
-//   createRoutesFromElements(
-//     <Route path="/" errorElement={<NotFound />} element={<Home />}>
-//       <Route path="cadastrar-investimentos" element={<CadastrarInvestimentos />} />
-//       <Route path="ver-investimentos" element={<VerInvestimentos />} />
-//       {/* <Route errorElement element={<NotFound />} /> */}
-//       <Route path="login" element={<Login />} />
-//     </Route>
-//   )
-// );
+import VerInvestimentos from "./pages/controle/VerPapeis/VerInvestimentos";
+import VerMovimentacoes from "./pages/controle/verMovimentacoes/VerMovimentacoes";
+import ControlePapeis from "./pages/controle/ControlePapeis";
 
 const router = createBrowserRouter([
   {
@@ -30,21 +20,27 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       {
-        path: "cadastrar-movimentacoes",
-        element: <CadastrarCompras />
-      },
-      {
-        path: "cadastrar-papel",
-        element: <CadastrarInvestimentos />
-      },
-      {
-        path: "ver-papeis",
-        element: <VerInvestimentos />
-      },
-      {
-        path: "ver-movimentacoes",
-        element: <VerMovimentacoes />
-      },
+        path: 'controle',
+        element: <ControlePapeis />,
+        children: [
+          {
+            path: "cadastrar-movimentacoes",
+            element: <CadastrarMovimentacoes />
+          },
+          {
+            path: "cadastrar-papel",
+            element: <CadastrarInvestimentos />
+          },
+          {
+            path: "ver-papeis",
+            element: <VerInvestimentos />
+          },
+          {
+            path: "ver-movimentacoes",
+            element: <VerMovimentacoes />
+          },
+        ]
+      }
     ]
   }, {
     path: "/login",

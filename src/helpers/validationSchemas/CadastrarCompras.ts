@@ -1,7 +1,7 @@
 import * as yup from 'yup'
 
 export type InitialValuesType = {
-    dataDaCompra: Date,
+    data: Date,
     preco: number,
     qtd: number,
     corretora: string,
@@ -10,7 +10,7 @@ export type InitialValuesType = {
 }
 
 export const initialValues: InitialValuesType = {
-    dataDaCompra: new Date(),
+    data: new Date(),
     preco: 0,
     qtd: 0,
     corretora: '',
@@ -26,7 +26,20 @@ export const validation = yup.object().shape({
         .positive('A qtd tem que ser um valor postivo maior que 0!'),
 
     corretora: yup.string().required('Campo obrigatório'),
-    dataDaCompra: yup.date().required('Campo obrigatório'),
+    data: yup.date().required('Campo obrigatório'),
     papel: yup.string().required('Campo obrigatório'),
     tipoMovimentacao: yup.string().required('Campo obrigatório')
+});
+
+export const edicaoValidation = yup.object().shape({
+    preco: yup.number()
+        .positive('O preço tem que ser um valor postivo maior que 0!'),
+
+    qtd: yup.number()
+        .positive('A qtd tem que ser um valor postivo maior que 0!'),
+
+    corretora: yup.string(),
+    data: yup.date(),
+    papel: yup.string(),
+    tipoMovimentacao: yup.string()
 });

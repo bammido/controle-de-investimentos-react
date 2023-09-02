@@ -1,14 +1,14 @@
 import { ErrorMessage, useFormikContext } from "formik";
-import InputText from "../../Components/InputText";
-import { ErrorMessageSpan, InputLabel, SubmitDiv } from "../../styles/CadastrarPapelStyle";
-import Dropdown, { DropdownChangeParams } from "../../Components/Dropdown";
-import Button from "../../Components/Button";
-import { InitialValuesType } from "../../helpers/validationSchemas/CadastrarInvestimentos";
+import InputText from "../../../Components/InputText";
+import { ErrorMessageSpan, InputLabel, SubmitDiv } from "../../../styles/CadastrarPapelStyle";
+import Dropdown, { DropdownChangeParams } from "../../../Components/Dropdown";
+import Button from "../../../Components/Button";
+import { InitialValuesType } from "../../../helpers/validationSchemas/CadastrarInvestimentos";
 import { PapelForm } from "./style";
 import { useEffect, useState } from "react";
-import TipoDeRendaService from "../../services/TipoDeRendaService/TipoDeRendaService";
-import { FieldSetStyled } from "../../styles/CadastrarMovimentacoesStyle";
-import TipoDeInvestimentoService from "../../services/TipoDeInvestimentoService/TipoDeInvestimentoService";
+import TipoDeRendaService from "../../../services/TipoDeRendaService/TipoDeRendaService";
+import { FieldSetStyled } from "../../../styles/CadastrarMovimentacoesStyle";
+import TipoDeInvestimentoService from "../../../services/TipoDeInvestimentoService/TipoDeInvestimentoService";
 
 type cadastrarPapelFormPropsType = { loading: boolean, setLoading: React.Dispatch<boolean>, sucesso: boolean, showErrorMessage: () => void }
 

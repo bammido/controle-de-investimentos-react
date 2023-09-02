@@ -42,8 +42,6 @@ export default function Login() {
 
             const token = response.data?.token
 
-            await sleep(2000)
-
             const { payload } = await verifyToken(token)
 
             const user = payload?.data || {}

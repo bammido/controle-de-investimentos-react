@@ -8,19 +8,19 @@ export default function Navigation(){
     }
 
     function goToCadastrarMovimentacoes() {
-        navigation('cadastrar-movimentacoes')
+        navigation('/controle/cadastrar-movimentacoes')
     }
 
     function goToVerMovimentacoes() {
-        navigation('ver-movimentacoes')
+        navigation('/controle/ver-movimentacoes')
     }
 
     function goToVerPapeis() {
-        navigation('ver-papeis')
+        navigation('/controle/ver-papeis')
     }
 
     function goToCadastrarPapel() {
-        navigation('cadastrar-papel')
+        navigation('/controle/cadastrar-papel')
     }
 
     function goToLogin() {
