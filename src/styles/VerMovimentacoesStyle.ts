@@ -5,7 +5,6 @@ import {
     VerInvestimentosWrapper,
     EditButton as EditButtonVeInvestimentos
 } from './VerInvestimentosStyle'
-import { colors } from "../theme/Theme";
 
 export const Titulo = styled(TituloVerInvestimentos)``
 

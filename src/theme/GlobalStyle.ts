@@ -8,6 +8,7 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         transition: 300ms;
+        color: ${props => props.theme.pallete.primary.contrastText};
     }
 
     body::-webkit-scrollbar {

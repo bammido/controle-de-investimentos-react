@@ -20,7 +20,11 @@ export const initialValues: InitialValuesType = {
 
 export const validation = yup.object().shape({
     preco: yup.number().required('Campo obrigatório')
-        .positive('O preço tem que ser um valor postivo maior que 0!'),
+        .test(
+            'positivoMaiorQueZero',
+            'O preço tem que ser um valor postivo!',
+            (value) => (value as number) >= 0
+        ),
 
     qtd: yup.number().required('Campo obrigatório')
         .positive('A qtd tem que ser um valor postivo maior que 0!'),
@@ -33,7 +37,11 @@ export const validation = yup.object().shape({
 
 export const edicaoValidation = yup.object().shape({
     preco: yup.number()
-        .positive('O preço tem que ser um valor postivo maior que 0!'),
+        .test(
+            'positivoMaiorQueZero',
+            'O preço tem que ser um valor postivo!',
+            (value) => (value as number) >= 0
+        ),
 
     qtd: yup.number()
         .positive('A qtd tem que ser um valor postivo maior que 0!'),

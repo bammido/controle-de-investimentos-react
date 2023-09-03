@@ -32,6 +32,16 @@ class UsuariosService {
             throw new Error('Erro na requisição de cadastro', { cause: error.response })
         }
     }
+
+    async pegarInformacoesDeInvestimentosDoUsuario(id: string) {
+        try {
+            const res = await apiInvestimentos.get(`/usuario/informacoes-atualizadas/${id}`)
+
+            return res
+        } catch (error: AxiosError | Error | any) {
+            throw new Error('Erro na requisição de cadastro', { cause: error.response })
+        }
+    }
 }
 
 export default new UsuariosService()

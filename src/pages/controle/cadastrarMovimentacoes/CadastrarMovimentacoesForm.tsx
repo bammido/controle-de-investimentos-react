@@ -2,7 +2,7 @@ import { ErrorMessage, useFormikContext } from "formik";
 import Button from "../../../Components/Button";
 import DatePicker from "../../../Components/DatePicker";
 import InputNumber from "../../../Components/InputNumber";
-import { CadastrarComprasForm, ErrorMessageSpan, FieldSetStyled, FormInputsWrapper, InputLabel, InputWrapper, SubmitDiv } from "../../../styles/CadastrarMovimentacoesStyle";
+import { CadastrarComprasForm, ErrorMessageSpan, FieldSetStyled, InputLabel, SubmitDiv } from "../../../styles/CadastrarMovimentacoesStyle";
 import Dropdown, { DropdownChangeParams } from "../../../Components/Dropdown";
 import { InitialValuesType } from "../../../helpers/validationSchemas/CadastrarCompras";
 import { useEffect, useState } from "react";

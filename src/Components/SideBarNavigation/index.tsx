@@ -34,7 +34,7 @@ export default function SideBarNavigation() {
                 <div>
                     <SideBarButtonsWrapper>
                         <SideBarNavButton
-                            BgColor={colors.darkPurple}
+                            bgcolor={colors.darkPurple}
                             onClick={goToHome}
                             label='Home'
                             aria-label='Home'
@@ -44,7 +44,7 @@ export default function SideBarNavigation() {
                     </SideBarButtonsWrapper>
                     <SideBarButtonsWrapper>
                         <SideBarNavButton
-                            BgColor={colors.federalBlue}
+                            bgcolor={colors.federalBlue}
                             onClick={goToVerPapeis}
                             label='controle de investimentos'
                             aria-label='controle de investimentos'

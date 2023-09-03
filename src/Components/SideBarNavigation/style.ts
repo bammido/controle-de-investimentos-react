@@ -3,7 +3,8 @@ import Button from "../Button";
 
 export const SideBarNavigationWrapper = styled.div`
     width: 100%;
-    position: absolute;
+    position: sticky;
+    top: 0;
 
 `
 
@@ -17,6 +18,7 @@ export const SideBarWrapper = styled.div`
 `
 
 export const SideBarNavigationShowButton = styled(Button)`
+    top: 0;
     width: 1rem;
     height: 2rem;
     margin-left: 1rem;
@@ -40,7 +42,7 @@ export const SideBarThemeButtom = styled(Button)`
     border-color: ${props => props.theme.pallete.colors.main};
 `
 
-export const SideBarNavButton = styled(Button)`
-    background-color: ${props => props.BgColor || props.theme.pallete.colors.blackSmooth} !important;
-    border-color: ${props => props.BgColor || props.theme.pallete.colors.blackSmooth};
+export const SideBarNavButton = styled(Button) <{ bgcolor: string }>`
+    background-color: ${props => props.bgcolor || props.theme.pallete.colors.blackSmooth} !important;
+    border-color: ${props => props.bgcolor || props.theme.pallete.colors.blackSmooth};
 `

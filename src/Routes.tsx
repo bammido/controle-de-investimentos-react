@@ -12,6 +12,7 @@ import Login from "./pages/Login";
 import VerInvestimentos from "./pages/controle/VerPapeis/VerInvestimentos";
 import VerMovimentacoes from "./pages/controle/verMovimentacoes/VerMovimentacoes";
 import ControlePapeis from "./pages/controle/ControlePapeis";
+import PainelDeAnalise from "./pages/painelDeAnalise/PainelDeAnalise";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
     element: <Home />,
     errorElement: <NotFound />,
     children: [
+      {
+        path: '/',
+        element: <PainelDeAnalise />
+      },
       {
         path: 'controle',
         element: <ControlePapeis />,

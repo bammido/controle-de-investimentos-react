@@ -17,7 +17,8 @@ export const colors = {
     federalBlue: '#2E1760',
     lightGreen: 'lightgreen',
     red: 'red',
-    green: 'green'
+    green: 'green',
+    lightBlue: '#495057'
 
 }
 
