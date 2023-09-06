@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { fonts } from "./Theme";
+import { colors, fonts } from "./Theme";
 
 
 export const GlobalStyle = createGlobalStyle`
@@ -27,5 +27,22 @@ export const GlobalStyle = createGlobalStyle`
 
     & .p-dialog .p-dialog-header .p-dialog-header-icon{
         color: ${props => props.theme.pallete.primary.contrastText};
+    }
+
+    & .p-datepicker table td > span{
+        color: ${colors.black};
+        font-weight: bold;
+    }
+    
+    & .p-datepicker table td > .p-disabled{
+        font-weight: 300;
+    }
+
+    & .p-datepicker-other-month .p-disabled{
+        font-weight: 300;
+    }
+
+    & .pi-chevron-left:before, & .pi-chevron-right:before {
+        color: ${colors.black};
     }
 `

@@ -32,9 +32,18 @@ export const SideBarButtonsWrapper = styled.div`
 
     margin: 0.3rem 0;
 
-    & button{
+    & button {
         width: 100%;
     }
+
+    & .p-button .p-button-label {
+        color: white !important;
+    }
+    
+    & .p-button .p-button-icon {
+        color: white !important;
+    }
+
 `
 
 export const SideBarThemeButtom = styled(Button)`

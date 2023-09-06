@@ -71,14 +71,19 @@ export const InfosPapel = styled.div`
         transform: scale(1.02);
     }
 
+    margin: 1vh 0;
     margin-right: 2vw;
-    margin-bottom: 2vh;
     min-width: 300px;
-    background-color: #7880B5 ;
+    background-color: ${colors.darkPurple};
     
     border-radius: 5px;
 
     padding: 0.5rem 1rem;
+
+    & > h3 {
+        color: ${colors.white} !important;
+    }
+
     & > div {
         display: flex;
         flex-direction: column;
@@ -93,9 +98,23 @@ export const InfosPapel = styled.div`
             display: flex;
             justify-content: space-between;
 
+            & > span {
+                color: ${colors.white} !important;
+            }
+
             &:last-of-type {
                 border: none;
             }
         }
     }
+`
+
+export const GainLosssField = styled.div<{ gain: boolean }>`
+    & > span {
+        color: ${props => {
+        console.log(props.gain)
+        return props.gain ? colors.lightGreen : colors.scarlet
+    }} !important;
+    }
+
 `

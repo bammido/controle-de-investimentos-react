@@ -24,7 +24,7 @@ class PapelService {
 
             return res
         } catch (error: AxiosError | Error | any) {
-            throw new Error('Erro na requisição de cadastro', { cause: error.response })
+            throw new Error('Erro na requisição de cadastrar papel', { cause: error.response })
         }
     }
 
@@ -34,7 +34,17 @@ class PapelService {
 
             return res
         } catch (error: AxiosError | Error | any) {
-            throw new Error('Erro na requisição de cadastro', { cause: error.response })
+            throw new Error('Erro na requisição de editar papel', { cause: error.response })
+        }
+    }
+
+    async getCotacaoVarios(papeis: string[]) {
+        try {
+            const res = await apiInvestimentos.post(`/papel/cotacao-recente/varios`, { papeis })
+
+            return res
+        } catch (error: AxiosError | Error | any) {
+            return ({ errorMessage: 'Erro na requisição de pegar cotações', cause: error.response })
         }
     }
 }

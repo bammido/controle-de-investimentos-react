@@ -7,8 +7,10 @@ import getUserId from '../../helpers/functions/getUserId';
 import { RadioButton } from 'primereact/radiobutton';
 import { GlobalStatesType, globalContext } from '../../Contexts/GlobalContext';
 import { colors } from '../../theme/Theme';
-import { FiltrosGraficoDiv, FiltrosGraficoOption, FiltrosGraficoRadioOptions, InfosPapel, PageWrapler, SubSection } from '../../styles/PainelDeAnalise';
+import { FiltrosGraficoDiv, FiltrosGraficoOption, FiltrosGraficoRadioOptions, GainLosssField, InfosPapel, PageWrapler, SubSection } from '../../styles/PainelDeAnalise';
 import { formatToBRL } from '../../helpers/functions/formatCurrency';
+import PapelService from '../../services/PapelService/PapelService';
+import formatDate from '../../helpers/functions/formatDate';
 
 interface PapeisInfos {
     precoMedio: number;
@@ -21,12 +23,24 @@ interface PapeisInfos {
     investimento: string;
 }
 
+interface CotacaoPapel {
+    cotacao: string;
+    dia: string;
+    papel: string;
+}
+interface CotacaoPapelError {
+    papel: string;
+    errorMessage: string;
+}
+
 export default function PainelDeAnalise() {
     const toast = useRef(null)
     const [loading, setLoading] = useState<boolean>(false)
     const [tiposDeRenda, setTiposDeRenda] = useState<string[]>([])
     const [tiposDeInvestimento, setTiposDeInvestimento] = useState<string[]>([])
     const [investimentosData, setInvestimentosData] = useState<any>({})
+    const [cotacoesPapeis, setCotacoesPapeis] = useState<CotacaoPapel[]>([])
+    const [cotacoesPapeisError, setCotacoesPapeisError] = useState<boolean>(false)
     const [papeisInfos, setPapeisInfos] = useState<PapeisInfos[]>([])
     const [filtroGrafico, setFiltroGrafico] = useState<string>('geral')
 
@@ -173,9 +187,44 @@ export default function PainelDeAnalise() {
                     return { ...prev, labels, datasets }
                 })
 
+                const papeisParaPegarCotacao = papeisInfosAux.filter(papel => {
+                    return papel.investimento === "fundo imobiliario" || papel.investimento === "acao"
+                }).map(papel => papel.papel)
+
+                PapelService.getCotacaoVarios(papeisParaPegarCotacao).then((res: any) => {
+                    if (res.message) {
+                        return setCotacoesPapeisError(true)
+                    }
+
+                    if (!Array.isArray(res.data)) {
+                        return setCotacoesPapeisError(true)
+                    }
+
+                    const cotacoesSemErro: CotacaoPapel[] = res.data.filter((cotacao: CotacaoPapelError) => !cotacao.errorMessage)
+
+                    // setCotacoesPapeis(cotacoesSemErro)
+                    setCotacoesPapeis([
+                        {
+                            cotacao: "14.9000",
+                            dia: "2023-09-04",
+                            papel: "BBDC4"
+                        },
+                        {
+                            cotacao: "196.5000",
+                            dia: "2023-09-04",
+                            papel: "NSLU11"
+                        },
+                        {
+                            cotacao: "10.97000",
+                            dia: "2023-09-04",
+                            papel: "MXRF11"
+                        }
+                    ])
+                })
+
                 setInvestimentosData(informacoes)
-                Array.isArray(rendas) && setTiposDeInvestimento(tiposDeInvestimentos)
-                Array.isArray(tiposDeInvestimentos) && setTiposDeRenda(rendas)
+                Array.isArray(tiposDeInvestimentos) && setTiposDeInvestimento(tiposDeInvestimentos.filter(inv => inv !== `null`))
+                Array.isArray(rendas) && setTiposDeRenda(rendas)
                 Array.isArray(papeisInfosAux) && setPapeisInfos(papeisInfosAux)
             } catch (error: any) {
                 console.log(error)
@@ -201,7 +250,7 @@ export default function PainelDeAnalise() {
             })
         }
 
-        else if (tiposDeRenda.includes(filtroGrafico)) {
+        else if (tiposDeRenda.includes(filtroGrafico) && filtroGrafico !== 'tesouro') {
             Object.keys(investimentosData).map(renda => {
                 if (renda !== filtroGrafico) {
                     return
@@ -223,10 +272,13 @@ export default function PainelDeAnalise() {
             })
         }
 
-        else if (tiposDeInvestimento.includes(filtroGrafico)) {
+        else if (tiposDeInvestimento.includes(filtroGrafico) || filtroGrafico === 'tesouro') {
             Object.keys(investimentosData).map(renda => {
+                if (filtroGrafico === 'tesouro' && filtroGrafico !== renda) {
+                    return
+                }
                 Object.keys(investimentosData[renda].investimentos).map(investimento => {
-                    if (investimento !== filtroGrafico) {
+                    if (filtroGrafico !== 'tesouro' && investimento !== filtroGrafico) {
                         return
                     }
                     Object.keys(investimentosData[renda].investimentos[investimento].papeis).map(papel => {
@@ -307,28 +359,44 @@ export default function PainelDeAnalise() {
             </SubSection>
 
             <SubSection>
-                <div style={{ width: '100%', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                    {papeisInfos.map(info => <InfosPapel key={info.papel}>
-                        <h3>{info.papel}</h3>
-                        <div>
+                <div style={{ width: '100%', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', border: `4px solid ${colors.blue}`, padding: "1rem 2rem", alignItems: "center" }}>
+                    {papeisInfos.map(info => {
+                        const cotacaoPapel = cotacoesPapeis.find(cotacao => cotacao.papel === info.papel)
+                        const cotacaoNumber = cotacaoPapel?.cotacao && Number(cotacaoPapel?.cotacao)
+                        const gainLoss = cotacaoNumber && ((cotacaoNumber * 100) / info.precoMedio) - 100
+
+                        return <InfosPapel key={info.papel}>
+                            <h3>{info.papel}</h3>
                             <div>
-                                <span>Preço Médio</span>
-                                <span>{formatToBRL(info.precoMedio)}</span>
-                            </div>
-                            <div>
-                                <span>QTD Atual</span>
-                                <span>{info.qtdAtual}</span>
-                            </div>
-                            <div>
-                                <span>Total Investido</span>
-                                <span>{formatToBRL(info.totalInvestido)}</span>
-                            </div>
-                            <div>
+                                <div>
+                                    <span>Preço Médio</span>
+                                    <span>{formatToBRL(info.precoMedio)}</span>
+                                </div>
+                                <div>
+                                    <span>QTD Atual</span>
+                                    <span>{info.qtdAtual}</span>
+                                </div>
+                                <div>
+                                    <span>Total Investido</span>
+                                    <span>{formatToBRL(info.totalInvestido)}</span>
+                                </div>
+                                {cotacaoPapel && <>
+                                    <div>
+                                        <span>Cotação {`(${formatDate((cotacaoPapel).dia)})`}</span>
+                                        <span>{formatToBRL(Number(cotacaoPapel.cotacao))}</span>
+                                    </div>
+                                    <GainLosssField gain={!!gainLoss && gainLoss >= 0} title="porcetagem de ganho ou perda em relação ao preço médio" >
+                                        <span>{gainLoss && gainLoss >= 0 ? "Gain" : "Loss"}</span>
+                                        <span>{(gainLoss as number).toFixed(2)} %</span>
+                                    </GainLosssField>
+                                </>}
+                                <div>
                                 <span>Tipo</span>
-                                <span>{info.renda} {(info?.investimento && info.investimento !== 'null') ? `> ${info.investimento}` : ''}</span>
+                                    <span>{info.renda} {(info?.investimento && info.investimento !== 'null') ? `> ${info.investimento}` : ''}</span>
+                                </div>
                             </div>
-                        </div>
-                    </InfosPapel>)}
+                        </InfosPapel>
+                    })}
                 </div>
             </SubSection>
 

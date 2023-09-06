@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Formik } from "formik";
 import Dialog, { DialogProps } from "../../../Components/Dialog";
-import { edicaoValidation } from "../../../helpers/validationSchemas/CadastrarCompras";
-import sleep from "../../../helpers/functions/sleep";
+import { edicaoValidation } from "../../../helpers/validationSchemas/CadastrarInvestimentos";
 import PapelServiceMakePayload from "../../../services/PapelService/PapelServiceMakePayload";
 import PapelService from "../../../services/PapelService/PapelService";
 import { mensagemDeErro, mensagemDeSucesso } from "../../../helpers/functions/Toast";
@@ -36,7 +35,6 @@ export default function DialogEdicaoInvestimentos(props: Props) {
         async function editar(values: any) {
                 try {
                         setIsLoading(true)
-                        await sleep(3000)
 
                         const {
                                 papel,
@@ -89,7 +87,7 @@ export default function DialogEdicaoInvestimentos(props: Props) {
                         initialValues={initialValues}
                         validationSchema={edicaoValidation}
                 >
-                        {() => (
+                        {({ errors }) => (
                                 <CadastrarPapelForm
                                         loading={isLoading}
                                         setLoading={setIsLoading}

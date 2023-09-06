@@ -17,9 +17,10 @@ export const colors = {
     federalBlue: '#2E1760',
     lightGreen: 'lightgreen',
     red: 'red',
+    scarlet: '#FF2400',
     green: 'green',
-    lightBlue: '#495057'
-
+    lightBlue: '#495057',
+    basil: '#32612D'
 }
 
 export const fonts = {
