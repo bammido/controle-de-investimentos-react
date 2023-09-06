@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Button from "../Button";
+import { colors } from "../../theme/Theme";
 
 export const SideBarNavigationWrapper = styled.div`
     width: 100%;
@@ -37,11 +38,11 @@ export const SideBarButtonsWrapper = styled.div`
     }
 
     & .p-button .p-button-label {
-        color: white !important;
+        color: ${colors.white} !important;
     }
     
     & .p-button .p-button-icon {
-        color: white !important;
+        color: ${colors.white} !important;
     }
 
 `

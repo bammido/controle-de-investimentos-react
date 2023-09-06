@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { LoginForm, InputLabel as InputLabelLogin, LoginPageWrapper, InputDiv as InputDivLogin, NavButtonDiv as NavButtonDivLogin } from "./LoginStyle";
+import { LoginFormStyled, InputLabel as InputLabelLogin, LoginPageWrapper, InputDiv as InputDivLogin, NavButtonDiv as NavButtonDivLogin } from "./LoginStyle";
 import { ErrorMessageSpan as ErrorMessageSpanCadastroInvestimentos } from './CadastrarMovimentacoesStyle'
 
-export const CadastroForm = styled(LoginForm)``
+export const CadastroFormStyled = styled(LoginFormStyled)``
 
 export const InputLabel = styled(InputLabelLogin)``
 
@@ -13,3 +13,8 @@ export const InputDiv = styled(InputDivLogin)``
 export const ErrorMessageSpan = styled(ErrorMessageSpanCadastroInvestimentos)``
 
 export const NavButtonDiv = styled(NavButtonDivLogin)``
+
+export const ContentCadastroDIv = styled.div`
+    display: flex; 
+    flex-direction: column;
+`

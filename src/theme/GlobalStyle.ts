@@ -45,4 +45,12 @@ export const GlobalStyle = createGlobalStyle`
     & .pi-chevron-left:before, & .pi-chevron-right:before {
         color: ${colors.black};
     }
+
+    & .p-divider .p-divider-content{
+        background-color: ${props => props.theme.pallete.primary.main};
+    }
+
+    & .p-password-panel {
+        background: ${props => props.theme.pallete.primary.main} !important;
+    }
 `
