@@ -7,7 +7,7 @@ import getUserId from '../../helpers/functions/getUserId';
 import { RadioButton } from 'primereact/radiobutton';
 import { GlobalStatesType, globalContext } from '../../Contexts/GlobalContext';
 import { colors } from '../../theme/Theme';
-import { FiltrosGraficoDiv, FiltrosGraficoOption, FiltrosGraficoRadioOptions, GainLosssField, InfosPapel, PageWrapler, SubSection } from '../../styles/PainelDeAnalise';
+import { FiltrosGraficoDiv, FiltrosGraficoOption, FiltrosGraficoRadioOptions, GainLosssField, InfosPapel, PageWrapler, SubSection } from './style';
 import { formatToBRL } from '../../helpers/functions/formatCurrency';
 import PapelService from '../../services/PapelService/PapelService';
 import formatDate from '../../helpers/functions/formatDate';
@@ -227,7 +227,6 @@ export default function PainelDeAnalise() {
                 Array.isArray(rendas) && setTiposDeRenda(rendas)
                 Array.isArray(papeisInfosAux) && setPapeisInfos(papeisInfosAux)
             } catch (error: any) {
-                console.log(error)
                 mensagemDeErro(toast, 'Algo deu errado :(', 'tente novamente mais tarde!')
             } finally {
                 setLoading(false)

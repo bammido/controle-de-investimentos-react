@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { LoginFormStyled, InputLabel as InputLabelLogin, LoginPageWrapper, InputDiv as InputDivLogin, NavButtonDiv as NavButtonDivLogin } from "./LoginStyle";
-import { ErrorMessageSpan as ErrorMessageSpanCadastroInvestimentos } from './CadastrarMovimentacoesStyle'
+import { LoginFormStyled, InputLabel as InputLabelLogin, LoginPageWrapper, InputDiv as InputDivLogin, NavButtonDiv as NavButtonDivLogin } from "../login/style";
+import { ErrorMessageSpan as ErrorMessageSpanCadastroInvestimentos } from '../controle/cadastrarMovimentacoes/style'
 
 export const CadastroFormStyled = styled(LoginFormStyled)``
 

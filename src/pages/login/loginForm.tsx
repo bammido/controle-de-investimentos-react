@@ -1,5 +1,5 @@
 import InputText from "../../Components/InputText";
-import { InputDiv, LoginFormStyled, InputLabel } from "../../styles/LoginStyle";
+import { InputDiv, LoginFormStyled, InputLabel } from "./style";
 import { InitialValuesType } from "../../helpers/validationSchemas/Login";
 import PasswordInput from "../../Components/PasswordInput";
 import { useFormikContext } from "formik";

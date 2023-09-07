@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { display } from "../theme/Theme";
+import { display } from "../../theme/Theme";
 
 export const LoginPageWrapper = styled.div`
     height: 100vh;

@@ -1,6 +1,6 @@
 import { useState, useRef, useContext } from "react"
 import Button from "../../Components/Button";
-import { ContentDiv, DividerHorizontalDiv, DividerVerticalDiv, LoginPageWrapper, LogoImg, NavButtonDiv } from "../../styles/LoginStyle";
+import { ContentDiv, DividerHorizontalDiv, DividerVerticalDiv, LoginPageWrapper, LogoImg, NavButtonDiv } from "./style";
 import { Formik } from "formik";
 import Navigation from "../../Navigation";
 import { initialValues, InitialValuesType, validation } from "../../helpers/validationSchemas/Login";
@@ -51,7 +51,9 @@ export default function Login() {
             goToHome()
 
         } catch (error: any) {
-            mensagemDeErro(toast, error.message || 'Algo deu errado!')
+            const { cause } = error
+            const errorMessage = cause?.data?.message
+            mensagemDeErro(toast, 'Ops...', errorMessage || 'Algo deu errado, tente novamente mais tarde!')
         } finally {
             setIsLoading(false)
         }

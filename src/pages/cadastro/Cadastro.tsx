@@ -8,7 +8,7 @@ import { mensagemDeErro, mensagemDeSucesso } from "../../helpers/functions/Toast
 import { initialValues, InitialValuesType, validation } from "../../helpers/validationSchemas/Cadastro";
 import UsuariosService from "../../services/UsuariosService/UsuariosService";
 import UsuariosServiceMakePayload from "../../services/UsuariosService/UsuariosServiceMakePayload";
-import { CadastroPageWrapper, ContentCadastroDIv, NavButtonDiv } from "../../styles/CadastroStyle";
+import { CadastroPageWrapper, ContentCadastroDIv, NavButtonDiv } from "./style";
 import Navigation from "../../Navigation";
 import NavButton from "../../Components/NavButton";
 import MudaTemaButtonComponent from "../../Components/MudaTemaButton";

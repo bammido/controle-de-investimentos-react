@@ -7,7 +7,7 @@ import InputText from '../../../Components/InputText';
 import { Toast } from '../../../Components/Toast/Toast';
 import { mensagemDeErro, mensagemDeSucesso } from '../../../helpers/functions/Toast';
 import PapelService from '../../../services/PapelService/PapelService';
-import { DataTableHeader, EditButton, Titulo, VerInvestimentosWrapper } from "../../../styles/VerInvestimentosStyle";
+import { DataTableHeader, EditButton, Titulo, VerInvestimentosWrapper } from "./style";
 import DialogEdicaoInvestimentos from './DialogEdicaoInvestimentos';
 
 export default function VerInvestimentos() {

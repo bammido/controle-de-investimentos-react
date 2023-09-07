@@ -1,7 +1,7 @@
 import { TabMenu, TabMenuTabChangeParams } from 'primereact/tabmenu';
 import { useState } from 'react';
 import Navigation from '../../Navigation';
-import { BarraDeNavegacaoWrapper } from '../../styles/BarraDeNavegacao';
+import { BarraDeNavegacaoWrapper } from './style';
 
 type Event = TabMenuTabChangeParams & { index: number, value: { label: string, action: () => {} } }
 

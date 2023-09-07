@@ -2,6 +2,10 @@ import CryptoJS from 'crypto-js';
 
 export default function decryptAES(cryptoToken: string) {
     try {
+        if (!cryptoToken) {
+            throw new Error('não foi enviado token')
+        }
+
         const decryptedToken = CryptoJS.AES.decrypt(
             cryptoToken,
             'secret key 751'
@@ -13,6 +17,6 @@ export default function decryptAES(cryptoToken: string) {
 
         return JSON.parse(decryptedToken)
     } catch (error) {
-        console.error(error)
+        return error
     }
 }

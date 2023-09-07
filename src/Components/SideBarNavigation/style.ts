@@ -25,6 +25,10 @@ export const SideBarNavigationShowButton = styled(Button)`
     margin-left: 1rem;
     margin-top: 1rem;
     z-index: 100;
+    & span {
+        color: ${colors.white} !important;
+        font-weight: bold;
+    }
 `
 
 export const SideBarButtonsWrapper = styled.div`

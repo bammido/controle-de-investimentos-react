@@ -1,6 +1,6 @@
 import { Formik, FormikHelpers } from "formik";
 import { useRef, useState } from "react";
-import { Titulo } from "../../../styles/CadastrarMovimentacoesStyle";
+import { Titulo } from "./style";
 import { InitialValuesType, initialValues, validation } from "../../../helpers/validationSchemas/CadastrarCompras";
 import { mensagemDeErro, mensagemDeSucesso } from "../../../helpers/functions/Toast";
 import { Toast } from "../../../Components/Toast/Toast";

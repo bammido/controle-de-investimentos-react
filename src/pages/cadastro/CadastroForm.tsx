@@ -1,6 +1,6 @@
 import { useFormikContext, ErrorMessage } from "formik"
 import { initialValues, InitialValuesType, validation } from "../../helpers/validationSchemas/Cadastro";
-import { CadastroFormStyled, CadastroPageWrapper, ErrorMessageSpan, InputDiv, InputLabel, NavButtonDiv } from "../../styles/CadastroStyle";
+import { CadastroFormStyled, CadastroPageWrapper, ErrorMessageSpan, InputDiv, InputLabel, NavButtonDiv } from "./style";
 import Button from "../../Components/Button";
 import InputText from "../../Components/InputText";
 import PasswordInput from "../../Components/PasswordInput";

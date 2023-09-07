@@ -53,4 +53,12 @@ export const GlobalStyle = createGlobalStyle`
     & .p-password-panel {
         background: ${props => props.theme.pallete.primary.main} !important;
     }
+
+    & .p-toast-message-text > span, & .p-toast-message-text > div {
+        color: ${colors.black};
+    }
+
+    & .p-toast-icon-close .pi-times:before{
+        color: ${colors.black};
+    }
 `

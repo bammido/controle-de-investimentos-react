@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { display } from "../theme/Theme";
+import { display } from "../../../theme/Theme";
 
 export const Titulo = styled.h1`
     text-align: center;

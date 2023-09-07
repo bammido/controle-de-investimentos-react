@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../theme/Theme";
+import { colors } from "../../theme/Theme";
 
 export const PageWrapler = styled.div`
     padding: 5vh 5vw;
@@ -9,7 +9,7 @@ export const PageWrapler = styled.div`
     align-items: center;
     flex-direction: column;
 
-    h1, h2, h3{
+    h1, h2, h3 {
         text-align: center;
         margin: 5vh 0; 
     }
@@ -71,8 +71,7 @@ export const InfosPapel = styled.div`
         transform: scale(1.02);
     }
 
-    margin: 1vh 0;
-    margin-right: 2vw;
+    margin: 1vh 1vw;
     min-width: 300px;
     background-color: ${colors.darkPurple};
     
@@ -91,7 +90,7 @@ export const InfosPapel = styled.div`
         justify-content: space-around;
 
         & > div {
-            border-bottom: 1px solid ${props => props.theme.pallete.primary.contrastText};
+            border-bottom: 1px solid ${colors.white};
             margin-bottom: 1rem;
             padding-bottom: 1rem;
 
@@ -112,7 +111,6 @@ export const InfosPapel = styled.div`
 export const GainLosssField = styled.div<{ gain: boolean }>`
     & > span {
         color: ${props => {
-        console.log(props.gain)
         return props.gain ? colors.lightGreen : colors.scarlet
     }} !important;
     }

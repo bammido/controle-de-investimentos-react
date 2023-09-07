@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import BarraDeNavegacao from "../../Components/NavBar";
-import { ControlePageWrapper, BarraDeNavegacaoDiv, OutLetDiv } from "../../styles/Controle";
+import { ControlePageWrapper, BarraDeNavegacaoDiv, OutLetDiv } from "./style";
 
 
 export default function ControlePapeis() {
