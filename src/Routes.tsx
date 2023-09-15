@@ -16,6 +16,7 @@ import InfosPainedDeAnalise from "./pages/painelDeAnalise/infos/Infos";
 import InfosHome from "./pages/Infos";
 import FerramentasUteis from "./pages/ferramnetasUteis/FerramentasUteis";
 import CalcuLadoraDeJurosCompostos from "./pages/ferramnetasUteis/calculadoraDeJurosCompostos/CalculadoraDeJurosCompostos";
+import InfosFerramentasUteis from "./pages/ferramnetasUteis/infos/Infos";
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,11 @@ const router = createBrowserRouter([
           {
             path: ferramentasUteis.caculadoraDeJurosCompostos,
             element: <CalcuLadoraDeJurosCompostos />
+          },
+
+          {
+            path: "",
+            element: <InfosFerramentasUteis />
           }
         ]
       }

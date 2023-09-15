@@ -9,7 +9,7 @@ export default function PainelDeAnalise() {
     const { goToPainelDeAnaliseVisaoGeral, goToPainelDeAnalise } = Navigation()
 
     const [telas] = useState([
-        { label: 'Visão Geral', icon: 'pi pi-plus', action: goToPainelDeAnaliseVisaoGeral, id: "visao-geral" },
+        { label: 'Visão Geral', icon: 'pi pi-chart-bar', action: goToPainelDeAnaliseVisaoGeral, id: "visao-geral" },
         { label: 'Infos', icon: 'pi pi-question-circle', action: goToPainelDeAnalise, id: "" },
     ])
 

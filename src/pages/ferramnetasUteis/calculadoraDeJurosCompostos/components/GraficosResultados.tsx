@@ -2,6 +2,12 @@ import { useState, useEffect, useContext } from "react"
 import { Chart } from "primereact/chart";
 import { GlobalStatesType, globalContext } from "../../../../Contexts/GlobalContext";
 import { colors } from "../../../../theme/Theme";
+import { DadoTabela } from "../CalculadoraDeJurosCompostos";
+import { SelectButton } from 'primereact/selectbutton';
+import DataTable from "../../../../Components/DataTable";
+import Column from "../../../../Components/Column";
+import { formatToBRL } from "../../../../helpers/functions/formatCurrency";
+import { ResultadoDetalhadoDiv } from "../style";
 
 interface Props {
     totalInvestidoData: number[];
@@ -9,6 +15,7 @@ interface Props {
     labelsGraficoBarra: string[];
     totalInvestido: number;
     totalRendimento: number;
+    dadosTabela: DadoTabela[];
 }
 
 export default function GraficosResultados({
@@ -16,10 +23,12 @@ export default function GraficosResultados({
     totalRendimentoData,
     labelsGraficoBarra,
     totalInvestido,
-    totalRendimento
+    totalRendimento,
+    dadosTabela
 }: Props) {
 
     const [mostraGraficos, setMostraGraficos] = useState<boolean>(false)
+    const [versao, setVersao] = useState<number>(1)
 
     const [stackedData, setStackedData] = useState({
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -174,12 +183,49 @@ export default function GraficosResultados({
         })
     }, [temaEstaEscuro])
 
-    return <>
-        {mostraGraficos && <div style={{ margin: "2vh 0", display: "flex", justifyContent: "center" }}>
+    const mesBody = (rowData: DadoTabela) => {
+        return <>{rowData.mes}</>
+    }
+
+    const totalInvestidoMesBody = (rowData: DadoTabela) => {
+        return <>{formatToBRL(rowData.totalInvestidoMes)}</>
+    }
+
+    const rendimentoMesBody = (rowData: DadoTabela) => {
+        return <>{formatToBRL(rowData.rendimentoMes)}</>
+    }
+
+    const totalRendimentoMesBody = (rowData: DadoTabela) => {
+        return <>{formatToBRL(rowData.totalRendimento)}</>
+    }
+
+    const totalAcumuladoBody = (rowData: DadoTabela) => {
+        return <>{formatToBRL(rowData.totalAcumulado)}</>
+    }
+
+    return <ResultadoDetalhadoDiv>
+
+        <SelectButton style={{ marginBottom: "4vh" }} value={versao} options={[{ label: "Tabela", value: 1 }, { label: "Gráfico", value: 2 }]} onChange={(e) => setVersao(e.value)} />
+
+        {versao === 2 && mostraGraficos && <div style={{ margin: "2vh 0", display: "flex", justifyContent: "center" }}>
             <Chart type="pie" data={chartData} options={lightOptions} />
         </div>}
-        {mostraGraficos && <div style={{ margin: "2vh 0" }}>
+        {versao === 2 && mostraGraficos && <div style={{ margin: "2vh 0" }}>
             <Chart type="bar" data={stackedData} options={stackedOptions} />
         </div>}
-    </>
+
+        {versao === 1 && <DataTable
+            value={dadosTabela}
+            paginator
+            rowsPerPageOptions={[5, 10, 15, 20]}
+            rows={5}
+            size="large"
+        >
+            <Column header="Mês" body={mesBody} ></Column>
+            <Column field="totalInvestidoMes" header="Total Investido" body={totalInvestidoMesBody}></Column>
+            <Column field="rendimentoMes" header="Juros" body={rendimentoMesBody}></Column>
+            <Column field="totalRendimento" header="Juros Acumulado" body={totalRendimentoMesBody}></Column>
+            <Column field="totalAcumulado" header="Total Acumulado" body={totalAcumuladoBody}></Column>
+        </DataTable>}
+    </ResultadoDetalhadoDiv>
 }

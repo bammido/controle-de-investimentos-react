@@ -7,10 +7,11 @@ import { useState } from "react";
 
 export default function FerramentasUteis() {
 
-    const { goToFerramentasUteisCalculadoraJurosCompostos } = Navigation()
+    const { goToFerramentasUteisCalculadoraJurosCompostos, goToFerramentasUteis } = Navigation()
 
     const [telas] = useState([
         { label: 'Calculadora de Juros Compostos', icon: 'pi pi-calculator', action: goToFerramentasUteisCalculadoraJurosCompostos, id: "cadastrar-papel" },
+        { label: 'Infos', icon: 'pi pi-question-circle', action: goToFerramentasUteis, id: "" },
     ])
 
     return <ControlePageWrapper>

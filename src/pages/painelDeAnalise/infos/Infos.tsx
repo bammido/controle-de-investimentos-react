@@ -1,8 +1,6 @@
-import Navigation from "../../../Navigation";
 import { InfosWrapper, Titulo, SubTitulo, FeatureSubItulo, FeatureDescriptionList, FeatureDiv, FeatureDescription, SectionDescription } from "../../controle/infos/style";
 
 export default function InfosPainedDeAnalise() {
-    const { goToPainelDeAnaliseVisaoGeral } = Navigation()
 
     return <InfosWrapper>
         <Titulo>Painel de Análise</Titulo>
@@ -16,7 +14,7 @@ export default function InfosPainedDeAnalise() {
                     <FeatureDescriptionList>Total investido por ação</FeatureDescriptionList>
                     <FeatureDescriptionList>Visualização da distribuição da cartera com base no tipo de renda ou no tipo de investimento</FeatureDescriptionList>
                 </ul>
-                <FeatureSubItulo>features Futuras:</FeatureSubItulo>
+                <FeatureSubItulo>Features Futuras:</FeatureSubItulo>
                 <ul>
                     <FeatureDescriptionList>Cotação de hoje para cada ativo e visualização de Gain/Loss</FeatureDescriptionList>
                     <FeatureDescriptionList>previsão de retorno para investimentos de renda fixa</FeatureDescriptionList>

@@ -22,8 +22,6 @@ export const CalculadoraDiv = styled.div`
     display: flex;
 
     justify-content: center;
-
-    margin: 5vh 0;
     
     & > div {
         margin: 0 2.5vw;
@@ -78,5 +76,17 @@ export const ResultadoResumidoDiv = styled.div`
             text-align: center;
             margin: 5% auto;
         }
+    }
+`
+
+export const ResultadoDetalhadoDiv = styled.div`
+    margin: 5vh 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & .p-button-label{
+        color: ${colors.black};
     }
 `

@@ -6,11 +6,12 @@ import { formatToBRL } from "../../../helpers/functions/formatCurrency";
 import Button from "../../../Components/Button";
 import GraficosResultados from "./components/GraficosResultados";
 
-interface DadoTabela {
+export interface DadoTabela {
     totalInvestidoMes: number;
     rendimentoMes: number;
     totalRendimento: number;
     totalAcumulado: number;
+    mes: number;
 }
 
 export default function CalcuLadoraDeJurosCompostos() {
@@ -78,7 +79,7 @@ export default function CalcuLadoraDeJurosCompostos() {
         const graficoBarraLabels: string[] = []
         const totalInvestidoGraficoBarraData: number[] = []
         const totalRendimentoGraficoBarraData: number[] = []
-        const retorno: DadoTabela[] = [{ totalInvestidoMes, rendimentoMes: 0, totalRendimento, totalAcumulado }]
+        const retorno: DadoTabela[] = [{ totalInvestidoMes, rendimentoMes: 0, totalRendimento, totalAcumulado, mes: 0 }]
 
         for (let i = 0; i <= periodoInvestimentoMensal; i++) {
             if (i === 0) {
@@ -91,7 +92,7 @@ export default function CalcuLadoraDeJurosCompostos() {
             totalRendimento += rendimentoMes
             totalAcumulado += rendimentoMes + aportAux
 
-            retorno.push({ totalInvestidoMes, rendimentoMes, totalRendimento, totalAcumulado })
+            retorno.push({ totalInvestidoMes, rendimentoMes, totalRendimento, totalAcumulado, mes: i })
             graficoBarraLabels.push(i.toString())
             totalInvestidoGraficoBarraData.push(totalInvestidoMes)
             totalRendimentoGraficoBarraData.push(totalRendimento)
@@ -176,7 +177,7 @@ export default function CalcuLadoraDeJurosCompostos() {
             </CalculadoraDiv>
         </SubSection>
         <SubSection>
-            <div style={{ display: "flex", justifyContent: "center" }}>
+            <div style={{ display: "flex", justifyContent: "center", marginBottom: "4vh" }}>
                 <Button
                     onClick={calculaVersaoDetalhada}
                     label="ver versão detalhada"
@@ -188,6 +189,7 @@ export default function CalcuLadoraDeJurosCompostos() {
                 totalInvestido &&
                 totalRendimentos &&
                 <GraficosResultados
+                dadosTabela={dadosTabela}
                     totalRendimentoData={totalRendimentoData}
                     totalInvestidoData={totalInvestidoData}
                     labelsGraficoBarra={labels}
