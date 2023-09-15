@@ -6,7 +6,7 @@ import PapelServiceMakePayload from "../../../services/PapelService/PapelService
 import PapelService from "../../../services/PapelService/PapelService";
 import { mensagemDeErro, mensagemDeSucesso } from "../../../helpers/functions/Toast";
 import { Toast as ToastPrimeReact } from "primereact/toast";
-import CadastrarPapelForm from "../cadastrarPapel/CadastrarPapelForm";
+import CadastrarPapelForm from "../CadastrarPapel/CadastrarPapelForm""
 
 type InvestimentosType = {
         id: string,
