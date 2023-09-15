@@ -4,7 +4,7 @@ import {
     DataTableHeader as DataTableHeaderVerInvestimentos,
     VerInvestimentosWrapper,
     EditButton as EditButtonVeInvestimentos
-} from '../verPapeis/style'
+} from '../VerPapeis/style'
 
 export const Titulo = styled(TituloVerInvestimentos)``
 

@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import NotFound from "./pages/404";
 import CadastrarMovimentacoes from "./pages/controle/cadastrarMovimentacoes/CadastrarMovimentacoes";
-import CadastrarInvestimentos from "./pages/controle/cadastrarPapel/CadastrarPapel";
+import CadastrarInvestimentos from "./pages/controle/CadastrarPapel/CadastrarPapel";
 import Cadastro from "./pages/cadastro/Cadastro";
 import Home from "./pages/Home";
 import Login from "./pages/login/Login";
-import VerInvestimentos from "./pages/controle/verPapeis/VerInvestimentos";
+import VerInvestimentos from "./pages/controle/VerPapeis/VerInvestimentos";
 import VerMovimentacoes from "./pages/controle/verMovimentacoes/VerMovimentacoes";
 import ControlePapeis from "./pages/controle/ControlePapeis";
 import VisaoGeral from "./pages/painelDeAnalise/visaoGeral/VisaoGeral";
