@@ -1,6 +1,6 @@
 import { Formik, FormikHelpers } from "formik";
 import { useRef, useState } from "react";
-import { Titulo } from "../../../styles/CadastrarMovimentacoesStyle";
+import { Titulo } from "./style";
 import { InitialValuesType, initialValues, validation } from "../../../helpers/validationSchemas/CadastrarCompras";
 import { mensagemDeErro, mensagemDeSucesso } from "../../../helpers/functions/Toast";
 import { Toast } from "../../../Components/Toast/Toast";
@@ -18,7 +18,7 @@ export default function CadastrarMovimentacoes() {
 
     async function cadastrar(values: InitialValuesType, formikHelpers: FormikHelpers<InitialValuesType>) {
         try {
-            const { resetForm } = formikHelpers
+            const { resetForm, setFieldValue } = formikHelpers
             setIsLoading(true)
             await new Promise(resolve => setTimeout(resolve, 3000))
             setSucesso(true)
@@ -36,6 +36,8 @@ export default function CadastrarMovimentacoes() {
 
             mensagemDeSucesso(toast, 'Sucesso!', 'Investimento cadastrado!', { life: 3000, closable: true })
             resetForm()
+
+            setFieldValue("data", data)
         } catch (error: any) {
             const { cause } = error
             const errorMessage = cause?.data?.message

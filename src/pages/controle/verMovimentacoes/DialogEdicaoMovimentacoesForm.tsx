@@ -2,9 +2,6 @@ import { useEffect, useState } from "react";
 import { Formik } from "formik";
 import Dialog, { DialogProps } from "../../../Components/Dialog";
 import { edicaoValidation } from "../../../helpers/validationSchemas/CadastrarInvestimentos";
-import sleep from "../../../helpers/functions/sleep";
-import PapelServiceMakePayload from "../../../services/PapelService/PapelServiceMakePayload";
-import PapelService from "../../../services/PapelService/PapelService";
 import { mensagemDeErro, mensagemDeSucesso } from "../../../helpers/functions/Toast";
 import { Toast as ToastPrimeReact } from "primereact/toast";
 import CadastrarMovimentacoesForm from "../cadastrarMovimentacoes/CadastrarMovimentacoesForm";
@@ -59,6 +56,8 @@ export default function DialogEdicaoMovimentacoes(props: Props) {
             mensagemDeSucesso(props.toast, 'sucesso', `Movimentação editada com sucesso!`)
 
             await props.pegarMovimentacoes()
+
+            setSucesso(true)
 
             props.fecharModoEdicao()
         } catch (error) {

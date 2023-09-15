@@ -8,7 +8,10 @@ export const ControlePageWrapper = styled.div`
 `
 
 export const BarraDeNavegacaoDiv = styled.div`
+    background: ${props => props.theme.pallete.primary.main};
     border-top: 3px solid ${props => props.theme.pallete.colors.blue};
+    position: sticky;
+    bottom: 0;
 `
 
 export const OutLetDiv = styled.div`

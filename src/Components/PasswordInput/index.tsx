@@ -1,11 +1,20 @@
-import { useState } from 'react'
-import InputText, { InputTextProps } from "../InputText";
+import { Password, PasswordProps } from 'primereact/password';
+import { PasswordIv } from './style';
 
-export default function PasswordInput(props: InputTextProps) {
-    const [mostraSenha, setMostraSenha] = useState<boolean>()
+type Props = { invalid?: number }
+export default function PasswordInput(props: PasswordProps & Props) {
+    const { invalid } = props
 
-    return <span className="p-input-icon-right">
-        <i className={mostraSenha ? "pi pi-eye" : "pi pi-eye-slash"} onClick={() => setMostraSenha(prev => !prev)} />
-        <InputText style={{ width: '100%' }} type={mostraSenha ? 'text' : 'password'}  {...props} />
-    </span>
+    return <PasswordIv>
+        <Password
+            {...props}
+            style={{ width: "100%" }}
+            promptLabel="Insira a senha"
+            weakLabel="Fraco"
+            mediumLabel="Médio"
+            strongLabel="Forte"
+            toggleMask
+            className={`${props.className ? props.className : ''} ${invalid ? "p-invalid block" : ''}`}
+        />
+    </PasswordIv>
 }

@@ -1,6 +1,6 @@
 import { Toast } from "../../../Components/Toast/Toast";
 import { useRef, useState, useEffect, useContext } from 'react'
-import { DataTableHeader, DataTableInfos, EditButton, Titulo, VerComprasWrapper } from "../../../styles/VerMovimentacoesStyle";
+import { DataTableHeader, DataTableInfos, EditButton, Titulo, VerComprasWrapper } from "./style";
 import DataTable from "../../../Components/DataTable";
 import Column from "../../../Components/Column";
 import MovimentacoesService from "../../../services/MovimentacoesService/MovimentacoesService";
@@ -9,7 +9,6 @@ import Button from "../../../Components/Button";
 import InputText from "../../../Components/InputText";
 import { FilterMatchMode } from "primereact/api";
 import DialogEdicaoMovimentacoes from "./DialogEdicaoMovimentacoesForm";
-import { GlobalStatesType, globalContext } from "../../../Contexts/GlobalContext";
 import getTokenLocal from "../../../helpers/functions/getTokenLocal";
 import verifyToken from "../../../helpers/functions/verifyToken";
 
@@ -23,10 +22,6 @@ export default function VerMovimentacoes() {
 
     const [modoEdicao, setModoEdicao] = useState<boolean>(false)
     const [movimentacaoEditando, setMovimentacaoEditando] = useState<Movimentacoes | {}>({})
-
-    const { states } = useContext(globalContext)
-
-    const { user } = (states as GlobalStatesType)
 
     async function pegarMovimentacoes() {
         try {

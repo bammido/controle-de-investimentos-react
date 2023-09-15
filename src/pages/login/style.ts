@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Button from "../Components/Button";
+import { display } from "../../theme/Theme";
 
 export const LoginPageWrapper = styled.div`
     height: 100vh;
@@ -11,7 +11,7 @@ export const LoginPageWrapper = styled.div`
 
 `
 
-export const LoginForm = styled.form`
+export const LoginFormStyled = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,5 +37,33 @@ export const InputDiv = styled.div`
 
 export const NavButtonDiv = styled.div`
     margin-top: 3vh;
+    align-self: center;
+`
+
+export const LogoImg = styled.img`
+    width: 100%; 
+    height: 100px;
+    margin-bottom: 3vh; 
+`
+
+export const DividerVerticalDiv = styled.div`
+    @media (${display.Tablets["max-width"]}){
+        display: none;
+    }
+`
+
+export const DividerHorizontalDiv = styled.div`
+    margin-top: 3vh;
+    @media (${display.Tablets["min-width"]}){
+        display: none;
+    }
+`
+
+export const ContentDiv = styled.div`
+    display: flex;
+
+    @media (${display.Tablets["max-width"]}){
+        flex-direction: column;
+    }
 `
 

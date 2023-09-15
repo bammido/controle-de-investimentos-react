@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import Button from "../Button"
+import { colors } from "../../theme/Theme"
 
 export const MudaTemaButton = styled(Button)`
     width: 1rem;
@@ -8,6 +9,10 @@ export const MudaTemaButton = styled(Button)`
     margin-top: 1rem;
 
     background-color: ${props => props.theme.pallete.colors.blackSmooth} !important;
+
+    & .p-button-icon {
+        color: ${colors.white} !important;
+    }
 `
 
 export const MudaTemaButtonWrapper = styled.div`

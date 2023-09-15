@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Button as PrimeReactButton, ButtonProps } from 'primereact/button';
 import { FormikErrors } from 'formik';
 
-export default function Button(props: ButtonProps & { nostyle?: boolean | string, severity?: string, sucesso?: boolean | string, errors?: FormikErrors<any> }) {
+type Severity = "sucesso" | "info" | "ajuda" | "aviso" | "erro" | "secundario" | ""
+
+export default function Button(props: ButtonProps & { nostyle?: boolean | string, severity?: Severity, sucesso?: boolean | string, errors?: FormikErrors<any> }) {
 
     const { sucesso, errors, nostyle } = props || {}
     const [buttonStyle, setButtonStyle] = useState<any>({})
@@ -12,11 +14,10 @@ export default function Button(props: ButtonProps & { nostyle?: boolean | string
 
         const errorsKeys = errors && Object.keys(errors)
 
-        let severity = ''
+        let severity = props.severity
 
         if (errorsKeys && errorsKeys.length) severity = 'erro'
         else if (sucesso) severity = 'sucesso'
-        else severity = ''
 
 
         let buttonStyle = { background: '' }
