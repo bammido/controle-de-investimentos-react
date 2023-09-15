@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components";
 import { colors, fonts } from "./Theme";
 
 
+
 export const GlobalStyle = createGlobalStyle<any>`
     * {
         font-family: ${fonts.primary};
