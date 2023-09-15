@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {
     VerInvestimentosWrapper,
     Titulo as TituloStyled
-} from '../VerPapeis/style'
+} from '../verPapeis/style'
 
 export const InfosWrapper = styled(VerInvestimentosWrapper)`
     display: flex;

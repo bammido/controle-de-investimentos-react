@@ -5,7 +5,7 @@ import CadastrarInvestimentos from "./pages/controle/cadastrarPapel/CadastrarPap
 import Cadastro from "./pages/cadastro/Cadastro";
 import Home from "./pages/Home";
 import Login from "./pages/login/Login";
-import VerInvestimentos from "./pages/controle/VerPapeis/VerInvestimentos";
+import VerInvestimentos from "./pages/controle/verPapeis/VerInvestimentos";
 import VerMovimentacoes from "./pages/controle/verMovimentacoes/VerMovimentacoes";
 import ControlePapeis from "./pages/controle/ControlePapeis";
 import VisaoGeral from "./pages/painelDeAnalise/visaoGeral/VisaoGeral";
