@@ -20,7 +20,8 @@ export const colors = {
     scarlet: '#FF2400',
     green: 'green',
     lightBlue: '#495057',
-    basil: '#32612D'
+    basil: '#32612D',
+    lightWashedOrange: '#FF9632'
 }
 
 export const fonts = {

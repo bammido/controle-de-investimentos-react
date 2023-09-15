@@ -57,6 +57,8 @@ export default function DialogEdicaoMovimentacoes(props: Props) {
 
             await props.pegarMovimentacoes()
 
+            setSucesso(true)
+
             props.fecharModoEdicao()
         } catch (error) {
             mensagemDeErro(props.toast, 'Ops...', 'falha ao editar papel!')

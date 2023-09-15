@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { display } from "../../../theme/Theme";
+import { colors, display } from "../../../theme/Theme";
 
 export const Titulo = styled.h1`
     text-align: center;
     margin: 5vh 0; 
 
-    color: ${props => props.theme.pallete.primary.contrastText};
+    color: ${colors.lightWashedOrange};
 `
 
 export const FormInputsWrapper = styled.div`

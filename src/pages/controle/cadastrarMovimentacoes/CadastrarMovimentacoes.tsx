@@ -18,7 +18,7 @@ export default function CadastrarMovimentacoes() {
 
     async function cadastrar(values: InitialValuesType, formikHelpers: FormikHelpers<InitialValuesType>) {
         try {
-            const { resetForm } = formikHelpers
+            const { resetForm, setFieldValue } = formikHelpers
             setIsLoading(true)
             await new Promise(resolve => setTimeout(resolve, 3000))
             setSucesso(true)
@@ -36,6 +36,8 @@ export default function CadastrarMovimentacoes() {
 
             mensagemDeSucesso(toast, 'Sucesso!', 'Investimento cadastrado!', { life: 3000, closable: true })
             resetForm()
+
+            setFieldValue("data", data)
         } catch (error: any) {
             const { cause } = error
             const errorMessage = cause?.data?.message

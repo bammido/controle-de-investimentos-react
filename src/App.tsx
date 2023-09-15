@@ -27,7 +27,6 @@ addLocale('pt-br', {
 locale('pt-br');
 
 function App() {
-
   const { states } = useContext(globalContext)
   const { temaEstaEscuro } = states as GlobalStatesType
   return (

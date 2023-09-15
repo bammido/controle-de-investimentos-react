@@ -4,7 +4,7 @@ import { colors } from "../../theme/Theme";
 
 export const SideBarNavigationWrapper = styled.div`
     width: 100%;
-    position: sticky;
+    position: absolute;
     top: 0;
 
 `

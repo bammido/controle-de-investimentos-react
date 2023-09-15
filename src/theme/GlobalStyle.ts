@@ -2,13 +2,17 @@ import { createGlobalStyle } from "styled-components";
 import { colors, fonts } from "./Theme";
 
 
-export const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle<any>`
     * {
         font-family: ${fonts.primary};
         margin: 0;
         padding: 0;
         transition: 300ms;
         color: ${props => props.theme.pallete.primary.contrastText};
+    }
+
+    h1, h2, h3, h4, h5 {
+        color: ${colors.lightWashedOrange};
     }
 
     body::-webkit-scrollbar {
@@ -60,5 +64,56 @@ export const GlobalStyle = createGlobalStyle`
 
     & .p-toast-icon-close .pi-times:before{
         color: ${colors.black};
+    }
+
+    & .pi-chevron-left:before, .pi-chevron-right:before {
+        color: ${props => props.theme.pallete.primary.contrastText};
+    }
+
+    & .p-accordion .p-accordion-header:not(.p-disabled).p-highlight .p-accordion-header-link {
+        background: ${props => props.theme.pallete.primary.main} !important;
+        border-color: ${props => props.theme.pallete.primary.contrastText};
+    }
+
+    & .p-accordion .p-accordion-header .p-accordion-header-link {
+        background: ${props => props.theme.pallete.primary.main} !important;
+        border-color: ${props => props.theme.pallete.primary.contrastText};
+    }
+
+    & .p-accordion .p-accordion-content {
+        background: ${props => props.theme.pallete.primary.main} !important;
+        border-color: ${props => props.theme.pallete.primary.contrastText};
+    }
+
+    & .pi-chevron-left:before, .pi-chevron-right:before {
+        color: ${colors.black};
+    }
+
+    & .p-datepicker .p-yearpicker .p-yearpicker-year {
+        color: ${colors.black};
+        font-weight: bold;
+    }
+    
+    & .p-datepicker .p-yearpicker .p-yearpicker-year .p-yearpicker-year .p-disabled{
+        font-weight: 300;
+    }
+
+    & .p-datepicker-decade span {
+        color: ${colors.black};
+        font-weight: bold;
+    }
+    
+    & .p-monthpicker-month {
+        color: ${colors.black};
+        font-weight: bold;
+    }
+    
+    & .p-monthpicker-month .p-disabled {
+        font-weight: 300;
+    }
+
+    & .p-button-text .p-button-label {
+        color: ${colors.black};
+        font-weight: bold;
     }
 `

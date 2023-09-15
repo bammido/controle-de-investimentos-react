@@ -3,12 +3,12 @@ import Button from '../Button';
 import Sidebar from "../SideBar";
 import { SideBarButtonsWrapper, SideBarNavButton, SideBarNavigationShowButton, SideBarNavigationWrapper, SideBarThemeButtom, SideBarWrapper } from './style';
 import Navigation from "../../Navigation"
-import { globalContext, GlobalMethodsType, GlobalSettersType, GlobalStatesType } from '../../Contexts/GlobalContext';
+import { globalContext, GlobalMethodsType, GlobalStatesType } from '../../Contexts/GlobalContext';
 import { colors, temaClaro, temaEscuro } from '../../theme/Theme';
 
 export default function SideBarNavigation() {
     const [mostrar, setMostrar] = useState<boolean>(false)
-    const { goToLogin, goToVerPapeis, goToHome } = Navigation()
+    const { goToLogin, goToControle, goToHome, goToPainelDeAnalise, goToFerramentasUteis } = Navigation()
 
     function onHide() {
         setMostrar(false)
@@ -19,7 +19,7 @@ export default function SideBarNavigation() {
         goToLogin()
     }
 
-    const { states, setters, methods } = useContext(globalContext)
+    const { states, methods } = useContext(globalContext)
     const { temaEstaEscuro } = states as GlobalStatesType
     const { mudaTema } = methods as GlobalMethodsType
 
@@ -45,11 +45,31 @@ export default function SideBarNavigation() {
                     <SideBarButtonsWrapper>
                         <SideBarNavButton
                             bgcolor={colors.federalBlue}
-                            onClick={goToVerPapeis}
+                            onClick={goToControle}
                             label='controle de investimentos'
                             aria-label='controle de investimentos'
                             iconPos='right'
                             icon='pi pi-dollar'
+                        />
+                    </SideBarButtonsWrapper>
+                    <SideBarButtonsWrapper>
+                        <SideBarNavButton
+                            bgcolor={colors.lightWashedOrange}
+                            onClick={goToPainelDeAnalise}
+                            label='Painel de Análise'
+                            aria-label='Painel de Análise'
+                            iconPos='right'
+                            icon='pi pi-mobile'
+                        />
+                    </SideBarButtonsWrapper>
+                    <SideBarButtonsWrapper>
+                        <SideBarNavButton
+                            bgcolor={colors.basil}
+                            onClick={goToFerramentasUteis}
+                            label='Ferramentas Úteis'
+                            aria-label='Ferramentas Úteis'
+                            iconPos='right'
+                            icon='pi pi-wrench'
                         />
                     </SideBarButtonsWrapper>
                 </div>

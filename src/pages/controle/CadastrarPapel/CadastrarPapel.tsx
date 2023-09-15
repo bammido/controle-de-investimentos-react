@@ -1,10 +1,5 @@
-import { ErrorMessage, Formik, FormikHelpers } from "formik";
+import { Formik, FormikHelpers } from "formik";
 import { useRef, useState } from "react";
-import Button from "../../../Components/Button";
-import Dropdown, { DropdownChangeParams } from "../../../Components/Dropdown";
-import InputNumber, { InputNumberChangeParams } from "../../../Components/InputNumber";
-import InputText from "../../../Components/InputText";
-import MultiSelect from "../../../Components/MultiSelect";
 import { Toast } from "../../../Components/Toast/Toast";
 import { mensagemDeErro, mensagemDeSucesso } from "../../../helpers/functions/Toast";
 import { initialValues, validation, InitialValuesType } from "../../../helpers/validationSchemas/CadastrarInvestimentos";
