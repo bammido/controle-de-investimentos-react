@@ -2,6 +2,8 @@
 
 Controle de Investimentos Front
 
+![image](https://github.com/bammido/controle-de-investimentos-react/assets/65303066/aebc67e7-3546-440a-b7d0-ca618d775587)
+
 # 🧑‍💻 FRAMEWORKS E DEPENDÊNCIAS 
 
 * vite: v ^4.0.0
