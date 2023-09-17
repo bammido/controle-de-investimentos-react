@@ -53,7 +53,7 @@
 * ### Correções emergenciais
         Branch hotfix/nome do hotfix
 
-# features
+# ➕ Features
 
 * Cadastro / login
 * Adicionar movimentações para unificar investimentos em um só lugar
