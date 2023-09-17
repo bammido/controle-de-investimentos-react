@@ -22,7 +22,7 @@ Controle de Investimentos Front
 # ⚙️ CONFIGURAÇÕES 
 
 ### 1. Instale as dependências
-→ $ npm install
+``` npm install ```
 ### 2. Inicialize a Aplicação
 ``` npm run dev ```
 
