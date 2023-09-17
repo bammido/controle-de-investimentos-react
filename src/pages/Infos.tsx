@@ -1,5 +1,5 @@
 import Navigation from "../Navigation";
-import { InfosWrapper, Titulo, SubTitulo, FeatureSubItulo, FeatureDescriptionList, FeatureDiv, FeatureDescription, SectionDescription } from "./controle/infos/style";
+import { InfosWrapper, Titulo, SubTitulo, NavA, FeatureSubItulo, FeatureDescriptionList, FeatureDiv, FeatureDescription, SectionDescription } from "./controle/infos/style";
 
 export default function InfosHome() {
     const { goToPainelDeAnaliseVisaoGeral } = Navigation()
@@ -24,6 +24,15 @@ export default function InfosHome() {
                     <FeatureDescriptionList><b>Triggers:</b> poderão ser ajustados <b>triggers de compra</b> (envio de email quando um ativo atinge determinado valor), <b>triggers de queda</b> (avisa quando um ativo cai brucasmente em um período), entre outros.</FeatureDescriptionList>
                     <FeatureDescriptionList><b>proventos futuros:</b> resumo dos próximos proventos a serem recebidos.</FeatureDescriptionList>
                     <FeatureDescriptionList><b>dy:</b> Dividend yeld de cada ativo que paga proventos.</FeatureDescriptionList>
+                </ul>
+            </FeatureDescription>
+        </FeatureDiv>
+        <FeatureDiv>
+            <SubTitulo>Github</SubTitulo>
+            <FeatureDescription>
+                <ul>
+                    <FeatureDescriptionList><NavA href="https://github.com/bammido/controle-de-investimentos-react">front</NavA></FeatureDescriptionList>
+                    <FeatureDescriptionList><NavA href="https://github.com/bammido/controle-de-investimentos-back">back</NavA></FeatureDescriptionList>
                 </ul>
             </FeatureDescription>
         </FeatureDiv>

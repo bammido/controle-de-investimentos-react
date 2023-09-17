@@ -26,6 +26,15 @@ export const NavSpan = styled.span`
         cursor: pointer;
     }
 `
+export const NavA = styled.a`
+    font-weight: bold;
+    text-decoration: none;
+
+    &:hover {
+        color: blueviolet;
+        cursor: pointer;
+    }
+`
 
 export const FeatureDescription = styled.p`
     margin: 2.5vh 0;
